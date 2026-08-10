@@ -47,7 +47,7 @@ class SiteNavbar extends HTMLElement {
                 <nav class="navbar" aria-label="Navegación principal">
                     <a class="navbar__brand" href="/" aria-label="${SITE.name} — Inicio">
                         <img class="navbar__logo" src="${SITE.isologo}"
-                             alt="${SITE.name}" width="120" height="32" />
+                        alt="${SITE.name}" width="120" height="32" />
                     </a>
 
                     <div class="navbar__menu">
