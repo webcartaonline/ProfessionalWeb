@@ -1,4 +1,4 @@
-import { NAV_LINKS, SITE } from "../config/site.js";
+import { BASE_PATH, NAV_LINKS, SITE } from "../config/site.js";
 import { findCurrentLink, normalizePath } from "../utils/routes.js";
 
 const CHEVRON_ICON = `
@@ -45,7 +45,7 @@ class SiteNavbar extends HTMLElement {
         return `
             <div class="navbar-scrim">
                 <nav class="navbar" aria-label="Navegación principal">
-                    <a class="navbar__brand" href="/" aria-label="${SITE.name} — Inicio">
+                    <a class="navbar__brand" href="${BASE_PATH}/" aria-label="${SITE.name} — Inicio">
                         <img class="navbar__logo" src="${SITE.isologo}"
                         alt="${SITE.name}" width="120" height="32" />
                     </a>
