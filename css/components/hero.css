@@ -42,6 +42,13 @@
     padding-block: var(--space-2xl);
 }
 
+/* Solo en móvil: acerca el bloque de texto al navbar, reduciendo el vacío superior. */
+@media (max-width: 47.99em) {
+    .hero__content {
+        margin-block-end: var(--space-2xl);
+    }
+}
+
 .hero__title {
     max-width: 16ch;
     font-size: var(--font-size-700);
