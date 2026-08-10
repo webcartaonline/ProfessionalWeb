@@ -1,10 +1,6 @@
 /* ==========================================================================
-   FOOTER — Cierre sobrio: marca, navegación, contacto y legal.
+   FOOTER — Cierre sobrio: marca, claim y contacto.
    ========================================================================== */
-
-site-footer {
-    display: block;
-}
 
 .footer {
     border-block-start: 1px solid var(--color-border);
@@ -43,12 +39,6 @@ site-footer {
     gap: var(--space-3xs);
 }
 
-.footer__list--inline {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
-
 .footer__link {
     display: inline-block;
     padding-block: var(--space-3xs);
@@ -74,7 +64,7 @@ site-footer {
 
 @media (min-width: 48em) {
     .footer__grid {
-        grid-template-columns: 1.5fr 1fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
         gap: var(--space-xl);
     }
 
