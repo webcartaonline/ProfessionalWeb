@@ -1,4 +1,18 @@
-body {
-    margin: 0;
-    background: #0a0a0a;
-}
+/* ==========================================================================
+   PROFESSIONAL WEB — Punto de entrada de estilos.
+   Orden de cascada: tokens → base → layout → componentes.
+   Cada página solo necesita enlazar este archivo.
+   ========================================================================== */
+
+@layer tokens, base, layout, components;
+
+@import url("/css/tokens.css") layer(tokens);
+@import url("/css/base.css") layer(base);
+@import url("/css/layout.css") layer(layout);
+
+@import url("/css/components/button.css") layer(components);
+@import url("/css/components/navbar.css") layer(components);
+@import url("/css/components/hero.css") layer(components);
+@import url("/css/components/marquee.css") layer(components);
+@import url("/css/components/feature.css") layer(components);
+@import url("/css/components/footer.css") layer(components);

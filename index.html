@@ -4,18 +4,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Professional Web</title>
+    <meta name="description" content="Lleva tu negocio al siguiente nivel creando una carta accesible en cualquier momento.">
+    <meta name="theme-color" content="#0a0a0a">
 
+    <!-- Favicon: .ico para compatibilidad amplia, .png para pantallas de alta densidad -->
+    <link rel="icon" href="/recursos/img/logo/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/recursos/img/logo/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/recursos/img/logo/favicon.ico">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+
+    <link rel="stylesheet" href="/index.css">
+    <script type="module" src="/js/main.js"></script>
 </head>
 
 <body>
 
-    <header></header>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-    <main></main>
+    <site-navbar></site-navbar>
 
-    <footer></footer>
-    
+    <main id="contenido">
+
+        <!-- ===== Portada ================================================= -->
+        <section class="hero">
+            <img class="hero__media" src="/recursos/img/PortadaRecortada.png" alt="" fetchpriority="high">
+            <div class="hero__veil"></div>
+
+            <div class="hero__content container">
+                <h1 class="hero__title">Lleva tu negocio al siguiente nivel</h1>
+                <p class="hero__subtitle">
+                    Diseñamos la web de tu negocio y te la entregamos lista para vender.
+                </p>
+                <a class="button button--primary" href="#por-que-elegirnos">Ver qué incluye</a>
+            </div>
+        </section>
+
+        <!-- ===== Ya confían en nosotros ================================== -->
+        <section class="section" id="confian" aria-labelledby="confian-titulo">
+            <div class="container section__header">
+                <h2 class="section__title" id="confian-titulo">Ya confían en nosotros</h2>
+                <p class="section__subtitle">
+                    Negocios que ya trabajan con su web hecha por nosotros.
+                </p>
+            </div>
+
+            <logo-marquee class="marquee">
+                <ul class="marquee__track" data-marquee-track>
+                    <li class="marquee__item">
+                        <img class="marquee__media" src="/recursos/img/FusionCafe/FusionCafeCartel.png" alt="Fusión Café"
+                            loading="lazy">
+                    </li>
+                    <li class="marquee__item">
+                        <img class="marquee__media"
+                            src="/recursos/img/ParkeLoungeBar/cartelElParkeLoungeBar.png" alt="El Parke Lounge Bar"
+                            loading="lazy">
+                    </li>
+                    <li class="marquee__item marquee__item--invite">
+                        FALTAS TÚ
+                    </li>
+                </ul>
+            </logo-marquee>
+        </section>
+
+        <!-- ===== Por qué elegirnos ====================================== -->
+        <section class="section" id="por-que-elegirnos" aria-labelledby="elegirnos-titulo">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title" id="elegirnos-titulo">¿Por qué elegirnos?</h2>
+                    <p class="section__subtitle">
+                        Todo lo que necesita tu negocio para estar en internet, sin letra pequeña.
+                    </p>
+                </div>
+
+                <div class="features">
+
+                    <article class="feature feature--blue">
+                        <span class="feature__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M17.5 6.2A6.5 6.5 0 0 0 7.8 11" />
+                                <path d="M7.8 13a6.5 6.5 0 0 0 9.7 4.8" />
+                                <path d="M4 11h9" />
+                                <path d="M4 14h9" />
+                            </svg>
+                        </span>
+                        <h3 class="feature__title">Pago único de 150 €</h3>
+                        <p class="feature__text">
+                            Pagas una vez y la web es tuya. Sin cuotas mensuales ni sorpresas.
+                        </p>
+                    </article>
+
+                    <article class="feature feature--green">
+                        <span class="feature__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M3 12h18" />
+                                <ellipse cx="12" cy="12" rx="4.5" ry="9" />
+                            </svg>
+                        </span>
+                        <h3 class="feature__title">Tu carta en diferentes idiomas</h3>
+                        <p class="feature__text">
+                            Tus clientes leen la carta en su idioma desde el primer momento.
+                        </p>
+                    </article>
+
+                    <article class="feature feature--orange">
+                        <span class="feature__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4Z" />
+                                <path d="m14.5 5.5 4 4" />
+                            </svg>
+                        </span>
+                        <h3 class="feature__title">Modifica los datos cuando quieras</h3>
+                        <p class="feature__text">
+                            Cambias precios, horarios o platos sin depender de nadie.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <site-footer></site-footer>
+
 </body>
+
 </html>
