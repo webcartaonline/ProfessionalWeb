@@ -8,7 +8,7 @@ export const SITE = {
     claim: "Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.",
     email: "hola@professionalweb.es",
     phone: "+34 600 000 000",
-    isologo: "/recursos/img/logo/isoLogoBlack.png",
+    isologo: "/Recursos/img/Logo/IsoLogoBlack.png",
 };
 
 /** Páginas del sitio. Añade una entrada y aparecerá en la barra y en el pie. */
