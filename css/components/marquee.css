@@ -10,25 +10,31 @@
     display: block;
     position: relative;
     overflow: hidden;
-    /* Difumina los extremos para que las tarjetas entren y salgan sin corte.
-       Se incluye el prefijo -webkit- porque Safari/iOS (WebKit) lo requiere;
-       sin él la máscara no aplica y puede dejar el bloque en blanco. */
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        #000 7%,
-        #000 93%,
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        #000 7%,
-        #000 93%,
-        transparent 100%
-    );
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+}
+
+/* Difuminado de los extremos con superposiciones en lugar de mask-image:
+   en iOS/WebKit la máscara sobre una pista animada por transform se compone
+   una vez y luego desaparece. Estos degradados se funden con el fondo de la
+   página y son 100% compatibles con todos los dispositivos. */
+.marquee::before,
+.marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 7%;
+    pointer-events: none;
+}
+
+.marquee::before {
+    left: 0;
+    background-image: linear-gradient(to right, var(--color-bg), transparent);
+}
+
+.marquee::after {
+    right: 0;
+    background-image: linear-gradient(to left, var(--color-bg), transparent);
 }
 
 .marquee__track {
@@ -36,11 +42,6 @@
     gap: var(--marquee-gap);
     width: max-content;
     animation: marquee-slide var(--marquee-duration) linear infinite;
-    /* Da a la pista su propia capa de composición: en iOS estabiliza la
-       animación bajo la máscara y evita parpadeos o repintados fallidos. */
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
 }
 
 /* De izquierda a derecha. Para invertir el sentido:
