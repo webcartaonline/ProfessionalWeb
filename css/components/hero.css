@@ -5,6 +5,7 @@
 .hero {
     position: relative;
     display: grid;
+    min-height: 82vh; /* Fallback para navegadores sin unidades svh */
     min-height: 82svh;
     isolation: isolate;
 }
@@ -55,6 +56,7 @@
 
 @media (min-width: 48em) {
     .hero {
+        min-height: 88vh; /* Fallback para navegadores sin unidades svh */
         min-height: 88svh;
     }
 
