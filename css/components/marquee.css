@@ -55,9 +55,14 @@
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch; /* inercia al deslizar en iOS */
 
-    /* Aire lateral para que la primera y la última tarjeta no queden
-       tapadas por el difuminado, y espacio para la barra. */
-    padding-inline: var(--layout-gutter);
+    /* Alinea el contenido con el resto de la página: hasta el ancho máximo
+       vale el gutter (móvil/tablet igual que antes); al superarlo, el padding
+       crece para centrar el carril dentro de la misma columna que .container,
+       de modo que la primera tarjeta quede a la altura del título. */
+    padding-inline: max(
+        var(--layout-gutter),
+        (100% - var(--layout-max-width)) / 2 + var(--layout-gutter)
+    );
     padding-bottom: var(--space-xs);
 
     /* --- Barra de desplazamiento propia (Firefox) --- */
@@ -121,7 +126,8 @@ a.marquee__card {
 
 a.marquee__card:hover,
 a.marquee__card:focus-visible {
-    transform: translateY(-2px);
+    /* Se encoge levemente hacia su centro (lo contrario a agrandarse). */
+    transform: scale(0.96);
     border-color: var(--color-white);
 }
 
