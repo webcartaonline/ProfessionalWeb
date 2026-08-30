@@ -61,33 +61,27 @@
             </div>
 
             <div class="marquee">
-                <ul class="marquee__track">
-                    <li class="marquee__item">
-                        <img class="marquee__media" src="Recursos/img/FusionCafe/FusionCafeCartel.png" alt="Fusión Café"
-                            loading="lazy">
-                    </li>
-                    <li class="marquee__item">
-                        <img class="marquee__media"
-                            src="Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png" alt="El Parke Lounge Bar"
-                            loading="lazy">
-                    </li>
-                    <li class="marquee__item marquee__item--invite">
-                        FALTAS TÚ
-                    </li>
-                    <!-- Copia oculta a lectores de pantalla: la animación desplaza el 50% de la pista, así el bucle no tiene costuras. -->
-                    <li class="marquee__item" aria-hidden="true">
-                        <img class="marquee__media" src="Recursos/img/FusionCafe/FusionCafeCartel.png" alt=""
-                            loading="lazy">
-                    </li>
-                    <li class="marquee__item" aria-hidden="true">
-                        <img class="marquee__media"
-                            src="Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png" alt=""
-                            loading="lazy">
-                    </li>
-                    <li class="marquee__item marquee__item--invite" aria-hidden="true">
-                        FALTAS TÚ
-                    </li>
-                </ul>
+                <div class="marquee__viewport">
+                    <ul class="marquee__track">
+                        <!-- Cada negocio enlaza a su página. Cambia el href="#" por la URL real. -->
+                        <li class="marquee__item">
+                            <a class="marquee__card" href="#" aria-label="Ver la carta de Fusión Café">
+                                <img class="marquee__media" src="Recursos/img/FusionCafe/FusionCafeCartel.png"
+                                    alt="Fusión Café" loading="lazy">
+                            </a>
+                        </li>
+                        <li class="marquee__item">
+                            <a class="marquee__card" href="#" aria-label="Ver la carta de El Parke Lounge Bar">
+                                <img class="marquee__media"
+                                    src="Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png"
+                                    alt="El Parke Lounge Bar" loading="lazy">
+                            </a>
+                        </li>
+                        <li class="marquee__item">
+                            <div class="marquee__card marquee__card--invite">FALTAS TÚ</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
 

@@ -1,21 +1,33 @@
 /* ==========================================================================
-   MARQUEE — Lista lateral con desplazamiento automático e infinito.
-   El JS duplica los elementos para que el bucle no tenga costuras.
+   MARQUEE — Tira de negocios con desplazamiento horizontal MANUAL.
+   Sin animación automática: el usuario desliza (táctil) o arrastra la barra
+   (escritorio) de izquierda a derecha. Barra de desplazamiento propia,
+   blanca y minimalista, y difuminado lateral que se funde a negro.
+
+   Estructura:
+     .marquee            → contenedor con el difuminado de los extremos.
+       .marquee__viewport → carril con scroll y barra personalizada.
+         .marquee__track  → fila flexible de tarjetas.
+           .marquee__item → caja de tamaño fijo (proporción del cartel).
+             .marquee__card → recuadro visible; es <a> (negocio) o div (invitación).
    ========================================================================== */
 
 .marquee {
     --marquee-gap: var(--space-sm);
-    --marquee-duration: 34s;
+    --marquee-fade: 7%;
 
-    display: block;
+    /* Barra de desplazamiento propia */
+    --marquee-bar-size: 6px;
+    --marquee-bar-track: rgb(255 255 255 / 0.08);
+    --marquee-bar-thumb: rgb(255 255 255 / 0.55);
+    --marquee-bar-thumb-hover: var(--color-white);
+
     position: relative;
-    overflow: hidden;
 }
 
-/* Difuminado de los extremos con superposiciones en lugar de mask-image:
-   en iOS/WebKit la máscara sobre una pista animada por transform se compone
-   una vez y luego desaparece. Estos degradados se funden con el fondo de la
-   página y son 100% compatibles con todos los dispositivos. */
+/* Difuminado de los extremos con superposiciones (no mask-image): en iOS/WebKit
+   la máscara puede desaparecer, mientras que estos degradados se funden con el
+   fondo negro de la página y son 100% compatibles con todos los dispositivos. */
 .marquee::before,
 .marquee::after {
     content: "";
@@ -23,8 +35,8 @@
     top: 0;
     bottom: 0;
     z-index: 2;
-    width: 7%;
-    pointer-events: none;
+    width: var(--marquee-fade);
+    pointer-events: none; /* deja pasar el clic y el scroll a las imágenes */
 }
 
 .marquee::before {
@@ -37,42 +49,80 @@
     background-image: linear-gradient(to left, var(--color-bg), transparent);
 }
 
+/* Carril con scroll: aquí vive la barra de desplazamiento personalizada. */
+.marquee__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* inercia al deslizar en iOS */
+
+    /* Aire lateral para que la primera y la última tarjeta no queden
+       tapadas por el difuminado, y espacio para la barra. */
+    padding-inline: var(--layout-gutter);
+    padding-bottom: var(--space-xs);
+
+    /* --- Barra de desplazamiento propia (Firefox) --- */
+    scrollbar-width: thin;
+    scrollbar-color: var(--marquee-bar-thumb) transparent;
+}
+
+/* --- Barra de desplazamiento propia (Chrome, Edge, Safari) --- */
+.marquee__viewport::-webkit-scrollbar {
+    height: var(--marquee-bar-size);
+}
+
+.marquee__viewport::-webkit-scrollbar-track {
+    background-color: var(--marquee-bar-track);
+    border-radius: var(--radius-pill);
+}
+
+.marquee__viewport::-webkit-scrollbar-thumb {
+    background-color: var(--marquee-bar-thumb);
+    border-radius: var(--radius-pill);
+}
+
+.marquee__viewport::-webkit-scrollbar-thumb:hover {
+    background-color: var(--marquee-bar-thumb-hover);
+}
+
 .marquee__track {
     display: flex;
     gap: var(--marquee-gap);
     width: max-content;
-    animation: marquee-slide var(--marquee-duration) linear infinite;
-}
-
-/* De izquierda a derecha. Para invertir el sentido:
-   .marquee__track { animation-direction: reverse; } */
-@keyframes marquee-slide {
-    from {
-        transform: translateX(calc(-50% - var(--marquee-gap) / 2));
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-.marquee:hover .marquee__track,
-.marquee:focus-within .marquee__track {
-    animation-play-state: paused;
 }
 
 .marquee__item {
+    /* Tamaño de las tarjetas (idéntico al diseño anterior). */
     flex: 0 0 clamp(13rem, 62vw, 17rem);
-    /* Misma proporción que los carteles (2692 x 1024), así la caja encaja
-       exactamente con la imagen sin huecos ni recortes. */
+    /* Misma proporción que los carteles (2692 x 1024): la caja encaja con la
+       imagen sin huecos ni recortes. */
     aspect-ratio: 673 / 256;
-    /* Red de seguridad: la misma proporción expresada como altura (ancho / 2.629).
-       Si WebKit no resuelve aspect-ratio dentro del flex, el item no colapsa a 0. */
+    /* Red de seguridad: la proporción como altura (ancho / 2.629). Si WebKit no
+       resuelve aspect-ratio dentro del flex, el item no colapsa a 0. */
     min-height: clamp(4.95rem, 23.6vw, 6.47rem);
+}
+
+/* Recuadro visible. Es la única pieza que dibuja borde, fondo y esquinas,
+   la compartan el enlace de un negocio o la tarjeta de invitación. */
+.marquee__card {
+    display: block;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background-color: var(--color-surface);
+}
+
+/* Realce al pasar el ratón o enfocar con teclado (solo en los enlaces). */
+a.marquee__card {
+    transition: transform var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+a.marquee__card:hover,
+a.marquee__card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--color-white);
 }
 
 .marquee__media {
@@ -80,11 +130,10 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    /* La imagen adopta las esquinas redondeadas de su caja contenedora. */
-    border-radius: inherit;
+    border-radius: inherit; /* la imagen adopta las esquinas de su caja */
 }
 
-.marquee__item--invite {
+.marquee__card--invite {
     display: grid;
     place-items: center;
     border-color: var(--color-white);
@@ -94,20 +143,4 @@
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-wide);
     text-align: center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .marquee {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        padding-inline: var(--layout-gutter);
-    }
-
-    .marquee__track {
-        animation: none;
-    }
-
-    .marquee__item {
-        scroll-snap-align: center;
-    }
 }
