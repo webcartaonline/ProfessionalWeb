@@ -8,6 +8,7 @@
     min-height: 82vh; /* Fallback para navegadores sin unidades svh */
     min-height: 82svh;
     isolation: isolate;
+    overflow: hidden;
 }
 
 .hero__media {
@@ -27,9 +28,9 @@
     z-index: -1;
     background-image: linear-gradient(
         to bottom,
-        rgb(10 10 10 / 0.1) 0%,
-        rgb(10 10 10 / 0.35) 45%,
-        rgb(10 10 10 / 0.85) 82%,
+        rgb(10 10 10 / 0.15) 0%,
+        rgb(10 10 10 / 0.4) 45%,
+        rgb(10 10 10 / 0.88) 82%,
         var(--color-black) 100%
     );
 }
@@ -46,6 +47,7 @@
 .hero__title {
     max-width: 16ch;
     font-size: var(--font-size-700);
+    line-height: 1.06;
 }
 
 .hero__subtitle {

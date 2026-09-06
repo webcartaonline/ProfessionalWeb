@@ -1,9 +1,10 @@
 /* ==========================================================================
-   FOOTER — Cierre sobrio: marca, claim y contacto.
+   FOOTER — Cierre sobrio: marca, claim, mapa del sitio y contacto.
    ========================================================================== */
 
 .footer {
     border-block-start: 1px solid var(--color-border);
+    margin-block-start: var(--space-lg);
     padding-block: var(--space-xl) var(--space-lg);
 }
 
@@ -15,6 +16,7 @@
 
 .footer__brand-name {
     font-size: var(--font-size-500);
+    font-weight: var(--font-weight-bold);
 }
 
 .footer__claim {
@@ -26,7 +28,7 @@
 
 .footer__heading {
     margin-block-end: var(--space-2xs);
-    color: var(--color-text-muted);
+    color: rgb(255 255 255 / 0.5);
     font-size: var(--font-size-100);
     font-weight: var(--font-weight-medium);
     letter-spacing: var(--letter-spacing-wide);
@@ -55,16 +57,16 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-2xs);
-    margin-block-start: var(--space-xl);
+    margin-block-start: var(--space-lg);
     padding-block-start: var(--space-md);
     border-block-start: 1px solid var(--color-border);
-    color: var(--color-text-muted);
+    color: var(--color-text-faint);
     font-size: var(--font-size-100);
 }
 
 @media (min-width: 48em) {
     .footer__grid {
-        grid-template-columns: 1.5fr 1fr;
+        grid-template-columns: 1.5fr 1fr 1fr;
         gap: var(--space-xl);
     }
 

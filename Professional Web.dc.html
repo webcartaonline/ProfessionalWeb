@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#0a0a0a;color:#ffffff;font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6;}
+  a{color:#ffffff;text-decoration:none;transition:color 150ms ease;}
+  a:hover{color:#e8710a;}
+  button{border:0;background:none;font-family:inherit;}
+  ::selection{background:#174ea6;color:#ffffff;}
+  .pw-scroll::-webkit-scrollbar{height:6px;}
+  .pw-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.08);border-radius:999px;}
+  .pw-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.5);border-radius:999px;}
+  .pw-scroll::-webkit-scrollbar-thumb:hover{background:#fff;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#0a0a0a;">
+
+  <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;top:0;left:0;right:0;z-index:100;pointer-events:none;padding:0.75rem clamp(1.25rem,5vw,3.5rem) 0;background:linear-gradient(to bottom,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0) 100%);">
+      <nav style="pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1180px;margin:0 auto;padding:0.4rem 0.6rem 0.4rem 1.1rem;border-radius:16px;background:#ffffff;box-shadow:0 24px 70px rgba(0,0,0,0.35);">
+        <button onClick="{{ goHome }}" aria-label="Professional Web — Inicio" style="display:flex;align-items:center;background:none;cursor:pointer;padding:0;">
+          <img src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web" style="height:3rem;width:auto;color:#000000;">
+        </button>
+        <div style="display:flex;align-items:center;gap:0.15rem;">
+          <sc-for list="{{ navItemsBar }}" as="item" hint-placeholder-count="5">
+            <button onClick="{{ item.onClick }}" style="{{ item.style }}" style-hover="{{ item.hover }}">{{ item.label }}</button>
+          </sc-for>
+        </div>
+      </nav>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;top:0;left:0;right:0;z-index:101;pointer-events:none;padding:0.6rem clamp(1rem,5vw,1.5rem) 0;background:linear-gradient(to bottom,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0) 100%);">
+      <nav style="pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.35rem 0.5rem 0.35rem 0.9rem;border-radius:14px;background:#ffffff;box-shadow:0 24px 70px rgba(0,0,0,0.35);">
+        <button onClick="{{ goHome }}" aria-label="Professional Web — Inicio" style="display:flex;align-items:center;background:none;cursor:pointer;padding:0;">
+          <img src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web" style="height:2.4rem;width:auto;">
+        </button>
+        <button onClick="{{ toggleMenu }}" aria-label="Abrir menú" style="display:flex;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;align-items:center;border-radius:10px;cursor:pointer;">
+          <span style="width:22px;height:2px;background:#0b2f66;border-radius:2px;"></span>
+          <span style="width:22px;height:2px;background:#0b2f66;border-radius:2px;"></span>
+          <span style="width:22px;height:2px;background:#0b2f66;border-radius:2px;"></span>
+        </button>
+      </nav>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ true }}">
+      <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:110;background:rgba(0,0,0,0.55);backdrop-filter:blur(2px);"></div>
+      <nav style="position:fixed;top:0;right:0;bottom:0;width:min(82vw,320px);z-index:111;display:flex;flex-direction:column;gap:0.4rem;padding:1.25rem 1rem;background:#0d0d0d;border-left:1px solid rgba(255,255,255,0.12);box-shadow:-20px 0 60px rgba(0,0,0,0.6);">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:0.5rem;">
+          <button onClick="{{ closeMenu }}" aria-label="Cerrar menú" style="width:40px;height:40px;font-size:1.4rem;color:#fff;cursor:pointer;">×</button>
+        </div>
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+          <button onClick="{{ item.onClick }}" style="{{ item.style }}" style-hover="{{ item.hover }}">
+            <span style="{{ item.dot }}"></span>{{ item.label }}
+          </button>
+        </sc-for>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:0.6rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.12);">
+          <a href="mailto:webcartaonline@gmail.com" style="font-size:0.85rem;color:rgba(255,255,255,0.72);word-break:break-all;">webcartaonline@gmail.com</a>
+          <a href="tel:+34722207215" style="font-size:0.85rem;color:rgba(255,255,255,0.72);">+34 722-207-215</a>
+        </div>
+      </nav>
+    </sc-if>
+  </sc-if>
+
+  <main style="{{ mainStyle }}">
+
+    <!-- ===================== HOME ===================== -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section style="position:relative;min-height:600px;display:grid;isolation:isolate;overflow:hidden;">
+        <img src="Recursos/img/PortadaRecortada.png" alt="" style="position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div style="position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(10,10,10,0.15) 0%,rgba(10,10,10,0.4) 45%,rgba(10,10,10,0.88) 82%,#0a0a0a 100%);"></div>
+        <div data-reveal="" style="align-self: end; display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; padding: 0 clamp(1.25rem,5vw,3.5rem) 3rem; max-width: 1180px; width: 100%; margin: 0 auto; margin-top: 142px; margin-bottom: 142px">
+          <h1 style="margin:0;max-width:16ch;font-size:clamp(2.25rem,1.5rem+4.4vw,4rem);line-height:1.06;letter-spacing:-0.02em;font-weight:700;">Lleva tu negocio al siguiente nivel</h1>
+          <p style="margin:0;max-width:42ch;color:rgba(255,255,255,0.72);font-size:clamp(1.0625rem,1rem+0.4vw,1.25rem);">Diseñamos la web de tu negocio y te la entregamos lista para funcionar.</p>
+          <button onClick="{{ scrollFeatures }}" style="align-self:flex-start;padding:0.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-weight:500;font-size:0.95rem;cursor:pointer;transition:transform 150ms ease,background-color 150ms ease;" style-hover="{{ orangeHover }}">Ver qué incluye</button>
+        </div>
+      </section>
+
+      <sc-if value="{{ showTestimonials }}" hint-placeholder-val="{{ true }}">
+        <section style="padding:clamp(3rem,6vw,5.5rem) 0;">
+          <div data-reveal="" style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);margin-bottom:2rem;">
+            <h2 style="margin:0 0 0.4rem;font-size:clamp(1.75rem,1.4rem+2vw,2.5rem);letter-spacing:-0.02em;">Ya confían en nosotros</h2>
+            <p style="margin:0;max-width:48ch;color:rgba(255,255,255,0.66);font-size:1.05rem;">Negocios que ya trabajan con su carta hecha por nosotros.</p>
+          </div>
+          <div class="pw-scroll" style="overflow-x:auto;overflow-y:hidden;padding:0 clamp(1.25rem,5vw,3.5rem) 0.75rem;-webkit-overflow-scrolling:touch;">
+            <ul style="display:flex;gap:1rem;width:max-content;margin:0;padding:0;list-style:none;">
+              <li style="flex:0 0 clamp(13rem,62vw,20rem);aspect-ratio:673/256;">
+                <a href="https://webcartaonline.github.io/FusionCafe/" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;height:100%;overflow:hidden;border:1px solid rgba(255,255,255,0.12);border-radius:20px;background:#121212;transition:transform 200ms ease,border-color 200ms ease;" style-hover="{{ cardScaleHover }}">
+                  <img src="Recursos/img/FusionCafe/FusionCafeCartel.png" alt="Fusión Café" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </a>
+              </li>
+              <li style="flex:0 0 clamp(13rem,62vw,20rem);aspect-ratio:673/256;">
+                <a href="https://webcartaonline.github.io/ElParkeLoungeBar/index.html" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;height:100%;overflow:hidden;border:1px solid rgba(255,255,255,0.12);border-radius:20px;background:#121212;transition:transform 200ms ease,border-color 200ms ease;" style-hover="{{ cardScaleHover }}">
+                  <img src="Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png" alt="El Parke Lounge Bar" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </a>
+              </li>
+              <li style="flex:0 0 clamp(13rem,62vw,20rem);aspect-ratio:673/256;">
+                <div style="display:grid;place-items:center;width:100%;height:100%;border-radius:20px;border:1px solid #fff;background:#fff;color:#0a0a0a;font-weight:700;letter-spacing:0.08em;text-align:center;font-size:1.4rem;">FALTAS TÚ</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </sc-if>
+
+      <section id="pw-features" style="padding:clamp(2rem,4vw,4rem) 0 clamp(3rem,6vw,5.5rem);">
+        <div style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+          <div data-reveal="" style="margin-bottom:2.25rem;">
+            <h2 style="margin:0 0 0.4rem;font-size:clamp(1.75rem,1.4rem+2vw,2.5rem);letter-spacing:-0.02em;">¿Por qué elegirnos?</h2>
+            <p style="margin:0;max-width:48ch;color:rgba(255,255,255,0.66);font-size:1.05rem;">Todo lo que necesita tu negocio para estar en internet, sin letra pequeña.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1.25rem;">
+            <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
+              <article data-reveal="" style="{{ f.card }}" style-hover="{{ liftHover }}">
+                <span style="position:absolute;top:0;left:0;right:0;height:3px;background:{{ f.accent }};"></span>
+                <span style="{{ f.iconWrap }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.4rem;height:1.4rem;" aria-hidden="true" dangerouslySetInnerHTML="{{ f.icon }}"></svg>
+                </span>
+                <h3 style="margin:0.4rem 0 0;font-size:1.35rem;letter-spacing:-0.01em;">{{ f.title }}</h3>
+                <p style="margin:0.4rem 0 0;color:rgba(255,255,255,0.66);font-size:0.95rem;">{{ f.text }}</p>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ===================== TEMPLATES ===================== -->
+    <sc-if value="{{ isTemplates }}" hint-placeholder-val="{{ true }}">
+      <section style="{{ pageSection }}">
+        <div style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+          <div data-reveal="" style="margin-bottom:2.5rem;max-width:60ch;">
+            <p style="{{ eyebrow }}">Plantillas</p>
+            <h1 style="margin:0 0 0.6rem;font-size:clamp(2rem,1.4rem+3vw,3.25rem);letter-spacing:-0.02em;">Diseños listos para tu negocio</h1>
+            <p style="margin: 0; color: rgba(255,255,255,0.66); font-size: 1.1rem; margin-top: 80px; margin-bottom: 80px">Cada plantilla es un conjunto de pantallas reales, pensadas para cafeterías, bares y restaurantes. Elige el estilo que va con tu negocio y lo adaptamos a tu marca.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.75rem;">
+            <sc-for list="{{ templates }}" as="t" hint-placeholder-count="6">
+              <article data-reveal="" style="border:1px solid rgba(255,255,255,0.12);border-radius:22px;background:linear-gradient(160deg,#181818,#121212);padding:clamp(1.25rem,3vw,1.75rem);">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1.25rem;">
+                  <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="{{ t.dot }}"></span>
+                    <div>
+                      <h2 style="margin:0;font-size:1.4rem;letter-spacing:-0.01em;">{{ t.name }}</h2>
+                      <p style="margin:0.15rem 0 0;color:rgba(255,255,255,0.55);font-size:0.85rem;">{{ t.tag }}</p>
+                    </div>
+                  </div>
+                  <span style="{{ t.badge }}">{{ t.count }} pantallas</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:0.75rem;">
+                  <sc-for list="{{ t.images }}" as="img" hint-placeholder-count="5">
+                    <sc-if value="{{ img.real }}" hint-placeholder-val="{{ true }}">
+                      <img src="{{ img.src }}" alt="{{ img.label }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,0.12);transition:transform 200ms ease;" style-hover="{{ imgHover }}">
+                    </sc-if>
+                    <sc-if value="{{ img.placeholder }}" hint-placeholder-val="{{ true }}">
+                      <div style="width:100%;aspect-ratio:4/3;border-radius:12px;border:1px solid rgba(255,255,255,0.12);display:grid;place-items:center;background-color:#141414;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 9px);">
+                        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.72rem;letter-spacing:0.02em;color:rgba(255,255,255,0.5);text-align:center;padding:0 0.4rem;">{{ img.label }}</span>
+                      </div>
+                    </sc-if>
+                  </sc-for>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+          <div data-reveal="" style="margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+            <a href="mailto:webcartaonline@gmail.com" style="padding:0.85rem 1.7rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-weight:500;" style-hover="{{ orangeHover }}">Quiero una web así</a>
+            <button onClick="{{ goPricing }}" style="padding:0.85rem 1.7rem;border-radius:999px;border:1px solid rgba(255,255,255,0.2);color:#fff;font-weight:500;cursor:pointer;" style-hover="{{ ghostHover }}">Ver precios</button>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ===================== HOW WE WORK ===================== -->
+    <sc-if value="{{ isHow }}" hint-placeholder-val="{{ true }}">
+      <section style="{{ pageSection }}">
+        <div style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+          <div data-reveal="" style="margin-bottom:2.75rem;max-width:60ch;">
+            <p style="{{ eyebrow }}">Cómo trabajamos</p>
+            <h1 style="margin:0 0 0.6rem;font-size:clamp(2rem,1.4rem+3vw,3.25rem);letter-spacing:-0.02em;">De tu idea a tu web en 5 pasos</h1>
+            <p style="margin: 0; color: rgba(255,255,255,0.66); font-size: 1.1rem; margin-top: 80px; margin-bottom: 80px">Sin complicaciones ni tecnicismos. Nosotros hacemos el trabajo; tú solo lo apruebas.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+              <article data-reveal="" style="display:flex;gap:clamp(1rem,3vw,1.75rem);align-items:flex-start;border:1px solid rgba(255,255,255,0.12);border-radius:18px;background:linear-gradient(160deg,#181818,#121212);padding:clamp(1.25rem,3vw,1.75rem);" style-hover="{{ liftHover }}">
+                <span style="flex:none;font-size:clamp(1.8rem,1rem+3vw,2.75rem);font-weight:700;line-height:1;color:{{ s.accent }};letter-spacing:-0.02em;">{{ s.num }}</span>
+                <div>
+                  <h2 style="margin:0 0 0.35rem;font-size:1.3rem;letter-spacing:-0.01em;">{{ s.title }}</h2>
+                  <p style="margin:0;color:rgba(255,255,255,0.66);font-size:1rem;">{{ s.text }}</p>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+          <div data-reveal="" style="margin-top:2.5rem;">
+            <button onClick="{{ goPricing }}" style="padding:0.85rem 1.7rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-weight:500;cursor:pointer;" style-hover="{{ orangeHover }}">Empezar mi web</button>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ===================== PRICING ===================== -->
+    <sc-if value="{{ isPricing }}" hint-placeholder-val="{{ true }}">
+      <section style="{{ pageSection }}">
+        <div style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+          <div data-reveal="" style="margin-bottom:2.75rem;max-width:60ch;">
+            <p style="{{ eyebrow }}">Precios y planes</p>
+            <h1 style="margin:0 0 0.6rem;font-size:clamp(2rem,1.4rem+3vw,3.25rem);letter-spacing:-0.02em;">Pago único. Sin sorpresas.</h1>
+            <p style="margin: 0; color: rgba(255,255,255,0.66); font-size: 1.1rem; margin-top: 80px; margin-bottom: 80px">Pagas una vez y la web es tuya. Elige el plan que mejor encaja con tu negocio.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:1.25rem;align-items:stretch;">
+            <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+              <article data-reveal="" style="{{ p.card }}">
+                <sc-if value="{{ p.highlighted }}" hint-placeholder-val="{{ true }}">
+                  <span style="position:absolute;top:1rem;right:1rem;padding:0.25rem 0.7rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;">POPULAR</span>
+                </sc-if>
+                <h2 style="margin:0;font-size:1.35rem;">{{ p.name }}</h2>
+                <p style="margin:0.25rem 0 0;color:rgba(255,255,255,0.6);font-size:0.9rem;">{{ p.tagline }}</p>
+                <div style="display:flex;align-items:baseline;gap:0.4rem;margin:1.25rem 0 0.25rem;">
+                  <span style="font-size:2.5rem;font-weight:700;letter-spacing:-0.02em;">{{ p.price }}</span>
+                </div>
+                <p style="margin:0 0 1.25rem;color:rgba(255,255,255,0.5);font-size:0.82rem;">pago único</p>
+                <ul style="list-style:none;padding:0;margin:0 0 1.5rem;display:flex;flex-direction:column;gap:0.6rem;">
+                  <sc-for list="{{ p.features }}" as="feat" hint-placeholder-count="5">
+                    <li style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.92rem;color:rgba(255,255,255,0.82);">
+                      <span style="flex:none;color:{{ p.accent }};font-weight:700;margin-top:1px;">✓</span>{{ feat }}
+                    </li>
+                  </sc-for>
+                </ul>
+                <a href="mailto:webcartaonline@gmail.com" style="{{ p.button }}">{{ p.cta }}</a>
+              </article>
+            </sc-for>
+          </div>
+          <p data-reveal="" style="margin:1rem 0 0;color:rgba(255,255,255,0.4);font-size:0.78rem;">*Precios de ejemplo. El presupuesto final depende del contenido de tu negocio.</p>
+
+          <div data-reveal="" style="margin-top:3rem;">
+            <h2 style="margin:0 0 1.25rem;font-size:1.5rem;letter-spacing:-0.01em;">Comparativa de planes</h2>
+            <div class="pw-scroll" style="overflow-x:auto;border:1px solid rgba(255,255,255,0.12);border-radius:16px;">
+              <table style="width:100%;border-collapse:collapse;min-width:520px;">
+                <thead>
+                  <tr>
+                    <th style="text-align:left;padding:0.9rem 1rem;font-size:0.85rem;color:rgba(255,255,255,0.6);font-weight:500;border-bottom:1px solid rgba(255,255,255,0.12);">Característica</th>
+                    <th style="text-align:center;padding:0.9rem 1rem;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.12);">Esencial</th>
+                    <th style="text-align:center;padding:0.9rem 1rem;font-size:0.9rem;color:#e8710a;border-bottom:1px solid rgba(255,255,255,0.12);">Profesional</th>
+                    <th style="text-align:center;padding:0.9rem 1rem;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.12);">Premium</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ comparison }}" as="row" hint-placeholder-count="7">
+                    <tr>
+                      <td style="padding:0.8rem 1rem;font-size:0.9rem;color:rgba(255,255,255,0.82);border-bottom:1px solid rgba(255,255,255,0.07);">{{ row.label }}</td>
+                      <td style="padding:0.8rem 1rem;font-size:0.9rem;text-align:center;color:rgba(255,255,255,0.7);border-bottom:1px solid rgba(255,255,255,0.07);">{{ row.esencial }}</td>
+                      <td style="padding:0.8rem 1rem;font-size:0.9rem;text-align:center;color:rgba(255,255,255,0.92);border-bottom:1px solid rgba(255,255,255,0.07);background:rgba(232,113,10,0.06);">{{ row.pro }}</td>
+                      <td style="padding:0.8rem 1rem;font-size:0.9rem;text-align:center;color:rgba(255,255,255,0.7);border-bottom:1px solid rgba(255,255,255,0.07);">{{ row.premium }}</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ===================== FAQS ===================== -->
+    <sc-if value="{{ isFaqs }}" hint-placeholder-val="{{ true }}">
+      <section style="{{ pageSection }}">
+        <div style="max-width:820px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+          <div data-reveal="" style="margin-bottom:2.5rem;max-width:60ch;">
+            <p style="{{ eyebrow }}">Preguntas frecuentes</p>
+            <h1 style="margin:0 0 0.6rem;font-size:clamp(2rem,1.4rem+3vw,3.25rem);letter-spacing:-0.02em;">Todo lo que sueles preguntarnos</h1>
+            <p style="margin: 0; color: rgba(255,255,255,0.66); font-size: 1.1rem; margin-top: 80px; margin-bottom: 80px">Y si te queda alguna duda, escríbenos: respondemos rápido.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="6">
+              <div data-reveal="" style="border:1px solid rgba(255,255,255,0.12);border-radius:14px;background:#121212;overflow:hidden;">
+                <button onClick="{{ q.toggle }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; padding: 1.1rem 1.25rem; cursor: pointer; color: #000000; font-size: 1.05rem; font-weight: 500" style-hover="{{ faqHover }}">
+                  <span style="color: #FFFFFF">{{ q.question }}</span>
+                  <span style="{{ q.iconStyle }}">+</span>
+                </button>
+                <sc-if value="{{ q.open }}" hint-placeholder-val="{{ true }}">
+                  <div style="padding: 0 1.25rem 1.2rem; color: rgba(255,255,255,0.68); font-size: 0.98rem; padding-bottom: 1.59rem; padding-top: 25px">{{ q.answer }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div data-reveal="" style="margin-top:2.5rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:16px;background:linear-gradient(160deg,#181818,#121212);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+            <div>
+              <p style="margin:0 0 0.2rem;font-size:1.1rem;font-weight:500;">¿No encuentras tu respuesta?</p>
+              <p style="margin:0;color:rgba(255,255,255,0.6);font-size:0.92rem;">Cuéntanos qué necesitas y te ayudamos.</p>
+            </div>
+            <a href="mailto:webcartaonline@gmail.com" style="padding:0.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-weight:500;white-space:nowrap;" style-hover="{{ orangeHover }}">Escríbenos</a>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer style="border-top:1px solid rgba(255,255,255,0.12);padding:clamp(2.5rem,5vw,3.5rem) 0 2rem;margin-top:2rem;">
+      <div style="max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem);">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:2rem;">
+          <div>
+            <p style="margin:0;font-size:1.3rem;font-weight:700;">Professional Web</p>
+            <p style="margin:0.5rem 0 0;max-width:34ch;color:rgba(255,255,255,0.6);font-size:0.92rem;">Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.</p>
+          </div>
+          <div>
+            <p style="margin:0 0 0.6rem;font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Contacto</p>
+            <div style="display:flex;flex-direction:column;gap:0.35rem;">
+              <a href="mailto:webcartaonline@gmail.com" style="color:rgba(255,255,255,0.72);font-size:0.92rem;">webcartaonline@gmail.com</a>
+              <a href="tel:+34722207215" style="color:rgba(255,255,255,0.72);font-size:0.92rem;">+34 722-207-215</a>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);font-size:0.8rem;">
+          <p style="margin:0;">© 2026 Professional Web. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:920},&quot;showTestimonials&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Inicio&quot;},&quot;plansHighlight&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Esencial&quot;,&quot;Profesional&quot;,&quot;Premium&quot;],&quot;default&quot;:&quot;Premium&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Precios&quot;}}">
+class Component extends DCLogic {
+  state = { page: "home", menuOpen: false, openFaq: 0, isMobile: false };
+
+  pages = [
+    { id: "home", label: "Inicio" },
+    { id: "templates", label: "Plantillas" },
+    { id: "how", label: "Cómo trabajamos" },
+    { id: "pricing", label: "Precios y Planes" },
+    { id: "faqs", label: "FAQs" },
+  ];
+
+  componentDidMount() {
+    this._mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => this.setState({ isMobile: this._mq.matches });
+    apply();
+    this._mqHandler = apply;
+    this._mq.addEventListener ? this._mq.addEventListener("change", apply) : this._mq.addListener(apply);
+    requestAnimationFrame(() => this.setupReveal());
+  }
+
+  componentWillUnmount() {
+    if (this._mq) this._mq.removeEventListener ? this._mq.removeEventListener("change", this._mqHandler) : this._mq.removeListener(this._mqHandler);
+    if (this._io) this._io.disconnect();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      if (this._io) this._io.disconnect();
+      requestAnimationFrame(() => this.setupReveal());
+    }
+  }
+
+  setupReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "none";
+          e.target.setAttribute("data-revealed", "");
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+    document.querySelectorAll("[data-reveal]:not([data-revealed])").forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity 650ms cubic-bezier(.2,.7,.2,1) " + Math.min(i * 40, 240) + "ms, transform 650ms cubic-bezier(.2,.7,.2,1) " + Math.min(i * 40, 240) + "ms";
+      this._io.observe(el);
+    });
+  }
+
+  go = (id) => {
+    this.setState({ page: id, menuOpen: false });
+    window.scrollTo(0, 0);
+  };
+
+  navLinkStyle(active) {
+    return {
+      display: "flex", alignItems: "center", gap: "0.7rem",
+      width: "100%", padding: "0.65rem 0.85rem", borderRadius: "12px",
+      fontSize: "0.95rem", fontWeight: active ? 700 : 500, textAlign: "left",
+      color: active ? "#0a0a0a" : "rgba(255,255,255,0.72)",
+      background: active ? "#ffffff" : "transparent",
+      cursor: "pointer", transition: "background-color 150ms ease, color 150ms ease",
+    };
+  }
+
+  navDot(active) {
+    return {
+      width: "7px", height: "7px", borderRadius: "999px", flex: "none",
+      background: active ? "#e8710a" : "rgba(255,255,255,0.3)",
+    };
+  }
+
+  navBarLinkStyle(active) {
+    return {
+      padding: "0.5rem 0.9rem", borderRadius: "999px", fontSize: "0.9rem",
+      fontWeight: active ? 700 : 500, whiteSpace: "nowrap",
+      color: active ? "#ffffff" : "#000000",
+      background: active ? "#000000" : "transparent",
+      cursor: "pointer", transition: "background-color 150ms ease, color 150ms ease",
+    };
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const showTestimonials = this.props.showTestimonials ?? true;
+    const highlight = this.props.plansHighlight ?? "Profesional";
+
+    const navItems = this.pages.map((p) => ({
+      id: p.id, label: p.label,
+      onClick: () => this.go(p.id),
+      style: this.navLinkStyle(page === p.id),
+      hover: {},
+      dot: this.navDot(page === p.id),
+    }));
+
+    const navItemsBar = this.pages.map((p) => ({
+      id: p.id, label: p.label,
+      onClick: () => this.go(p.id),
+      style: this.navBarLinkStyle(page === p.id),
+      hover: {},
+    }));
+
+    const accents = ["#174ea6", "#157f3c", "#e8710a"];
+
+    const features = [
+      { title: "Pago único", text: "Pagas una vez y la web es tuya. Sin cuotas mensuales ni sorpresas.", accent: "#174ea6",
+        icon: { __html: '<path d="M17.5 6.2A6.5 6.5 0 0 0 7.8 11"/><path d="M7.8 13a6.5 6.5 0 0 0 9.7 4.8"/><path d="M4 11h9"/><path d="M4 14h9"/>' } },
+      { title: "Tu carta en diferentes idiomas", text: "Vende más y atrae a más clientes permitiendo ver la página en diferentes idiomas.", accent: "#157f3c",
+        icon: { __html: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4.5" ry="9"/>' } },
+      { title: "Modifica los datos cuando quieras", text: "Cambias precios, horarios, imágenes y más desde un solo lugar, cuando y donde quieras.", accent: "#e8710a",
+        icon: { __html: '<path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4Z"/><path d="m14.5 5.5 4 4"/>' } },
+    ].map((f) => ({
+      ...f,
+      card: {
+        position: "relative", display: "flex", flexDirection: "column", gap: "0.25rem",
+        overflow: "hidden", padding: "2rem 1.5rem", border: "1px solid rgba(255,255,255,0.12)",
+        borderRadius: "22px", background: "linear-gradient(160deg,#181818,#121212)",
+        transition: "transform 200ms ease, border-color 200ms ease",
+      },
+      iconWrap: {
+        display: "grid", placeItems: "center", width: "2.75rem", height: "2.75rem",
+        borderRadius: "999px", color: "#fff",
+        background: "color-mix(in srgb," + f.accent + " 24%, transparent)",
+      },
+    }));
+
+    const templates = [
+      { name: "Fusión Café", tag: "Cafetería · brunch", accent: accents[0],
+        images: [
+          { real: true, src: "Recursos/img/FusionCafe/FusionCafeCartel.png", label: "cartel" },
+          { real: true, src: "Recursos/img/FusionCafe/Inicio.JPG", label: "inicio" },
+          { real: true, src: "Recursos/img/FusionCafe/Dulces.JPG", label: "dulces" },
+          { placeholder: true, label: "menú café" },
+          { placeholder: true, label: "galería" },
+        ] },
+      { name: "El Parke Lounge Bar", tag: "Bar · lounge · cócteles", accent: accents[2],
+        images: [
+          { real: true, src: "Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png", label: "cartel" },
+          { real: true, src: "Recursos/img/ParkeLoungueBar/Inicio.JPG", label: "inicio" },
+          { real: true, src: "Recursos/img/ParkeLoungueBar/Comidas.JPG", label: "comidas" },
+          { real: true, src: "Recursos/img/ParkeLoungueBar/ComidasEN.JPG", label: "comidas EN" },
+          { placeholder: true, label: "cócteles" },
+          { placeholder: true, label: "eventos" },
+        ] },
+      { name: "Restaurante clásico", tag: "Cocina de mercado", accent: accents[1],
+        images: [
+          { placeholder: true, label: "portada" }, { placeholder: true, label: "entrantes" },
+          { placeholder: true, label: "principales" }, { placeholder: true, label: "postres" },
+          { placeholder: true, label: "vinos" },
+        ] },
+      { name: "Pizzería", tag: "Napolitana · para llevar", accent: accents[2],
+        images: [
+          { placeholder: true, label: "portada" }, { placeholder: true, label: "pizzas" },
+          { placeholder: true, label: "pastas" }, { placeholder: true, label: "bebidas" },
+          { placeholder: true, label: "ofertas" }, { placeholder: true, label: "contacto" },
+        ] },
+      { name: "Heladería", tag: "Artesanal · temporada", accent: accents[0],
+        images: [
+          { placeholder: true, label: "portada" }, { placeholder: true, label: "sabores" },
+          { placeholder: true, label: "tarrinas" }, { placeholder: true, label: "batidos" },
+          { placeholder: true, label: "galería" },
+        ] },
+      { name: "Food truck", tag: "Street food · eventos", accent: accents[1],
+        images: [
+          { placeholder: true, label: "portada" }, { placeholder: true, label: "menú" },
+          { placeholder: true, label: "combos" }, { placeholder: true, label: "ubicación" },
+          { placeholder: true, label: "agenda" }, { placeholder: true, label: "redes" },
+        ] },
+    ].map((t) => ({
+      ...t,
+      count: t.images.length,
+      dot: { width: "12px", height: "12px", borderRadius: "999px", flex: "none", background: t.accent, boxShadow: "0 0 0 4px color-mix(in srgb," + t.accent + " 22%, transparent)" },
+      badge: { padding: "0.3rem 0.75rem", borderRadius: "999px", border: "1px solid rgba(255,255,255,0.15)", fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", whiteSpace: "nowrap" },
+    }));
+
+    const steps = [
+      { num: "01", title: "Cuéntanos tu negocio", text: "Hablamos de lo que ofreces, tu estilo y lo que necesitas. Sin tecnicismos." },
+      { num: "02", title: "Diseñamos tu web", text: "Creamos un diseño a medida con tus colores, tus fotos y tus productos." },
+      { num: "03", title: "Revisamos juntos", text: "Te la enseñamos y ajustamos cada detalle hasta que quede perfecta." },
+      { num: "04", title: "Publicamos y entregamos", text: "La ponemos online y te entregamos el enlace, listo para funcionar." },
+      { num: "05", title: "Modifícala cuando quieras", text: "Con tu panel cambias precios, fotos y textos en cualquier momento." },
+    ].map((s, i) => ({ ...s, accent: accents[i % 3] }));
+
+    const basePlans = [
+      { name: "Esencial", tagline: "Perfecto para empezar", price: "249€", accent: "#174ea6",
+        features: ["Carta digital (1 idioma)", "Hasta 30 productos", "Diseño a medida", "Publicación en tu enlace", "Entrega en 7 días"] },
+      { name: "Profesional", tagline: "El favorito de los negocios", price: "399€", accent: "#e8710a",
+        features: ["Todo lo de Esencial", "Multidioma (hasta 3)", "Productos ilimitados", "Galería de fotos", "Panel de edición propio", "Soporte 3 meses"] },
+      { name: "Premium", tagline: "Para llevarlo al máximo", price: "649€", accent: "#157f3c",
+        features: ["Todo lo de Profesional", "Dominio propio", "Reservas y pedidos", "Integración con redes", "Multidioma ilimitado", "Soporte 12 meses"] },
+    ];
+    const plans = basePlans.map((p) => {
+      const hl = p.name === highlight;
+      return {
+        ...p, highlighted: hl, cta: hl ? "Elegir " + p.name : "Elegir plan",
+        card: {
+          position: "relative", display: "flex", flexDirection: "column",
+          padding: "1.75rem 1.5rem", borderRadius: "22px",
+          border: hl ? "1px solid #e8710a" : "1px solid rgba(255,255,255,0.12)",
+          background: hl ? "linear-gradient(160deg,#1d150c,#121212)" : "linear-gradient(160deg,#181818,#121212)",
+          boxShadow: "none",
+        },
+        button: {
+          display: "block", textAlign: "center", marginTop: "auto",
+          padding: "0.8rem 1.4rem", borderRadius: "999px", fontWeight: 500, fontSize: "0.92rem",
+          background: hl ? "#e8710a" : "transparent",
+          color: hl ? "#0a0a0a" : "#fff",
+          border: hl ? "1px solid #e8710a" : "1px solid rgba(255,255,255,0.2)",
+        },
+      };
+    });
+
+    const comparison = [
+      { label: "Idiomas", esencial: "1", pro: "3", premium: "Ilimitado" },
+      { label: "Nº de productos", esencial: "30", pro: "Ilimitado", premium: "Ilimitado" },
+      { label: "Panel de edición", esencial: "—", pro: "✓", premium: "✓" },
+      { label: "Galería de fotos", esencial: "—", pro: "✓", premium: "✓" },
+      { label: "Dominio propio", esencial: "—", pro: "—", premium: "✓" },
+      { label: "Reservas / pedidos", esencial: "—", pro: "—", premium: "✓" },
+      { label: "Soporte", esencial: "—", pro: "3 meses", premium: "12 meses" },
+    ];
+
+    const faqData = [
+      { question: "¿El pago es realmente único?", answer: "Sí. Pagas una vez y la web es tuya. No hay cuotas mensuales ni sorpresas." },
+      { question: "¿Puedo modificar los datos yo mismo?", answer: "Sí. Con el panel de edición cambias precios, horarios, imágenes y textos cuando quieras, desde el móvil o el ordenador." },
+      { question: "¿En cuántos idiomas puede estar mi carta?", answer: "Desde uno hasta los que necesites, según el plan. Tus clientes eligen el idioma con un solo toque." },
+      { question: "¿Cuánto tarda en estar lista?", answer: "Normalmente entre 5 y 7 días desde que tenemos tus contenidos." },
+      { question: "¿Necesito conocimientos técnicos?", answer: "Ninguno. Nos encargamos de todo y te enseñamos a usar el panel en minutos." },
+      { question: "¿Incluye dominio y hosting?", answer: "El plan Premium incluye dominio propio. En todos los casos publicamos tu web y te entregamos el enlace listo para compartir." },
+      { question: "¿Puedo añadir fotos de mis productos?", answer: "Claro. Añadimos tu galería de fotos para que tu carta entre por los ojos." },
+    ];
+    const faqs = faqData.map((q, i) => ({
+      ...q, open: this.state.openFaq === i,
+      toggle: () => this.setState((s) => ({ openFaq: s.openFaq === i ? -1 : i })),
+      iconStyle: {
+        flex: "none", fontSize: "1.5rem", lineHeight: 1, color: "#e8710a",
+        transition: "transform 200ms ease",
+        transform: this.state.openFaq === i ? "rotate(45deg)" : "rotate(0deg)",
+      },
+    }));
+
+    return {
+      desktop: !this.state.isMobile,
+      isMobile: this.state.isMobile,
+      menuOpen: this.state.menuOpen,
+      showTestimonials,
+      isHome: page === "home", isTemplates: page === "templates",
+      isHow: page === "how", isPricing: page === "pricing", isFaqs: page === "faqs",
+      navItems, navItemsBar,
+      goHome: () => this.go("home"),
+      goPricing: () => this.go("pricing"),
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      scrollFeatures: () => { const el = document.getElementById("pw-features"); if (el) el.scrollIntoView({ behavior: "smooth" }); },
+      mainStyle: { minHeight: "100vh" },
+      pageSection: { paddingTop: "11rem", paddingBottom: "clamp(2.5rem,6vw,4.5rem)", paddingLeft: 0, paddingRight: 0 },
+      eyebrow: { margin: "0 0 0.6rem", fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#e8710a" },
+      orangeHover: {},
+      ghostHover: {},
+      faqHover: {},
+      liftHover: {},
+      imgHover: {},
+      cardScaleHover: {},
+      features, templates, steps, plans, comparison, faqs,
+    };
+  }
+}
+</script>
+</body>
+</html>

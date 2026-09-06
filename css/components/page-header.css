@@ -1,0 +1,28 @@
+/* ==========================================================================
+   PAGE HEADER — Cabecera de las páginas interiores: antetítulo, título y
+   entradilla. Reemplaza a la portada en todo lo que no es el Inicio.
+   ========================================================================== */
+
+.page-header {
+    max-width: 60ch;
+    margin-block-end: var(--space-2xl);
+}
+
+.page-header__eyebrow {
+    margin-block-end: var(--space-2xs);
+    color: var(--color-orange);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+}
+
+.page-header__title {
+    margin-block-end: var(--space-md);
+    font-size: var(--font-size-650);
+}
+
+.page-header__lead {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-400);
+}

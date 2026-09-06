@@ -6,7 +6,7 @@
 
    Estructura:
      .marquee            → contenedor con el difuminado de los extremos.
-       .marquee__viewport → carril con scroll y barra personalizada.
+       .marquee__viewport → carril con scroll (hereda .scroller de base.css).
          .marquee__track  → fila flexible de tarjetas.
            .marquee__item → caja de tamaño fijo (proporción del cartel).
              .marquee__card → recuadro visible; es <a> (negocio) o div (invitación).
@@ -15,12 +15,6 @@
 .marquee {
     --marquee-gap: var(--space-sm);
     --marquee-fade: 7%;
-
-    /* Barra de desplazamiento propia */
-    --marquee-bar-size: 6px;
-    --marquee-bar-track: rgb(255 255 255 / 0.08);
-    --marquee-bar-thumb: rgb(255 255 255 / 0.55);
-    --marquee-bar-thumb-hover: var(--color-white);
 
     position: relative;
 }
@@ -49,61 +43,34 @@
     background-image: linear-gradient(to left, var(--color-bg), transparent);
 }
 
-/* Carril con scroll: aquí vive la barra de desplazamiento personalizada. */
+/* Carril con scroll. Alinea el contenido con el resto de la página: hasta el
+   ancho máximo vale el gutter; al superarlo, el padding crece para centrar el
+   carril dentro de la misma columna que .container, de modo que la primera
+   tarjeta quede a la altura del título. */
 .marquee__viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* inercia al deslizar en iOS */
-
-    /* Alinea el contenido con el resto de la página: hasta el ancho máximo
-       vale el gutter (móvil/tablet igual que antes); al superarlo, el padding
-       crece para centrar el carril dentro de la misma columna que .container,
-       de modo que la primera tarjeta quede a la altura del título. */
     padding-inline: max(
         var(--layout-gutter),
         (100% - var(--layout-max-width)) / 2 + var(--layout-gutter)
     );
     padding-bottom: var(--space-xs);
-
-    /* --- Barra de desplazamiento propia (Firefox) --- */
-    scrollbar-width: thin;
-    scrollbar-color: var(--marquee-bar-thumb) transparent;
-}
-
-/* --- Barra de desplazamiento propia (Chrome, Edge, Safari) --- */
-.marquee__viewport::-webkit-scrollbar {
-    height: var(--marquee-bar-size);
-}
-
-.marquee__viewport::-webkit-scrollbar-track {
-    background-color: var(--marquee-bar-track);
-    border-radius: var(--radius-pill);
-}
-
-.marquee__viewport::-webkit-scrollbar-thumb {
-    background-color: var(--marquee-bar-thumb);
-    border-radius: var(--radius-pill);
-}
-
-.marquee__viewport::-webkit-scrollbar-thumb:hover {
-    background-color: var(--marquee-bar-thumb-hover);
 }
 
 .marquee__track {
     display: flex;
     gap: var(--marquee-gap);
     width: max-content;
+    margin: 0;
 }
 
 .marquee__item {
-    /* Tamaño de las tarjetas (idéntico al diseño anterior). */
-    flex: 0 0 clamp(13rem, 62vw, 17rem);
+    /* Tamaño de las tarjetas. */
+    flex: 0 0 clamp(13rem, 62vw, 20rem);
     /* Misma proporción que los carteles (2692 x 1024): la caja encaja con la
        imagen sin huecos ni recortes. */
     aspect-ratio: 673 / 256;
     /* Red de seguridad: la proporción como altura (ancho / 2.629). Si WebKit no
        resuelve aspect-ratio dentro del flex, el item no colapsa a 0. */
-    min-height: clamp(4.95rem, 23.6vw, 6.47rem);
+    min-height: clamp(4.95rem, 23.6vw, 7.61rem);
 }
 
 /* Recuadro visible. Es la única pieza que dibuja borde, fondo y esquinas,

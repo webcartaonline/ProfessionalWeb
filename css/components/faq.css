@@ -1,0 +1,59 @@
+/* ==========================================================================
+   FAQ — Acordeón de preguntas frecuentes construido con <details>/<summary>.
+   Funciona sin JavaScript; js/faq.js solo añade el cierre automático del
+   resto de preguntas al abrir una.
+   ========================================================================== */
+
+.faqs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.faq {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    overflow: hidden;
+}
+
+.faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 1.1rem var(--space-md);
+    color: var(--color-white);
+    font-size: var(--font-size-300);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    list-style: none;
+    transition: background-color var(--transition-fast);
+}
+
+/* Oculta el triángulo nativo del acordeón en todos los navegadores. */
+.faq__question::-webkit-details-marker {
+    display: none;
+}
+
+.faq__question:hover {
+    background-color: rgb(255 255 255 / 0.04);
+}
+
+.faq__icon {
+    flex: none;
+    color: var(--color-orange);
+    font-size: var(--font-size-500);
+    line-height: 1;
+    transition: transform var(--transition-base);
+}
+
+.faq[open] .faq__icon {
+    transform: rotate(45deg);
+}
+
+.faq__answer {
+    padding: var(--space-md) var(--space-md) var(--space-md);
+    color: rgb(255 255 255 / 0.68);
+    font-size: var(--font-size-200);
+}

@@ -1,0 +1,54 @@
+/* ==========================================================================
+   TABLE — Comparativa de planes. En móvil se desplaza en horizontal dentro
+   de su propio marco (.table-wrap hereda .scroller de base.css).
+   ========================================================================== */
+
+.table-wrap {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.table {
+    width: 100%;
+    min-width: 32.5rem;
+    border-collapse: collapse;
+}
+
+.table__head {
+    padding: 0.9rem var(--space-sm);
+    border-block-end: 1px solid var(--color-border);
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+.table__head--label {
+    color: rgb(255 255 255 / 0.6);
+    text-align: left;
+}
+
+.table__head--featured {
+    color: var(--color-orange);
+}
+
+.table__cell {
+    padding: 0.8rem var(--space-sm);
+    border-block-end: 1px solid var(--color-border-soft);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-200);
+    text-align: center;
+}
+
+.table__cell--label {
+    color: var(--color-text-soft);
+    text-align: left;
+}
+
+.table__cell--featured {
+    background-color: var(--color-orange-soft);
+    color: rgb(255 255 255 / 0.92);
+}
+
+.table tbody tr:last-child .table__cell {
+    border-block-end: 0;
+}

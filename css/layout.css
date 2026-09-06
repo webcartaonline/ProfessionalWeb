@@ -9,13 +9,23 @@
     padding-inline: var(--layout-gutter);
 }
 
+/* Columna estrecha para lectura larga (FAQs). */
+.container--narrow {
+    max-width: var(--layout-max-width-narrow);
+}
+
 .section {
     padding-block: var(--space-2xl);
 }
 
 /* Reserva el hueco de la barra flotante en páginas sin portada a sangre. */
 .section--below-nav {
-    padding-block-start: calc(var(--nav-space) + var(--space-lg));
+    padding-block-start: calc(var(--nav-space) + var(--space-2xl));
+}
+
+/* Sección encadenada a la anterior: sin doble aire entre las dos. */
+.section--tight {
+    padding-block-start: var(--space-lg);
 }
 
 .section__header {
@@ -38,6 +48,14 @@
 @media (min-width: 48em) {
     .section {
         padding-block: var(--space-3xl);
+    }
+
+    .section--below-nav {
+        padding-block-start: calc(var(--nav-space) + var(--space-3xl));
+    }
+
+    .section--tight {
+        padding-block-start: var(--space-xl);
     }
 
     .section__header {

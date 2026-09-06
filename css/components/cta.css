@@ -1,0 +1,31 @@
+/* ==========================================================================
+   CTA — Bloque de cierre con una llamada a la acción destacada.
+   ========================================================================== */
+
+.cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-block-start: var(--space-2xl);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-image: var(--gradient-card);
+}
+
+.cta__title {
+    font-size: var(--font-size-400);
+    font-weight: var(--font-weight-medium);
+}
+
+.cta__text {
+    margin-block-start: var(--space-3xs);
+    color: rgb(255 255 255 / 0.6);
+    font-size: var(--font-size-200);
+}
+
+.cta .button {
+    white-space: nowrap;
+}

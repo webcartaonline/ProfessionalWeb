@@ -36,6 +36,11 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* Bloquea el desplazamiento del fondo mientras el menú móvil está abierto. */
+body.is-locked {
+    overflow: hidden;
+}
+
 img,
 picture,
 svg,
@@ -111,7 +116,7 @@ p {
     position: absolute;
     inset-block-start: var(--space-2xs);
     inset-inline-start: var(--space-2xs);
-    z-index: calc(var(--z-nav) + 1);
+    z-index: calc(var(--z-drawer) + 1);
     padding: var(--space-2xs) var(--space-sm);
     border-radius: var(--radius-pill);
     background-color: var(--color-white);
@@ -124,4 +129,57 @@ p {
 
 .skip-link:focus-visible {
     transform: translateY(0);
+}
+
+/* ----- Aparición al hacer scroll ---------------------------------------
+   El elemento se oculta SOLO si el JS ha marcado el documento con
+   .js-reveal. Sin JavaScript el contenido se ve siempre.
+   ------------------------------------------------------------------------ */
+
+.js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity var(--transition-reveal), transform var(--transition-reveal);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js-reveal [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js-reveal [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ----- Barra de desplazamiento propia (carriles horizontales) ----------- */
+
+.scroller {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* inercia al deslizar en iOS */
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.5) rgb(255 255 255 / 0.08);
+}
+
+.scroller::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scroller::-webkit-scrollbar-track {
+    background-color: rgb(255 255 255 / 0.08);
+    border-radius: var(--radius-pill);
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 0.5);
+    border-radius: var(--radius-pill);
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-white);
 }

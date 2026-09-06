@@ -1,0 +1,118 @@
+/* ==========================================================================
+   PLAN — Tarjetas de precio. El plan destacado se marca con --featured:
+   borde naranja, fondo cálido, distintivo "POPULAR" y botón sólido.
+   ========================================================================== */
+
+.plans {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    align-items: stretch;
+}
+
+.plan {
+    --plan-accent: var(--color-blue);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background-image: var(--gradient-card);
+}
+
+.plan--blue {
+    --plan-accent: var(--color-blue);
+}
+
+.plan--green {
+    --plan-accent: var(--color-green);
+}
+
+.plan--orange {
+    --plan-accent: var(--color-orange);
+}
+
+.plan--featured {
+    border-color: var(--color-orange);
+    background-image: linear-gradient(160deg, #1d150c, var(--color-surface));
+}
+
+.plan__badge {
+    position: absolute;
+    inset-block-start: var(--space-sm);
+    inset-inline-end: var(--space-sm);
+    padding: var(--space-3xs) 0.7rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange);
+    color: var(--color-text-inverse);
+    font-size: 0.72rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.04em;
+}
+
+.plan__name {
+    font-size: var(--font-size-500);
+}
+
+.plan__tagline {
+    margin-block-start: var(--space-3xs);
+    color: rgb(255 255 255 / 0.6);
+    font-size: var(--font-size-200);
+}
+
+.plan__price {
+    display: block;
+    margin-block-start: var(--space-md);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.plan__period {
+    margin-block-end: var(--space-md);
+    color: rgb(255 255 255 / 0.5);
+    font-size: 0.82rem;
+}
+
+.plan__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    margin: 0 0 var(--space-md);
+}
+
+.plan__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+    color: var(--color-text-soft);
+    font-size: var(--font-size-200);
+}
+
+.plan__check {
+    flex: none;
+    color: var(--plan-accent);
+    font-weight: var(--font-weight-bold);
+}
+
+/* El botón se pega al fondo para que todas las tarjetas cierren a la misma altura. */
+.plan__cta {
+    margin-block-start: auto;
+    width: 100%;
+}
+
+.plans__note {
+    margin-block-start: var(--space-sm);
+    color: var(--color-text-faint);
+    font-size: 0.78rem;
+}
+
+@media (min-width: 48em) {
+    .plans {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+    }
+}

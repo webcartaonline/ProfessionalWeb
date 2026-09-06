@@ -12,7 +12,15 @@
 
 @import url("css/components/button.css") layer(components);
 @import url("css/components/navbar.css") layer(components);
+@import url("css/components/drawer.css") layer(components);
 @import url("css/components/hero.css") layer(components);
 @import url("css/components/marquee.css") layer(components);
 @import url("css/components/feature.css") layer(components);
+@import url("css/components/page-header.css") layer(components);
+@import url("css/components/template.css") layer(components);
+@import url("css/components/step.css") layer(components);
+@import url("css/components/plan.css") layer(components);
+@import url("css/components/table.css") layer(components);
+@import url("css/components/faq.css") layer(components);
+@import url("css/components/cta.css") layer(components);
 @import url("css/components/footer.css") layer(components);

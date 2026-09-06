@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cómo trabajamos — Professional Web</title>
+    <meta name="description" content="De tu idea a tu web en 5 pasos. Sin complicaciones ni tecnicismos: nosotros hacemos el trabajo y tú solo lo apruebas.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon: .ico para compatibilidad amplia, .png para pantallas de alta densidad -->
+    <link rel="icon" href="Recursos/img/Logo/favicon.ico" sizes="32x32">
+    <link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="Recursos/img/Logo/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Guardián de la animación de entrada: marca el documento antes de pintar
+         para que no haya parpadeo. Si el navegador no soporta IntersectionObserver
+         o se pide reducir el movimiento, no se marca y todo se ve desde el inicio. -->
+    <script>
+        if ("IntersectionObserver" in window &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("js-reveal");
+        }
+    </script>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/reveal.js" defer></script>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <!-- ===== Barra de navegación ====================================== -->
+    <div class="navbar-scrim">
+        <nav class="navbar" aria-label="Navegación principal">
+            <a class="navbar__brand" href="index.html" aria-label="Professional Web — Inicio">
+                <img class="navbar__logo" src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web"
+                    width="120" height="32">
+            </a>
+
+            <ul class="navbar__menu">
+                <li><a class="navbar__link" href="index.html">Inicio</a></li>
+                <li><a class="navbar__link" href="plantillas.html">Plantillas</a></li>
+                <li><a class="navbar__link" href="como-trabajamos.html" aria-current="page">Cómo trabajamos</a></li>
+                <li><a class="navbar__link" href="precios.html">Precios y Planes</a></li>
+                <li><a class="navbar__link" href="faqs.html">FAQs</a></li>
+            </ul>
+
+            <button class="navbar__toggle" type="button" data-drawer-toggle aria-expanded="false"
+                aria-controls="menu-movil" aria-label="Abrir menú">
+                <span class="navbar__bar"></span>
+                <span class="navbar__bar"></span>
+                <span class="navbar__bar"></span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== Menú lateral (móvil) ===================================== -->
+    <div class="drawer" id="menu-movil" data-drawer hidden>
+        <div class="drawer__scrim" data-drawer-close></div>
+
+        <nav class="drawer__panel" aria-label="Navegación móvil">
+            <div class="drawer__header">
+                <button class="drawer__close" type="button" data-drawer-close aria-label="Cerrar menú">&times;</button>
+            </div>
+
+            <ul class="drawer__menu">
+                <li>
+                    <a class="drawer__link" href="index.html">
+                        <span class="drawer__dot"></span>Inicio
+                    </a>
+                </li>
+                <li>
+                    <a class="drawer__link" href="plantillas.html">
+                        <span class="drawer__dot"></span>Plantillas
+                    </a>
+                </li>
+                <li>
+                    <a class="drawer__link" href="como-trabajamos.html" aria-current="page">
+                        <span class="drawer__dot"></span>Cómo trabajamos
+                    </a>
+                </li>
+                <li>
+                    <a class="drawer__link" href="precios.html">
+                        <span class="drawer__dot"></span>Precios y Planes
+                    </a>
+                </li>
+                <li>
+                    <a class="drawer__link" href="faqs.html">
+                        <span class="drawer__dot"></span>FAQs
+                    </a>
+                </li>
+            </ul>
+
+            <div class="drawer__footer">
+                <a class="drawer__contact" href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a>
+                <a class="drawer__contact" href="tel:+34722207215">+34 722-207-215</a>
+            </div>
+        </nav>
+    </div>
+
+    <main id="contenido">
+
+        <section class="section section--below-nav" aria-labelledby="proceso-titulo">
+            <div class="container">
+
+                <div class="page-header" data-reveal>
+                    <p class="page-header__eyebrow">Cómo trabajamos</p>
+                    <h1 class="page-header__title" id="proceso-titulo">De tu idea a tu web en 5 pasos</h1>
+                    <p class="page-header__lead">
+                        Sin complicaciones ni tecnicismos. Nosotros hacemos el trabajo; tú solo lo apruebas.
+                    </p>
+                </div>
+
+                <ol class="steps">
+
+                    <li class="step step--blue" data-reveal>
+                        <span class="step__number" aria-hidden="true">01</span>
+                        <div>
+                            <h2 class="step__title">Cuéntanos tu negocio</h2>
+                            <p class="step__text">
+                                Hablamos de lo que ofreces, tu estilo y lo que necesitas. Sin tecnicismos.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="step step--green" data-reveal>
+                        <span class="step__number" aria-hidden="true">02</span>
+                        <div>
+                            <h2 class="step__title">Diseñamos tu web</h2>
+                            <p class="step__text">
+                                Creamos un diseño a medida con tus colores, tus fotos y tus productos.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="step step--orange" data-reveal>
+                        <span class="step__number" aria-hidden="true">03</span>
+                        <div>
+                            <h2 class="step__title">Revisamos juntos</h2>
+                            <p class="step__text">
+                                Te la enseñamos y ajustamos cada detalle hasta que quede perfecta.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="step step--blue" data-reveal>
+                        <span class="step__number" aria-hidden="true">04</span>
+                        <div>
+                            <h2 class="step__title">Publicamos y entregamos</h2>
+                            <p class="step__text">
+                                La ponemos online y te entregamos el enlace, listo para funcionar.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="step step--green" data-reveal>
+                        <span class="step__number" aria-hidden="true">05</span>
+                        <div>
+                            <h2 class="step__title">Modifícala cuando quieras</h2>
+                            <p class="step__text">
+                                Con tu panel cambias precios, fotos y textos en cualquier momento.
+                            </p>
+                        </div>
+                    </li>
+
+                </ol>
+
+                <div class="button-row" data-reveal>
+                    <a class="button button--primary" href="precios.html">Empezar mi web</a>
+                    <a class="button button--ghost" href="plantillas.html">Ver plantillas</a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== Pie ====================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <p class="footer__brand-name">Professional Web</p>
+                    <p class="footer__claim">
+                        Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="footer__heading">Navegación</h2>
+                    <ul class="footer__list">
+                        <li><a class="footer__link" href="index.html">Inicio</a></li>
+                        <li><a class="footer__link" href="plantillas.html">Plantillas</a></li>
+                        <li><a class="footer__link" href="como-trabajamos.html">Cómo trabajamos</a></li>
+                        <li><a class="footer__link" href="precios.html">Precios y Planes</a></li>
+                        <li><a class="footer__link" href="faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="footer__heading">Contacto</h2>
+                    <ul class="footer__list">
+                        <li>
+                            <a class="footer__link" href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a>
+                        </li>
+                        <li>
+                            <a class="footer__link" href="tel:+34722207215">+34 722-207-215</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <!-- Sin JS no hay año dinámico: actualízalo a mano una vez al año. -->
+                <p>© 2026 Professional Web. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
