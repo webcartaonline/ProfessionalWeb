@@ -33,6 +33,7 @@
 
     <script src="js/navbar.js" defer></script>
     <script src="js/reveal.js" defer></script>
+    <script src="js/gallery.js" defer></script>
 </head>
 
 <body>
@@ -122,217 +123,251 @@
                     </p>
                 </div>
 
-                <div class="templates">
+                <div class="gallery" data-reveal>
+                    <div class="gallery__tabs">
+                        <div class="gallery__tablist" role="tablist" aria-label="Tipo de diseño"
+                            data-gallery-tabs>
+                            <button class="gallery__tab" type="button" role="tab" id="tab-plantillas"
+                                aria-controls="panel-plantillas" aria-selected="true">Plantillas</button>
+                            <button class="gallery__tab" type="button" role="tab" id="tab-cartas"
+                                aria-controls="panel-cartas" aria-selected="false">Otras cartas</button>
+                        </div>
+                    </div>
 
-                    <!-- ----- Fusión Café ---------------------------------- -->
-                    <article class="template template--blue" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">Fusión Café</h2>
-                                    <p class="template__tag">Cafetería · brunch</p>
-                                </div>
-                            </div>
-                            <span class="template__badge">5 pantallas</span>
+                    <!-- ----- Plantillas ---------------------------------- -->
+                    <div class="gallery__panel" id="panel-plantillas" role="tabpanel" aria-labelledby="tab-plantillas">
+                        <div class="gallery__list" role="tablist" aria-orientation="vertical"
+                            aria-label="Plantillas por estilo" data-gallery-tabs>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p1"
+                                aria-controls="rail-p1" aria-selected="true">
+                                <span>Plantilla 1</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p2"
+                                aria-controls="rail-p2" aria-selected="false">
+                                <span>Plantilla 2</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p3"
+                                aria-controls="rail-p3" aria-selected="false">
+                                <span>Plantilla 3</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p4"
+                                aria-controls="rail-p4" aria-selected="false">
+                                <span>Plantilla 4</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p5"
+                                aria-controls="rail-p5" aria-selected="false">
+                                <span>Plantilla 5</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p6"
+                                aria-controls="rail-p6" aria-selected="false">
+                                <span>Plantilla 6</span>
+                                <span class="gallery__dot"></span>
+                            </button>
                         </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <img class="template__screen" src="Recursos/img/FusionCafe/FusionCafeCartel.png"
-                                    alt="Cartel de Fusión Café" loading="lazy">
-                            </li>
-                            <li>
-                                <img class="template__screen" src="Recursos/img/FusionCafe/Inicio.JPG"
-                                    alt="Pantalla de inicio de Fusión Café" loading="lazy">
-                            </li>
-                            <li>
-                                <img class="template__screen" src="Recursos/img/FusionCafe/Dulces.JPG"
-                                    alt="Sección de dulces de Fusión Café" loading="lazy">
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">menú café</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">galería</div>
-                            </li>
-                        </ul>
-                    </article>
-
-                    <!-- ----- El Parke Lounge Bar -------------------------- -->
-                    <article class="template template--orange" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">El Parke Lounge Bar</h2>
-                                    <p class="template__tag">Bar · lounge · cócteles</p>
+                        <div class="gallery__stage">
+                            <div class="gallery__screens scroller" id="rail-p1" role="tabpanel"
+                                aria-labelledby="tab-p1">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="template__badge">6 pantallas</span>
-                        </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <img class="template__screen"
-                                    src="Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png"
-                                    alt="Cartel de El Parke Lounge Bar" loading="lazy">
-                            </li>
-                            <li>
-                                <img class="template__screen" src="Recursos/img/ParkeLoungueBar/Inicio.JPG"
-                                    alt="Pantalla de inicio de El Parke Lounge Bar" loading="lazy">
-                            </li>
-                            <li>
-                                <img class="template__screen" src="Recursos/img/ParkeLoungueBar/Comidas.JPG"
-                                    alt="Carta de comidas de El Parke Lounge Bar" loading="lazy">
-                            </li>
-                            <li>
-                                <img class="template__screen" src="Recursos/img/ParkeLoungueBar/ComidasEN.JPG"
-                                    alt="Carta de comidas en inglés de El Parke Lounge Bar" loading="lazy">
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">cócteles</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">eventos</div>
-                            </li>
-                        </ul>
-                    </article>
-
-                    <!-- ----- Restaurante clásico -------------------------- -->
-                    <article class="template template--green" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">Restaurante clásico</h2>
-                                    <p class="template__tag">Cocina de mercado</p>
+                            <div class="gallery__screens scroller" id="rail-p2" role="tabpanel"
+                                aria-labelledby="tab-p2">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="template__badge">5 pantallas</span>
-                        </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <div class="template__screen template__screen--pending">portada</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">entrantes</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">principales</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">postres</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">vinos</div>
-                            </li>
-                        </ul>
-                    </article>
-
-                    <!-- ----- Pizzería ------------------------------------- -->
-                    <article class="template template--orange" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">Pizzería</h2>
-                                    <p class="template__tag">Napolitana · para llevar</p>
+                            <div class="gallery__screens scroller" id="rail-p3" role="tabpanel"
+                                aria-labelledby="tab-p3">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="template__badge">6 pantallas</span>
-                        </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <div class="template__screen template__screen--pending">portada</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">pizzas</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">pastas</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">bebidas</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">ofertas</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">contacto</div>
-                            </li>
-                        </ul>
-                    </article>
-
-                    <!-- ----- Heladería ------------------------------------ -->
-                    <article class="template template--blue" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">Heladería</h2>
-                                    <p class="template__tag">Artesanal · temporada</p>
+                            <div class="gallery__screens scroller" id="rail-p4" role="tabpanel"
+                                aria-labelledby="tab-p4">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="template__badge">5 pantallas</span>
-                        </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <div class="template__screen template__screen--pending">portada</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">sabores</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">tarrinas</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">batidos</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">galería</div>
-                            </li>
-                        </ul>
-                    </article>
-
-                    <!-- ----- Food truck ----------------------------------- -->
-                    <article class="template template--green" data-reveal>
-                        <div class="template__header">
-                            <div class="template__identity">
-                                <span class="template__dot"></span>
-                                <div>
-                                    <h2 class="template__name">Food truck</h2>
-                                    <p class="template__tag">Street food · eventos</p>
+                            <div class="gallery__screens scroller" id="rail-p5" role="tabpanel"
+                                aria-labelledby="tab-p5">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="template__badge">6 pantallas</span>
+
+                            <div class="gallery__screens scroller" id="rail-p6" role="tabpanel"
+                                aria-labelledby="tab-p6">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen gallery__screen--pending"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ----- Otras cartas -------------------------------- -->
+                    <div class="gallery__panel" id="panel-cartas" role="tabpanel" aria-labelledby="tab-cartas">
+                        <div class="gallery__list" role="tablist" aria-orientation="vertical"
+                            aria-label="Cartas ya publicadas" data-gallery-tabs>
+                            <button class="gallery__item" type="button" role="tab" id="tab-c1"
+                                aria-controls="rail-c1" aria-selected="true">
+                                <span>Fusión Café</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-c2"
+                                aria-controls="rail-c2" aria-selected="false">
+                                <span>El Parke Lounge Bar</span>
+                                <span class="gallery__dot"></span>
+                            </button>
                         </div>
 
-                        <ul class="template__screens">
-                            <li>
-                                <div class="template__screen template__screen--pending">portada</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">menú</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">combos</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">ubicación</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">agenda</div>
-                            </li>
-                            <li>
-                                <div class="template__screen template__screen--pending">redes</div>
-                            </li>
-                        </ul>
-                    </article>
+                        <div class="gallery__stage">
+                            <div class="gallery__screens scroller" id="rail-c1" role="tabpanel"
+                                aria-labelledby="tab-c1">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/FusionCafe/Inicio.JPG"
+                                                alt="Pantalla de inicio de Fusión Café" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/FusionCafe/Dulces.JPG"
+                                                alt="Sección de dulces de Fusión Café" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="gallery__screens scroller" id="rail-c2" role="tabpanel"
+                                aria-labelledby="tab-c2">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/ParkeLoungueBar/Inicio.JPG"
+                                                alt="Pantalla de inicio de El Parke Lounge Bar" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/ParkeLoungueBar/Comidas.JPG"
+                                                alt="Carta de comidas de El Parke Lounge Bar" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/ParkeLoungueBar/ComidasEN.JPG"
+                                                alt="Carta de comidas en inglés de El Parke Lounge Bar" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="button-row" data-reveal>

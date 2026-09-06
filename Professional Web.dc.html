@@ -17,6 +17,8 @@
   a{color:#ffffff;text-decoration:none;transition:color 150ms ease;}
   a:hover{color:#e8710a;}
   button{border:0;background:none;font-family:inherit;}
+  @keyframes pwSwap{from{opacity:0;transform:translateX(22px);}to{opacity:1;transform:none;}}
+  @keyframes pwPhoneIn{from{opacity:0;transform:translateY(14px) scale(0.98);}to{opacity:1;transform:none;}}
   ::selection{background:#174ea6;color:#ffffff;}
   .pw-scroll::-webkit-scrollbar{height:6px;}
   .pw-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.08);border-radius:999px;}
@@ -145,35 +147,45 @@
             <h1 style="margin:0 0 0.6rem;font-size:clamp(2rem,1.4rem+3vw,3.25rem);letter-spacing:-0.02em;">Diseños listos para tu negocio</h1>
             <p style="margin: 0; color: rgba(255,255,255,0.66); font-size: 1.1rem; margin-top: 80px; margin-bottom: 80px">Cada plantilla es un conjunto de pantallas reales, pensadas para cafeterías, bares y restaurantes. Elige el estilo que va con tu negocio y lo adaptamos a tu marca.</p>
           </div>
-          <div style="display:flex;flex-direction:column;gap:1.75rem;">
-            <sc-for list="{{ templates }}" as="t" hint-placeholder-count="6">
-              <article data-reveal="" style="border:1px solid rgba(255,255,255,0.12);border-radius:22px;background:linear-gradient(160deg,#181818,#121212);padding:clamp(1.25rem,3vw,1.75rem);">
-                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-bottom:1.25rem;">
-                  <div style="display:flex;align-items:center;gap:0.85rem;">
-                    <span style="{{ t.dot }}"></span>
-                    <div>
-                      <h2 style="margin:0;font-size:1.4rem;letter-spacing:-0.01em;">{{ t.name }}</h2>
-                      <p style="margin:0.15rem 0 0;color:rgba(255,255,255,0.55);font-size:0.85rem;">{{ t.tag }}</p>
+          <div data-reveal style="display:flex;justify-content:center;margin-bottom:3rem;">
+            <div style="display:inline-flex;background:#161616;border:1px solid rgba(255,255,255,0.12);border-radius:999px;padding:5px;gap:4px;">
+              <sc-for list="{{ tplTabs }}" as="tb" hint-placeholder-count="2">
+                <button onClick="{{ tb.onClick }}" style="{{ tb.style }}">{{ tb.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="{{ tplGridStyle }}">
+            <div style="{{ tplListStyle }}">
+              <sc-for list="{{ tplList }}" as="it" hint-placeholder-count="4">
+                <button onClick="{{ it.onClick }}" style="{{ it.labelStyle }}">
+                  <span>{{ it.name }}</span>
+                  <span style="{{ it.dotStyle }}"></span>
+                </button>
+              </sc-for>
+            </div>
+
+            <div key="{{ carouselKey }}" class="pw-scroll" style="overflow-x:auto;overflow-y:hidden;padding-bottom:0.9rem;animation:pwSwap 420ms cubic-bezier(.2,.7,.2,1);">
+              <div style="display:flex;gap:1.1rem;width:max-content;padding:0.25rem;">
+                <sc-for list="{{ screens }}" as="scr" hint-placeholder-count="4">
+                  <div style="{{ scr.frameStyle }}">
+                    <div style="border-radius:26px;background:#050505;border:1px solid rgba(255,255,255,0.14);padding:7px;">
+                      <div style="border-radius:20px;overflow:hidden;aspect-ratio:9/19;background:#0f0f0f;">
+                        <sc-if value="{{ scr.hasImage }}" hint-placeholder-val="{{ true }}">
+                          <img src="{{ scr.src }}" alt="Pantalla de plantilla" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;"/>
+                        </sc-if>
+                        <sc-if value="{{ scr.empty }}" hint-placeholder-val="{{ true }}">
+                          <div style="width:100%;height:100%;background-color:#0f0f0f;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.035) 0,rgba(255,255,255,0.035) 1px,transparent 1px,transparent 11px);"></div>
+                        </sc-if>
+                      </div>
                     </div>
                   </div>
-                  <span style="{{ t.badge }}">{{ t.count }} pantallas</span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:0.75rem;">
-                  <sc-for list="{{ t.images }}" as="img" hint-placeholder-count="5">
-                    <sc-if value="{{ img.real }}" hint-placeholder-val="{{ true }}">
-                      <img src="{{ img.src }}" alt="{{ img.label }}" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,0.12);transition:transform 200ms ease;" style-hover="{{ imgHover }}">
-                    </sc-if>
-                    <sc-if value="{{ img.placeholder }}" hint-placeholder-val="{{ true }}">
-                      <div style="width:100%;aspect-ratio:4/3;border-radius:12px;border:1px solid rgba(255,255,255,0.12);display:grid;place-items:center;background-color:#141414;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 9px);">
-                        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.72rem;letter-spacing:0.02em;color:rgba(255,255,255,0.5);text-align:center;padding:0 0.4rem;">{{ img.label }}</span>
-                      </div>
-                    </sc-if>
-                  </sc-for>
-                </div>
-              </article>
-            </sc-for>
+                </sc-for>
+              </div>
+            </div>
           </div>
-          <div data-reveal="" style="margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+
+          <div data-reveal style="margin-top:3rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
             <a href="mailto:webcartaonline@gmail.com" style="padding:0.85rem 1.7rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-weight:500;" style-hover="{{ orangeHover }}">Quiero una web así</a>
             <button onClick="{{ goPricing }}" style="padding:0.85rem 1.7rem;border-radius:999px;border:1px solid rgba(255,255,255,0.2);color:#fff;font-weight:500;cursor:pointer;" style-hover="{{ ghostHover }}">Ver precios</button>
           </div>
@@ -331,7 +343,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:920},&quot;showTestimonials&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Inicio&quot;},&quot;plansHighlight&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Esencial&quot;,&quot;Profesional&quot;,&quot;Premium&quot;],&quot;default&quot;:&quot;Premium&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Precios&quot;}}">
 class Component extends DCLogic {
-  state = { page: "home", menuOpen: false, openFaq: 0, isMobile: false };
+  state = { page: "home", menuOpen: false, openFaq: 0, isMobile: false, tplTab: "plantillas", tplSel: 0 };
 
   pages = [
     { id: "home", label: "Inicio" },
@@ -459,54 +471,89 @@ class Component extends DCLogic {
       },
     }));
 
-    const templates = [
-      { name: "Fusión Café", tag: "Cafetería · brunch", accent: accents[0],
-        images: [
-          { real: true, src: "Recursos/img/FusionCafe/FusionCafeCartel.png", label: "cartel" },
-          { real: true, src: "Recursos/img/FusionCafe/Inicio.JPG", label: "inicio" },
-          { real: true, src: "Recursos/img/FusionCafe/Dulces.JPG", label: "dulces" },
-          { placeholder: true, label: "menú café" },
-          { placeholder: true, label: "galería" },
-        ] },
-      { name: "El Parke Lounge Bar", tag: "Bar · lounge · cócteles", accent: accents[2],
-        images: [
-          { real: true, src: "Recursos/img/ParkeLoungueBar/cartelElParkeLoungeBar.png", label: "cartel" },
-          { real: true, src: "Recursos/img/ParkeLoungueBar/Inicio.JPG", label: "inicio" },
-          { real: true, src: "Recursos/img/ParkeLoungueBar/Comidas.JPG", label: "comidas" },
-          { real: true, src: "Recursos/img/ParkeLoungueBar/ComidasEN.JPG", label: "comidas EN" },
-          { placeholder: true, label: "cócteles" },
-          { placeholder: true, label: "eventos" },
-        ] },
-      { name: "Restaurante clásico", tag: "Cocina de mercado", accent: accents[1],
-        images: [
-          { placeholder: true, label: "portada" }, { placeholder: true, label: "entrantes" },
-          { placeholder: true, label: "principales" }, { placeholder: true, label: "postres" },
-          { placeholder: true, label: "vinos" },
-        ] },
-      { name: "Pizzería", tag: "Napolitana · para llevar", accent: accents[2],
-        images: [
-          { placeholder: true, label: "portada" }, { placeholder: true, label: "pizzas" },
-          { placeholder: true, label: "pastas" }, { placeholder: true, label: "bebidas" },
-          { placeholder: true, label: "ofertas" }, { placeholder: true, label: "contacto" },
-        ] },
-      { name: "Heladería", tag: "Artesanal · temporada", accent: accents[0],
-        images: [
-          { placeholder: true, label: "portada" }, { placeholder: true, label: "sabores" },
-          { placeholder: true, label: "tarrinas" }, { placeholder: true, label: "batidos" },
-          { placeholder: true, label: "galería" },
-        ] },
-      { name: "Food truck", tag: "Street food · eventos", accent: accents[1],
-        images: [
-          { placeholder: true, label: "portada" }, { placeholder: true, label: "menú" },
-          { placeholder: true, label: "combos" }, { placeholder: true, label: "ubicación" },
-          { placeholder: true, label: "agenda" }, { placeholder: true, label: "redes" },
-        ] },
+    // ---- Plantillas (sin imágenes por ahora: pantallas vacías) ----
+    const empty = (n) => Array.from({ length: n }, () => ({ empty: true }));
+    const plantillasData = [
+      { name: "Plantilla 1", screens: empty(5) },
+      { name: "Plantilla 2", screens: empty(6) },
+      { name: "Plantilla 3", screens: empty(5) },
+      { name: "Plantilla 4", screens: empty(6) },
+      { name: "Plantilla 5", screens: empty(5) },
+      { name: "Plantilla 6", screens: empty(6) },
+    ];
+    // ---- Otras cartas: negocios reales con sus pantallas ----
+    const otrasData = [
+      { name: "Fusión Café", screens: [
+        { src: "Recursos/img/FusionCafe/Inicio.JPG" },
+        { src: "Recursos/img/FusionCafe/Dulces.JPG" },
+      ] },
+      { name: "El Parke Lounge Bar", screens: [
+        { src: "Recursos/img/ParkeLoungueBar/Inicio.JPG" },
+        { src: "Recursos/img/ParkeLoungueBar/Comidas.JPG" },
+        { src: "Recursos/img/ParkeLoungueBar/ComidasEN.JPG" },
+      ] },
+    ];
+
+    const tplTab = this.state.tplTab;
+    const activeList = tplTab === "plantillas" ? plantillasData : otrasData;
+    const tplSel = Math.min(this.state.tplSel, activeList.length - 1);
+    const mob = this.state.isMobile;
+
+    const tplTabStyle = (active) => ({
+      padding: "0.6rem 1.6rem", borderRadius: "999px", fontSize: "0.98rem", fontWeight: 700,
+      cursor: "pointer", transition: "background-color 200ms ease, color 200ms ease",
+      color: active ? "#ffffff" : "rgba(255,255,255,0.7)",
+      background: active ? "#e8710a" : "transparent",
+    });
+    const tplTabs = [
+      { label: "Plantillas", tab: "plantillas" },
+      { label: "Otras cartas", tab: "otras" },
     ].map((t) => ({
-      ...t,
-      count: t.images.length,
-      dot: { width: "12px", height: "12px", borderRadius: "999px", flex: "none", background: t.accent, boxShadow: "0 0 0 4px color-mix(in srgb," + t.accent + " 22%, transparent)" },
-      badge: { padding: "0.3rem 0.75rem", borderRadius: "999px", border: "1px solid rgba(255,255,255,0.15)", fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", whiteSpace: "nowrap" },
+      label: t.label,
+      style: tplTabStyle(tplTab === t.tab),
+      onClick: () => this.setState({ tplTab: t.tab, tplSel: 0 }),
     }));
+
+    const tplList = activeList.map((it, i) => {
+      const active = i === tplSel;
+      return {
+        name: it.name,
+        onClick: () => this.setState({ tplSel: i }),
+        labelStyle: {
+          display: "flex", alignItems: "center", gap: "0.7rem",
+          justifyContent: mob ? "flex-start" : "space-between",
+          width: mob ? "auto" : "100%",
+          padding: mob ? "0.45rem 0.95rem" : "0.55rem 0.25rem",
+          fontSize: mob ? "0.95rem" : "clamp(1.15rem,0.9rem+1vw,1.7rem)",
+          fontWeight: 600, cursor: "pointer", transition: "color 200ms ease, background-color 200ms ease",
+          color: active ? "#e8710a" : "#ffffff",
+          background: mob && active ? "rgba(232,113,10,0.12)" : "transparent",
+          borderRadius: mob ? "999px" : "0",
+        },
+        dotStyle: {
+          width: "16px", height: "16px", borderRadius: "999px", flex: "none",
+          border: active ? "none" : "2px solid rgba(255,255,255,0.45)",
+          background: active ? "#e8710a" : "transparent",
+          transition: "background-color 200ms ease, border-color 200ms ease",
+        },
+      };
+    });
+
+    const screens = activeList[tplSel].screens.map((s, i) => ({
+      hasImage: !!s.src, empty: !s.src, src: s.src || "",
+      frameStyle: {
+        flex: "0 0 auto", width: mob ? "clamp(150px,52vw,205px)" : "clamp(175px,20vw,225px)",
+        animation: "pwPhoneIn 480ms cubic-bezier(.2,.7,.2,1) " + Math.min(i * 70, 420) + "ms both",
+      },
+    }));
+
+    const carouselKey = tplTab + "-" + tplSel;
+    const tplGridStyle = mob
+      ? { display: "flex", flexDirection: "column", gap: "1.75rem" }
+      : { display: "grid", gridTemplateColumns: "minmax(190px,250px) 1fr", gap: "2.5rem", alignItems: "start" };
+    const tplListStyle = mob
+      ? { display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "0.5rem" }
+      : { display: "flex", flexDirection: "column", gap: "0.35rem" };
 
     const steps = [
       { num: "01", title: "Cuéntanos tu negocio", text: "Hablamos de lo que ofreces, tu estilo y lo que necesitas. Sin tecnicismos." },
@@ -596,7 +643,8 @@ class Component extends DCLogic {
       liftHover: {},
       imgHover: {},
       cardScaleHover: {},
-      features, templates, steps, plans, comparison, faqs,
+      features, steps, plans, comparison, faqs,
+      tplTabs, tplList, screens, carouselKey, tplGridStyle, tplListStyle,
     };
   }
 }

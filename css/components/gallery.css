@@ -1,0 +1,267 @@
+/* ==========================================================================
+   GALLERY — Galería de plantillas: un conmutador entre "Plantillas" y
+   "Otras cartas", la lista de diseños de cada grupo y un carril horizontal
+   con las pantallas de móvil del diseño elegido.
+
+   Sin JavaScript no se oculta nada: se ven todos los grupos, uno tras otro.
+   js/gallery.js es quien marca la pestaña activa y esconde el resto.
+   ========================================================================== */
+
+.gallery__tabs {
+    display: flex;
+    justify-content: center;
+    margin-block-end: var(--space-xl);
+}
+
+.gallery__tablist {
+    display: inline-flex;
+    gap: var(--space-3xs);
+    padding: var(--space-3xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-surface-raised);
+}
+
+.gallery__tab {
+    padding: 0.6rem 1.6rem;
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-bold);
+    transition: background-color var(--transition-base),
+        color var(--transition-base);
+}
+
+.gallery__tab:hover {
+    color: var(--color-white);
+}
+
+.gallery__tab[aria-selected="true"] {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+}
+
+/* ----- Grupo: lista de diseños + escenario ------------------------------ */
+
+.gallery__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+/* Más específico que las reglas de arriba: gana aunque haya display propio. */
+.gallery__panel[hidden] {
+    display: none;
+}
+
+/* Solo se aprecia sin JavaScript, cuando los dos grupos están a la vista. */
+.gallery__panel + .gallery__panel {
+    margin-block-start: var(--space-xl);
+}
+
+.gallery__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+}
+
+.gallery__item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: var(--radius-pill);
+    color: var(--color-white);
+    /* Los <button> vienen centrados de fábrica: los nombres largos que parten
+       en dos líneas deben quedar alineados a la izquierda como el resto. */
+    text-align: start;
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-bold);
+    transition: background-color var(--transition-base),
+        color var(--transition-base);
+}
+
+.gallery__item:hover {
+    color: var(--color-orange);
+}
+
+.gallery__item[aria-selected="true"] {
+    background-color: rgb(232 113 10 / 0.12);
+    color: var(--color-orange);
+}
+
+.gallery__dot {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-text-faint);
+    border-radius: var(--radius-pill);
+    transition: background-color var(--transition-base),
+        border-color var(--transition-base);
+}
+
+.gallery__item[aria-selected="true"] .gallery__dot {
+    border-color: var(--color-orange);
+    background-color: var(--color-orange);
+}
+
+/* min-width: 0 permite que el carril encoja dentro de la rejilla en vez de
+   desbordar la página entera. */
+.gallery__stage {
+    min-width: 0;
+}
+
+.gallery__screens {
+    padding-block-end: 0.9rem;
+}
+
+.gallery__screens[hidden] {
+    display: none;
+}
+
+.gallery__track {
+    display: flex;
+    gap: 1.1rem;
+    width: max-content;
+    padding: var(--space-3xs);
+}
+
+/* ----- Maqueta de móvil ------------------------------------------------- */
+
+.gallery__phone {
+    flex: none;
+    width: clamp(9.375rem, 52vw, 12.8125rem);
+    padding: 7px;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-black);
+}
+
+.gallery__screen {
+    aspect-ratio: 9 / 19;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-sunken);
+}
+
+.gallery__screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Pantalla aún no fotografiada: trama diagonal muy tenue. */
+.gallery__screen--pending {
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgb(255 255 255 / 0.035) 0,
+        rgb(255 255 255 / 0.035) 1px,
+        transparent 1px,
+        transparent 11px
+    );
+}
+
+/* ----- Entrada al cambiar de diseño -------------------------------------
+   La clase .is-entering la pone y la quita js/gallery.js en cada cambio,
+   para poder repetir la animación tantas veces como haga falta.
+   ------------------------------------------------------------------------ */
+
+@keyframes gallery-swap {
+    from {
+        opacity: 0;
+        transform: translateX(1.375rem);
+    }
+}
+
+@keyframes gallery-phone-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.875rem) scale(0.98);
+    }
+}
+
+.gallery__screens.is-entering {
+    animation: gallery-swap 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.gallery__screens.is-entering .gallery__phone {
+    animation: gallery-phone-in 480ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: 420ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(2) {
+    animation-delay: 70ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(3) {
+    animation-delay: 140ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(4) {
+    animation-delay: 210ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(5) {
+    animation-delay: 280ms;
+}
+
+.gallery__screens.is-entering .gallery__phone:nth-child(6) {
+    animation-delay: 350ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gallery__screens.is-entering,
+    .gallery__screens.is-entering .gallery__phone {
+        animation: none;
+    }
+}
+
+/* ----- Escritorio: lista en columna al lado del carril ------------------ */
+
+@media (min-width: 64em) {
+    .gallery__panel {
+        display: grid;
+        grid-template-columns: minmax(9.375rem, 12.5rem) 1fr;
+        gap: var(--space-lg);
+        align-items: start;
+    }
+
+    .gallery__list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: var(--space-3xs);
+    }
+
+    .gallery__item {
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.55rem var(--space-3xs);
+        border-radius: var(--radius-sm);
+        font-size: var(--font-size-300);
+    }
+
+    .gallery__item[aria-selected="true"] {
+        background-color: transparent;
+    }
+
+    /* El carril de pantallas es lo único que rompe el contenedor: se estira
+       hasta el borde derecho de la ventana. El margen negativo vale lo que
+       separa el borde del contenedor del de la pantalla, es decir el aire
+       lateral sobrante más el canalón. */
+    .gallery__stage {
+        margin-inline-end: calc(
+            -1 * (
+                var(--layout-gutter) +
+                (100vw - min(100vw, var(--layout-max-width))) / 2
+            )
+        );
+    }
+
+    .gallery__phone {
+        width: clamp(10.9375rem, 20vw, 14.0625rem);
+    }
+}
