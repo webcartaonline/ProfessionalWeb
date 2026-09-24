@@ -96,7 +96,7 @@
 
     /* ----- Layout ------------------------------------------------------- */
     --layout-max-width: 75rem;
-    --layout-max-width-narrow: 51rem;
+    --layout-max-width-narrow: 56rem;
     --layout-gutter: clamp(1rem, 5vw, 2.5rem);
 
     /* ----- Barra de navegación ------------------------------------------ */

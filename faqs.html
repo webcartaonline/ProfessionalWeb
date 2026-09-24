@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FAQs — Professional Web</title>
-    <meta name="description" content="Respuestas a las preguntas más frecuentes sobre nuestras webs y cartas digitales.">
+    <meta name="description" content="Respuestas a las preguntas más frecuentes sobre nuestras webs, cartas digitales y el editor adminApp.">
     <meta name="theme-color" content="#0a0a0a">
 
     <!-- Favicon: .ico para compatibilidad amplia, .png para pantallas de alta densidad -->
@@ -117,104 +117,616 @@
 
     <main id="contenido">
 
-        <section class="section section--below-nav" aria-labelledby="faqs-titulo">
+        <section class="section section--below-nav faq-page" aria-labelledby="faqs-titulo">
             <div class="container container--narrow">
 
                 <div class="page-header" data-reveal>
                     <p class="page-header__eyebrow">Preguntas frecuentes</p>
                     <h1 class="page-header__title" id="faqs-titulo">Todo lo que sueles preguntarnos</h1>
                     <p class="page-header__lead">
-                        Y si te queda alguna duda, escríbenos: respondemos rápido.
+                        Sobre tu web, tu carta y el editor adminApp. Busca tu duda o filtra por tema.
                     </p>
+                </div>
+
+                <!-- Buscador y temas: solo aparecen si hay JavaScript (js/faq.js). -->
+                <div class="faq-tools" data-faq-tools hidden>
+                    <label class="faq-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        <input class="faq-search__input" type="search" data-faq-search autocomplete="off"
+                            placeholder="Busca: foto, publicar, PDF, clave…" aria-label="Buscar en las preguntas">
+                    </label>
+                    <!-- Las flechas solo son para el ratón: con teclado se recorren los temas con Tab. -->
+                    <div class="faq-topics-bar" data-faq-topics-bar>
+                        <button class="faq-arrow faq-arrow--prev" type="button" data-faq-scroll="-1" tabindex="-1"
+                            aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-topics" role="group" aria-label="Temas" data-faq-topics>
+                            <button class="faq-topic" type="button" aria-pressed="true" data-faq-topic="todas">Todas<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="general">Tu web<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="empezar">Primeros pasos<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="editar">Editar la carta<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="publicar">Publicar<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="pdf">PDF e impresión<span class="faq-topic__count"></span></button>
+                            <button class="faq-topic" type="button" aria-pressed="false" data-faq-topic="app">App y dispositivos<span class="faq-topic__count"></span></button>
+                        </div>
+                        <button class="faq-arrow faq-arrow--next" type="button" data-faq-scroll="1" tabindex="-1"
+                            aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="faq-empty" data-faq-empty hidden>
+                    <strong>No hemos encontrado nada con «<span data-faq-query></span>».</strong>
+                    Prueba con otra palabra o <a href="mailto:webcartaonline@gmail.com">escríbenos</a>.
                 </div>
 
                 <div class="faqs">
 
-                    <details class="faq" data-faq open>
+                    <!-- ===== Tu web ======================================== -->
+
+                    <details class="faq faq--green" id="pago-unico" data-cat="general" open>
                         <summary class="faq__question">
-                            <span>¿El pago es realmente único?</span>
+                            <span class="faq__title">¿El pago es realmente único?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Sí. Pagas una vez y la web es tuya. No hay cuotas mensuales ni sorpresas.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Sí. Pagas una vez y la web es tuya. No hay cuotas mensuales ni sorpresas.
+                            </p>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <details class="faq faq--green" id="plazo" data-cat="general">
                         <summary class="faq__question">
-                            <span>¿Puedo modificar los datos yo mismo?</span>
+                            <span class="faq__title">¿Cuánto tarda en estar lista?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Sí. Con el panel de edición cambias precios, horarios, imágenes y textos cuando quieras,
-                            desde el móvil o el ordenador.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">Normalmente entre 5 y 7 días desde que tenemos tus contenidos.</p>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <details class="faq faq--green" id="conocimientos" data-cat="general">
                         <summary class="faq__question">
-                            <span>¿En cuántos idiomas puede estar mi carta?</span>
+                            <span class="faq__title">¿Necesito conocimientos técnicos?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Desde uno hasta los que necesites, según el plan. Tus clientes eligen el idioma con un
-                            solo toque.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Ninguno. Nos encargamos de todo y te enseñamos a usar el editor en minutos.
+                            </p>
+                            <a class="faq__link" href="conoce-tus-herramientas.html">Conoce el editor adminApp →</a>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <details class="faq faq--green" id="dominio" data-cat="general">
                         <summary class="faq__question">
-                            <span>¿Cuánto tarda en estar lista?</span>
+                            <span class="faq__title">¿Incluye dominio y hosting?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Normalmente entre 5 y 7 días desde que tenemos tus contenidos.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                El plan Premium incluye dominio propio. En todos los casos publicamos tu web y te
+                                entregamos el enlace listo para compartir.
+                            </p>
+                            <a class="faq__link" href="precios.html">Ver precios y planes →</a>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <!-- ===== Primeros pasos ================================ -->
+
+                    <details class="faq" id="instalar" data-cat="empezar">
                         <summary class="faq__question">
-                            <span>¿Necesito conocimientos técnicos?</span>
+                            <span class="faq__title">¿Cómo instalo el editor en mi móvil u ordenador?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Ninguno. Nos encargamos de todo y te enseñamos a usar el panel en minutos.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                adminApp se instala desde el navegador, sin tiendas de apps. Después tendrás su
+                                icono y se abrirá a pantalla completa. Elige tu dispositivo:
+                            </p>
+                            <div class="faq-panel" data-faq-tabs="install">
+                                <div class="pills" role="group" aria-label="Tu dispositivo">
+                                    <button class="pill" type="button" aria-pressed="true" data-tab="android">Android</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="iphone">iPhone</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="pc">Ordenador</button>
+                                </div>
+                                <div class="faq-tab" data-tab-panel="android" data-active>
+                                    <p class="faq-tab__title">Android</p>
+                                    <ol class="faq__steps faq__steps--blue">
+                                        <li>Abre la dirección del editor en Chrome.</li>
+                                        <li>Toca el menú ⋮ de arriba a la derecha.</li>
+                                        <li>Elige «Instalar aplicación» y confirma.</li>
+                                    </ol>
+                                </div>
+                                <div class="faq-tab" data-tab-panel="iphone">
+                                    <p class="faq-tab__title">iPhone</p>
+                                    <ol class="faq__steps faq__steps--blue">
+                                        <li>Abre la dirección del editor en Safari.</li>
+                                        <li>Toca el botón compartir (el cuadrado con la flecha).</li>
+                                        <li>Elige «Añadir a pantalla de inicio».</li>
+                                    </ol>
+                                </div>
+                                <div class="faq-tab" data-tab-panel="pc">
+                                    <p class="faq-tab__title">Ordenador</p>
+                                    <ol class="faq__steps faq__steps--blue">
+                                        <li>Abre la dirección del editor en Chrome o Edge.</li>
+                                        <li>Pulsa el icono de instalar de la barra de direcciones.</li>
+                                        <li>Confirma con «Instalar».</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <details class="faq" id="conexion" data-cat="empezar">
                         <summary class="faq__question">
-                            <span>¿Incluye dominio y hosting?</span>
+                            <span class="faq__title">¿Qué pongo en «Negocio» y «Clave»?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            El plan Premium incluye dominio propio. En todos los casos publicamos tu web y te
-                            entregamos el enlace listo para compartir.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Son los dos datos que conectan el editor con tu carta. Se guardan solo en tu
+                                navegador.
+                            </p>
+                            <ol class="faq__steps">
+                                <li>Entra en «Ajustes» › «Conexión con la carta».</li>
+                                <li>En «Negocio» escribe el nombre corto de tu local, el mismo de tu dirección: si tu
+                                    carta es mi-bar.webcartaonline.com, escribe mi-bar.</li>
+                                <li>En «Clave» pega la que te dimos al contratar.</li>
+                                <li>Pulsa «Guardar conexión» y luego «Probar la conexión».</li>
+                            </ol>
+                            <p class="faq__note"><strong>Consejo</strong><span>No compartas la clave con nadie: quien
+                                    la tenga puede cambiar tu carta.</span></p>
+                        </div>
                     </details>
 
-                    <details class="faq" data-faq>
+                    <details class="faq" id="empezar-editar" data-cat="empezar">
                         <summary class="faq__question">
-                            <span>¿Puedo añadir fotos de mis productos?</span>
+                            <span class="faq__title">Ya lo tengo instalado, ¿cómo empiezo?</span>
                             <span class="faq__icon" aria-hidden="true">+</span>
                         </summary>
-                        <p class="faq__answer">
-                            Claro. Añadimos tu galería de fotos para que tu carta entre por los ojos.
-                        </p>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Abre el editor y pulsa «Cargar carta». En unos segundos verás tus secciones a la
+                                izquierda y podrás tocar cualquier grupo o plato para editarlo.
+                            </p>
+                            <figure class="faq__shot">
+                                <button class="faq__zoom" type="button" data-faq-zoom aria-label="Ampliar captura">
+                                    <img src="Recursos/img/adminApp/editor-ordenador.png" loading="lazy"
+                                        alt="El editor con las secciones y grupos a la izquierda">
+                                    <span class="faq__zoom-hint" aria-hidden="true">Ampliar</span>
+                                </button>
+                                <figcaption>El editor con las secciones y grupos a la izquierda</figcaption>
+                            </figure>
+                        </div>
+                    </details>
+
+                    <!-- ===== Editar la carta =============================== -->
+
+                    <details class="faq faq--orange" id="cambiar-plato" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Cómo cambio un precio, un nombre o una descripción?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Elige la sección y el grupo en el panel izquierdo; cada plato aparece como una ficha
+                                con sus campos. Escribe y listo: el cambio queda preparado hasta que publiques.
+                            </p>
+                            <figure class="faq__shot">
+                                <button class="faq__zoom" type="button" data-faq-zoom aria-label="Ampliar captura">
+                                    <img src="Recursos/img/adminApp/editor-plato.png" loading="lazy"
+                                        alt="Ficha de un plato: precio, foto, nombre y descripción en dos idiomas, alérgenos y etiquetas">
+                                    <span class="faq__zoom-hint" aria-hidden="true">Ampliar</span>
+                                </button>
+                                <figcaption>Ficha de un plato: precio, foto, nombre y descripción en dos idiomas,
+                                    alérgenos y etiquetas</figcaption>
+                            </figure>
+                            <p class="faq__note"><strong>Consejo</strong><span>Con los botones ▲ ▼ cambias el orden,
+                                    y con «Copiar» duplicas un plato para no escribirlo de cero.</span></p>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="fotos" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Cómo añado o cambio la foto de un plato?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Pulsa «Foto» en la ficha del plato, elige la imagen y encuádrala arrastrando y con el
+                                zoom. El editor la recorta y la aligera él solo.
+                            </p>
+                            <ol class="faq__steps">
+                                <li>Valen JPG, PNG o WEBP de hasta 25 MB.</li>
+                                <li>En secciones y grupos puedes marcar la zona importante de la foto, la que nunca
+                                    se debe cortar.</li>
+                                <li>La foto se sube al pulsar «Publicar cambios».</li>
+                            </ol>
+                            <p class="faq__note"><strong>Consejo</strong><span>Las fotos HEIC del iPhone no se pueden
+                                    leer. En el móvil: Ajustes › Cámara › Formatos › «Más compatible», o compártela
+                                    como JPG.</span></p>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="recuperar-foto" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">He quitado una foto por error, ¿la recupero?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Sí, mientras no cierres el editor. Vuelve a abrir la ventana de la foto de ese plato
+                                y pulsa «Recuperar». Si ya lo cerraste, tendrás que subirla de nuevo.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="alergenos" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Cómo indico los alérgenos?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                En la ficha de cada plato tienes los 14 alérgenos como botones: toca los que lleve y
+                                quedan marcados. En tu carta se verán como iconos y tus clientes podrán filtrar los
+                                platos.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="etiquetas" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Qué diferencia hay entre etiqueta, alerta y nota?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Son tres formas de destacar algo en tu carta. Cada una va en un sitio distinto:
+                            </p>
+                            <ul class="faq-types">
+                                <li class="faq-type">
+                                    <span class="label">En un plato</span>
+                                    <span class="faq-type__sample faq-type__sample--tag">Picante</span>
+                                    <span class="faq-type__name">Etiqueta</span>
+                                    <span class="faq-type__text">Palabra corta junto al plato: «250 g», «Nuevo».
+                                        Puedes poner varias.</span>
+                                </li>
+                                <li class="faq-type">
+                                    <span class="label">En un grupo</span>
+                                    <span class="faq-type__sample faq-type__sample--alert">También en media ración</span>
+                                    <span class="faq-type__name">Alerta</span>
+                                    <span class="faq-type__text">Un aviso para todos los platos del grupo. Solo una,
+                                        junto al título.</span>
+                                </li>
+                                <li class="faq-type">
+                                    <span class="label">En una sección</span>
+                                    <span class="faq-type__sample faq-type__sample--note">Tipos de pan</span>
+                                    <span class="faq-type__name">Nota</span>
+                                    <span class="faq-type__text">Un recuadro entre la portada de la sección y su
+                                        primer grupo.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="idiomas" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿En cuántos idiomas puede estar mi carta?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Desde uno hasta los que necesites, según tu plan. Si tu plan incluye idiomas extra, al
+                                cargar la carta el editor te pregunta cuáles quieres. Después cada campo aparece
+                                duplicado por idioma (ES, EN…) y tus clientes eligen el idioma con un toque.
+                            </p>
+                            <a class="faq__link" href="precios.html">Ver qué incluye cada plan →</a>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="apariencia" data-cat="editar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Puedo cambiar los colores, la portada o las letras de mi carta?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Sí, en «Ajustes de la carta». Ahí cambias colores, portada, logotipo, fuentes y los
+                                mensajes del pie de página, con una muestra en vivo. Algunas opciones dependen de tu
+                                plan.
+                            </p>
+                            <figure class="faq__shot">
+                                <button class="faq__zoom" type="button" data-faq-zoom aria-label="Ampliar captura">
+                                    <img src="Recursos/img/adminApp/ajustes-fuentes.png" loading="lazy"
+                                        alt="Ajustes de la página: posición del filtro de alérgenos, fuentes y mensajes del pie">
+                                    <span class="faq__zoom-hint" aria-hidden="true">Ampliar</span>
+                                </button>
+                                <figcaption>Ajustes de la página: posición del filtro de alérgenos, fuentes y mensajes
+                                    del pie</figcaption>
+                            </figure>
+                            <p class="faq__note"><strong>Consejo</strong><span>Si subes tu propia letra, para el texto
+                                    conviene una sencilla: las muy decorativas lucen más solo en el título.</span></p>
+                        </div>
+                    </details>
+
+                    <!-- ===== Publicar ====================================== -->
+
+                    <details class="faq faq--green" id="ven-cambios" data-cat="publicar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Mis clientes ven los cambios mientras edito?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                No. Todo lo que cambias se queda como borrador. Pulsa «Vista previa» para ver tu carta
+                                tal cual quedará, con el aviso «Cambios sin publicar». Tus clientes solo lo verán
+                                cuando pulses «Publicar cambios».
+                            </p>
+                            <figure class="faq__shot">
+                                <button class="faq__zoom" type="button" data-faq-zoom aria-label="Ampliar captura">
+                                    <img src="Recursos/img/adminApp/vista-previa-completa.png" loading="lazy"
+                                        alt="Vista previa con el aviso «Cambios sin publicar»">
+                                    <span class="faq__zoom-hint" aria-hidden="true">Ampliar</span>
+                                </button>
+                                <figcaption>Vista previa con el aviso «Cambios sin publicar»</figcaption>
+                            </figure>
+                            <a class="faq__link" href="conoce-tus-herramientas.html#vista-previa">Probar la vista previa →</a>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--green" id="publicar-error" data-cat="publicar">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Y si publico algo por error?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Tranquilo: antes de sustituir tu carta, el servidor guarda una copia de seguridad con
+                                fecha. Además, rechaza cualquier archivo dañado, así que una carta rota nunca llega a
+                                tus clientes.
+                            </p>
+                            <ol class="faq__steps">
+                                <li>Si es un error pequeño, corrígelo en el editor y vuelve a publicar.</li>
+                                <li>Si prefieres volver a la versión anterior, escríbenos y la recuperamos.</li>
+                            </ol>
+                            <a class="faq__link" href="mailto:webcartaonline@gmail.com">Escribir a soporte →</a>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--green" id="errores" data-cat="publicar">
+                        <summary class="faq__question">
+                            <span class="faq__title">Me sale un mensaje de error, ¿qué hago?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                El editor explica cada problema con un mensaje. Toca el tuyo para ver cómo
+                                solucionarlo:
+                            </p>
+                            <div class="faq-panel" data-faq-tabs="errors">
+                                <p class="label">¿Qué mensaje te sale?</p>
+                                <div class="pills pills--small" role="group" aria-label="Mensajes de error">
+                                    <button class="pill" type="button" aria-pressed="true" data-tab="faltan">Faltan datos</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="clave">Clave incorrecta</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="red">Sin conexión</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="caducada">Licencia caducada</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="plan">No incluido</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="grande">Archivo grande</button>
+                                    <button class="pill" type="button" aria-pressed="false" data-tab="heic">Formato de foto</button>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="faltan" data-active>
+                                    <p class="faq-error__message">«Faltan el negocio o la clave. Entra en «Ajustes» y complétalos.»</p>
+                                    <p class="faq-error__fix">Ve a «Ajustes» › «Conexión con la carta» y rellena los dos
+                                        campos. Si no tienes la clave, pídenosla.</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="clave">
+                                    <p class="faq-error__message">«La clave no es correcta. Revísala en «Ajustes».»</p>
+                                    <p class="faq-error__fix">Cópiala de nuevo, sin espacios al principio ni al final, y
+                                        pulsa «Probar la conexión».</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="red">
+                                    <p class="faq-error__message">«No hay conexión con el servidor. Comprueba tu internet.»</p>
+                                    <p class="faq-error__fix">Comprueba el wifi o los datos y vuelve a intentarlo. Tus
+                                        cambios no se pierden mientras no cierres el editor.</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="caducada">
+                                    <p class="faq-error__message">«Tu licencia ha caducado. Renueva para poder seguir editando.»</p>
+                                    <p class="faq-error__fix">Escríbenos para renovarla. Tu carta sigue visible para tus
+                                        clientes.</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="plan">
+                                    <p class="faq-error__message">«Tu plan no incluye esto.»</p>
+                                    <p class="faq-error__fix">Esa función no está en tu plan. Si la necesitas, podemos
+                                        ampliarlo.</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="grande">
+                                    <p class="faq-error__message">«El archivo es demasiado grande.»</p>
+                                    <p class="faq-error__fix">Usa una foto más ligera o haz una captura de ella antes de
+                                        subirla.</p>
+                                </div>
+                                <div class="faq-tab faq-error" data-tab-panel="heic">
+                                    <p class="faq-error__message">«Ese archivo no es una imagen JPG, PNG o WEBP.»</p>
+                                    <p class="faq-error__fix">Convierte la foto a JPG. En el iPhone: Ajustes › Cámara ›
+                                        Formatos › «Más compatible».</p>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--green" id="licencia" data-cat="publicar">
+                        <summary class="faq__question">
+                            <span class="faq__title">Me avisa de que mi licencia caduca</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Cuando quedan 30 días o menos, el editor te avisa al cargar la carta. Si caduca, tu
+                                carta sigue visible, pero no podrás publicar cambios hasta renovarla.
+                            </p>
+                            <a class="faq__link" href="mailto:webcartaonline@gmail.com">Renovar mi licencia →</a>
+                        </div>
+                    </details>
+
+                    <!-- ===== PDF e impresión =============================== -->
+
+                    <details class="faq faq--orange" id="pdf" data-cat="pdf">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Cómo descargo mi carta en PDF?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Pulsa «Descargar PDF» en la barra de arriba. Se abre una ventana con la vista previa
+                                de cada página y todas las opciones.
+                            </p>
+                            <ol class="faq__steps">
+                                <li>Elige papel y orientación.</li>
+                                <li>Decide columnas, idioma, portada, fotos y márgenes.</li>
+                                <li>Pulsa «Descargar PDF».</li>
+                            </ol>
+                            <figure class="faq__shot">
+                                <button class="faq__zoom" type="button" data-faq-zoom aria-label="Ampliar captura">
+                                    <img src="Recursos/img/adminApp/descargar-pdf-v2.png" loading="lazy"
+                                        alt="Ventana «Descargar en PDF» con las opciones y la vista previa de páginas">
+                                    <span class="faq__zoom-hint" aria-hidden="true">Ampliar</span>
+                                </button>
+                                <figcaption>Ventana «Descargar en PDF» con las opciones y la vista previa de páginas</figcaption>
+                            </figure>
+                        </div>
+                    </details>
+
+                    <details class="faq faq--orange" id="imprimir" data-cat="pdf">
+                        <summary class="faq__question">
+                            <span class="faq__title">Consejos para imprimir la carta</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">Para que salga igual que en pantalla:</p>
+                            <ol class="faq__steps">
+                                <li>Imprime al 100 % o «Tamaño real», no «Ajustar a la página».</li>
+                                <li>Elige en la impresora el mismo papel que en el PDF (A4, A5…).</li>
+                                <li>Si quieres un acabado profesional, lleva el PDF a una imprenta: ya va listo.</li>
+                            </ol>
+                            <p class="faq__note"><strong>Consejo</strong><span>Si tu carta tiene muchas fotos y no
+                                    necesitas imprimirlas, desactívalas: el PDF pesará menos y gastarás menos
+                                    tinta.</span></p>
+                        </div>
+                    </details>
+
+                    <!-- ===== App y dispositivos ============================ -->
+
+                    <details class="faq" id="dispositivos" data-cat="app">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Funciona en cualquier dispositivo?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Sí: móvil Android o iPhone, tablet y ordenador con Chrome, Edge o Safari. La pantalla
+                                se adapta sola.
+                            </p>
+                            <a class="faq__link" href="conoce-tus-herramientas.html#dispositivos">Verlo en cada dispositivo →</a>
+                        </div>
+                    </details>
+
+                    <details class="faq" id="sin-conexion" data-cat="app">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Funciona sin conexión a internet?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                El editor se abre al instante aunque no haya conexión, porque guarda una copia en tu
+                                dispositivo. Eso sí, para cargar tu carta y publicar cambios necesitas internet.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq" id="actualizaciones" data-cat="app">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Tengo que actualizar la app?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                No. Las mejoras se instalan solas. La primera vez que abras el editor después de una
+                                mejora verás una ventana con las novedades: pulsa «Actualizar» y listo. Tu carta, tu
+                                clave y tus ajustes no se tocan.
+                            </p>
+                        </div>
+                    </details>
+
+                    <details class="faq" id="cambiar-dispositivo" data-cat="app">
+                        <summary class="faq__question">
+                            <span class="faq__title">Voy a cambiar de móvil u ordenador, ¿pierdo algo?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Tu carta está a salvo en el servidor. Lo que se guarda en cada navegador son los
+                                ajustes del editor (negocio, clave, color y modo). Para llevártelos:
+                            </p>
+                            <ol class="faq__steps">
+                                <li>En el dispositivo antiguo: «Ajustes» › «Exportar e importar» › «Descargar archivo
+                                    de ajustes».</li>
+                                <li>En el nuevo: instala el editor y en el mismo apartado elige ese archivo.</li>
+                                <li>Revisa lo que trae y pulsa «Importar estos ajustes».</li>
+                            </ol>
+                            <p class="faq__note"><strong>Consejo</strong><span>La clave solo va en el archivo si la
+                                    incluyes. Si lo haces, no compartas ese archivo con nadie.</span></p>
+                        </div>
+                    </details>
+
+                    <details class="faq" id="personalizar-editor" data-cat="app">
+                        <summary class="faq__question">
+                            <span class="faq__title">¿Puedo cambiar el color del editor o usar modo oscuro?</span>
+                            <span class="faq__icon" aria-hidden="true">+</span>
+                        </summary>
+                        <div class="faq__body">
+                            <p class="faq__answer">
+                                Sí. Pulsa «Modo oscuro» o «Modo claro» arriba a la derecha. En «Ajustes» ›
+                                «Personalización» cambias el nombre del editor y su color principal. Esto solo cambia
+                                tu editor, no tu carta.
+                            </p>
+                        </div>
                     </details>
 
                 </div>
 
-                <div class="cta" data-reveal>
+                <div class="cta cta--large" data-reveal>
                     <div>
                         <p class="cta__title">¿No encuentras tu respuesta?</p>
                         <p class="cta__text">Cuéntanos qué necesitas y te ayudamos.</p>
                     </div>
-                    <a class="button button--primary" href="mailto:webcartaonline@gmail.com">Escríbenos</a>
+                    <div class="button-row">
+                        <a class="button button--ghost" href="tel:+34722207215">Llámanos</a>
+                        <a class="button button--primary" href="mailto:webcartaonline@gmail.com">Escríbenos</a>
+                    </div>
                 </div>
 
             </div>
         </section>
+
+        <!-- Captura ampliada: un único <dialog> que reutilizan todas las capturas. -->
+        <dialog class="zoom" data-faq-zoom-dialog aria-label="Captura ampliada">
+            <img alt="">
+            <button class="zoom__close" type="button" aria-label="Cerrar">&times;</button>
+        </dialog>
 
     </main>
 

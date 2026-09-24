@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>FAQs — Professional Web</title>
+<meta name="description" content="Respuestas a las preguntas más frecuentes sobre nuestras webs, cartas digitales y el editor adminApp.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}*{margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{min-height:100vh;background:#0a0a0a;color:#fff;font-family:"Google Sans","Google Sans Text","Product Sans","DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:1rem;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}
+h1,h2,h3{font-weight:700;line-height:1.08;letter-spacing:-0.02em;text-wrap:balance}p{text-wrap:pretty}
+:where(a,button,input,[tabindex]):focus-visible{outline:2px solid #e8710a;outline-offset:3px;border-radius:.5rem}
+::selection{background:#174ea6;color:#fff}
+@keyframes faqIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<div style="position:fixed;top:0;left:0;right:0;z-index:100;min-height:9rem;padding-top:.75rem;padding-left:clamp(1rem,5vw,2.5rem);padding-right:clamp(1rem,5vw,2.5rem);pointer-events:none;background-image:linear-gradient(to bottom,rgb(10 10 10 / .95) 0%,rgb(10 10 10 / 0) 100%)">
+  <nav aria-label="Navegación principal" style="pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;max-width:75rem;min-height:3.25rem;margin:0 auto;padding:.5rem 1rem;border-radius:.875rem;background:#fff;color:#0b2f66;box-shadow:0 1.5rem 4.375rem rgb(0 0 0 / .35)">
+    <a href="index.html" aria-label="Professional Web — Inicio" style="display:flex;align-items:center;padding-left:.25rem">
+      <img src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web" style="width:auto;height:3rem;display:block">
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <ul style="display:flex;align-items:center;gap:.25rem;list-style:none;padding:0;margin:0">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+          <li><a href="{{ l.href }}" aria-current="{{ l.current }}" style="{{ l.style }}" style-hover="{{ l.hover }}">{{ l.label }}</a></li>
+        </sc-for>
+      </ul>
+    </sc-if>
+    <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+      <button type="button" aria-label="Abrir menú" aria-expanded="{{ menuOpen }}" onClick="{{ openMenu }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:2.625rem;height:2.625rem;border-radius:.5rem" style-hover="background-color:rgb(10 10 10 / .06)">
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+      </button>
+    </sc-if>
+  </nav>
+</div>
+
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:110;background:rgb(0 0 0 / .55);backdrop-filter:blur(2px)"></div>
+    <nav aria-label="Navegación móvil" style="position:fixed;top:0;bottom:0;right:0;z-index:111;display:flex;flex-direction:column;gap:.25rem;width:min(82vw,20rem);padding:1.5rem 1rem;background:#0d0d0d;border-left:1px solid rgb(255 255 255 / .12);box-shadow:-1.25rem 0 3.75rem rgb(0 0 0 / .6);overflow-y:auto">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:.5rem">
+        <button type="button" aria-label="Cerrar menú" onClick="{{ closeMenu }}" style="display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:.5rem;color:#fff;font-size:1.4rem;line-height:1">×</button>
+      </div>
+      <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0;margin:0">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+          <li><a href="{{ l.href }}" aria-current="{{ l.current }}" style="{{ l.dStyle }}"><span style="{{ l.dot }}"></span>{{ l.label }}</a></li>
+        </sc-for>
+      </ul>
+      <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:auto;padding-top:1rem;border-top:1px solid rgb(255 255 255 / .12)">
+        <a href="mailto:webcartaonline@gmail.com" style="color:rgb(255 255 255 / .66);font-size:.8125rem;word-break:break-word">webcartaonline@gmail.com</a>
+        <a href="tel:+34722207215" style="color:rgb(255 255 255 / .66);font-size:.8125rem">+34 722-207-215</a>
+      </div>
+    </nav>
+  </div>
+</sc-if>
+
+<main id="contenido">
+  <section data-screen-label="FAQs" style="padding-top:calc(4.75rem + clamp(4rem,2rem + 5vw,6rem));padding-bottom:clamp(4rem,2rem + 5vw,6rem)">
+    <div style="width:100%;max-width:56rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+
+      <div data-reveal="" style="max-width:60ch;margin-bottom:2rem">
+        <p style="margin-bottom:.5rem;color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Preguntas frecuentes</p>
+        <h1 style="margin-bottom:1rem;font-size:clamp(2rem,1.4rem + 3vw,3.25rem)">Todo lo que sueles preguntarnos</h1>
+        <p style="color:rgb(255 255 255 / .66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem)">Sobre tu web, tu carta y el editor adminApp. Busca tu duda o filtra por tema.</p>
+      </div>
+
+      <div data-reveal="" data-delay="80" style="position:sticky;top:5.25rem;z-index:20;display:flex;flex-direction:column;gap:.75rem;padding:.75rem;margin:0 -.75rem 1.5rem;border-radius:1.25rem;background:rgb(10 10 10 / .88);backdrop-filter:blur(10px)">
+        <label style="position:relative;display:block">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;left:1rem;top:50%;width:1.1rem;height:1.1rem;transform:translateY(-50%);color:rgb(255 255 255 / .45)"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="search" value="{{ query }}" onInput="{{ setQuery }}" placeholder="Busca: foto, publicar, PDF, clave…" aria-label="Buscar en las preguntas" style="width:100%;padding:.85rem 1rem .85rem 2.75rem;border-radius:999px;border:1px solid rgb(255 255 255 / .2);background:#121212;color:#fff;outline:none;transition:border-color 150ms ease" style-focus="border-color:#e8710a">
+        </label>
+        <div role="tablist" aria-label="Temas" style="display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;padding-bottom:2px">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+            <button type="button" role="tab" aria-selected="{{ c.active }}" onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}<span style="{{ c.countStyle }}">{{ c.count }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:2.5rem 1.5rem;text-align:center;border:1px dashed rgb(255 255 255 / .2);border-radius:1.25rem;color:rgb(255 255 255 / .66)">
+          <p style="font-weight:500;color:#fff;margin-bottom:.25rem">No hemos encontrado nada con «{{ query }}».</p>
+          <p style="font-size:.9375rem">Prueba con otra palabra o <a href="mailto:webcartaonline@gmail.com" style="color:#e8710a;border-bottom:1px solid rgb(232 113 10 / .4)">escríbenos</a>.</p>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+          <article id="{{ f.id }}" style="{{ f.cardStyle }}">
+            <button type="button" aria-expanded="{{ f.open }}" onClick="{{ f.toggle }}" style="display:flex;align-items:center;gap:1rem;width:100%;padding:1.1rem 1.25rem;text-align:left">
+              <span style="{{ f.tagStyle }}">{{ f.catLabel }}</span>
+              <span style="flex:1;min-width:0;font-weight:500;font-size:clamp(1rem,.95rem + .3vw,1.125rem);line-height:1.35">{{ f.q }}</span>
+              <span aria-hidden="true" style="{{ f.iconStyle }}">+</span>
+            </button>
+            <div style="{{ f.bodyWrap }}">
+              <div style="min-height:0;overflow:hidden">
+                <div style="display:flex;flex-direction:column;gap:1rem;padding:0 1.25rem 1.35rem">
+                  <p style="color:rgb(255 255 255 / .75)">{{ f.a }}</p>
+
+                  <sc-if value="{{ f.hasSteps }}" hint-placeholder-val="{{ false }}">
+                    <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem">
+                      <sc-for list="{{ f.steps }}" as="s" hint-placeholder-count="3">
+                        <li style="display:flex;gap:.75rem;align-items:flex-start">
+                          <span style="flex:none;display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:999px;background:rgb(232 113 10 / .18);color:#e8710a;font-size:.8125rem;font-weight:700">{{ s.n }}</span>
+                          <span style="color:rgb(255 255 255 / .82);padding-top:.1rem">{{ s.t }}</span>
+                        </li>
+                      </sc-for>
+                    </ol>
+                  </sc-if>
+
+                  <sc-if value="{{ f.isInstall }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:.9rem;padding:1rem;border-radius:1rem;border:1px solid rgb(255 255 255 / .12);background:#0d0d0d">
+                      <div role="tablist" aria-label="Tu dispositivo" style="display:flex;flex-wrap:wrap;gap:.5rem">
+                        <sc-for list="{{ installTabs }}" as="d" hint-placeholder-count="3">
+                          <button type="button" role="tab" aria-selected="{{ d.active }}" onClick="{{ d.pick }}" style="{{ d.style }}">{{ d.label }}</button>
+                        </sc-for>
+                      </div>
+                      <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem">
+                        <sc-for list="{{ installSteps }}" as="s" hint-placeholder-count="3">
+                          <li style="{{ s.style }}">
+                            <span style="flex:none;display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:999px;background:#174ea6;color:#fff;font-size:.8125rem;font-weight:700">{{ s.n }}</span>
+                            <span style="color:rgb(255 255 255 / .82);padding-top:.1rem">{{ s.t }}</span>
+                          </li>
+                        </sc-for>
+                      </ol>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ f.isErrors }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:.9rem;padding:1rem;border-radius:1rem;border:1px solid rgb(255 255 255 / .12);background:#0d0d0d">
+                      <p style="font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .5)">¿Qué mensaje te sale?</p>
+                      <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+                        <sc-for list="{{ errorTabs }}" as="e" hint-placeholder-count="6">
+                          <button type="button" aria-pressed="{{ e.active }}" onClick="{{ e.pick }}" style="{{ e.style }}">{{ e.label }}</button>
+                        </sc-for>
+                      </div>
+                      <div key="{{ errKey }}" style="display:flex;flex-direction:column;gap:.35rem;padding:.9rem 1rem;border-radius:.75rem;background:rgb(232 113 10 / .1);border:1px solid rgb(232 113 10 / .35);animation:faqIn 300ms ease both">
+                        <p style="font-weight:500;color:#fff">«{{ errMsg }}»</p>
+                        <p style="color:rgb(255 255 255 / .75);font-size:.9375rem">{{ errFix }}</p>
+                      </div>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ f.isTypes }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.75rem">
+                      <sc-for list="{{ tagTypes }}" as="t" hint-placeholder-count="3">
+                        <div style="display:flex;flex-direction:column;gap:.5rem;padding:1rem;border-radius:1rem;border:1px solid rgb(255 255 255 / .12);background:#0d0d0d">
+                          <span style="font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .5)">{{ t.where }}</span>
+                          <span style="{{ t.sample }}">{{ t.example }}</span>
+                          <span style="font-weight:700">{{ t.name }}</span>
+                          <span style="color:rgb(255 255 255 / .66);font-size:.9375rem">{{ t.text }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ f.hasImg }}" hint-placeholder-val="{{ false }}">
+                    <figure style="display:flex;flex-direction:column;gap:.5rem">
+                      <button type="button" onClick="{{ f.zoom }}" aria-label="Ampliar captura" style="position:relative;display:block;overflow:hidden;border-radius:1rem;border:1px solid rgb(255 255 255 / .12);cursor:zoom-in">
+                        <img src="{{ f.img }}" alt="{{ f.imgAlt }}" loading="lazy" style="display:block;width:100%;height:auto;transition:transform 700ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.03)">
+                        <span style="position:absolute;right:.6rem;bottom:.6rem;padding:.25rem .6rem;border-radius:999px;background:rgb(10 10 10 / .8);font-size:.75rem;font-weight:500">Ampliar</span>
+                      </button>
+                      <figcaption style="font-size:.8125rem;color:rgb(255 255 255 / .5)">{{ f.imgAlt }}</figcaption>
+                    </figure>
+                  </sc-if>
+
+                  <sc-if value="{{ f.hasNote }}" hint-placeholder-val="{{ false }}">
+                    <p style="display:flex;gap:.6rem;padding:.75rem .9rem;border-radius:.75rem;background:rgb(23 78 166 / .18);font-size:.9375rem;color:rgb(255 255 255 / .85)"><span style="flex:none;font-weight:700;color:#8ab4f8">Consejo</span><span>{{ f.note }}</span></p>
+                  </sc-if>
+
+                  <sc-if value="{{ f.hasLink }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ f.linkHref }}" style="align-self:flex-start;font-size:.9375rem;font-weight:500;color:#fff;border-bottom:1px solid rgb(255 255 255 / .25);padding-bottom:1px" style-hover="border-color:#fff">{{ f.linkLabel }}</a>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;margin-top:3rem;padding:clamp(1.5rem,4vw,2.5rem);border-radius:1.75rem;border:1px solid rgb(255 255 255 / .12);background:radial-gradient(90% 140% at 100% 0%,rgb(23 78 166 / .24),transparent 60%),linear-gradient(160deg,#181818,#121212)">
+        <div>
+          <p style="margin-bottom:.25rem;font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700">¿No encuentras tu respuesta?</p>
+          <p style="color:rgb(255 255 255 / .66)">Cuéntanos qué necesitas y te ayudamos.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem">
+          <a href="tel:+34722207215" style="display:inline-flex;align-items:center;padding:.8rem 1.4rem;border-radius:999px;border:1px solid rgb(255 255 255 / .25);font-size:.9375rem;font-weight:500" style-hover="border-color:#fff;background-color:rgb(255 255 255 / .06)">Llámanos</a>
+          <a href="mailto:webcartaonline@gmail.com" style="display:inline-flex;align-items:center;padding:.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:.9375rem;font-weight:500" style-hover="background-color:color-mix(in srgb,#e8710a 88%,white)">Escríbenos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<sc-if value="{{ hasZoom }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Captura ampliada" onClick="{{ closeZoom }}" style="position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:clamp(1rem,4vw,3rem);background:rgb(0 0 0 / .85);backdrop-filter:blur(4px);cursor:zoom-out">
+    <img src="{{ zoomSrc }}" alt="{{ zoomAlt }}" style="max-width:100%;max-height:100%;border-radius:1rem;box-shadow:0 2rem 5rem rgb(0 0 0 / .6);animation:zoomIn 250ms cubic-bezier(0.2,0.7,0.2,1) both">
+    <button type="button" aria-label="Cerrar" onClick="{{ closeZoom }}" style="position:absolute;top:1rem;right:1rem;display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:999px;background:#fff;color:#0a0a0a;font-size:1.4rem;line-height:1">×</button>
+  </div>
+</sc-if>
+
+<footer style="border-top:1px solid rgb(255 255 255 / .12);margin-top:2rem;padding:3rem 0 2rem">
+  <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:clamp(2rem,4vw,3rem)">
+      <div>
+        <p style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700">Professional Web</p>
+        <p style="max-width:34ch;margin-top:.5rem;color:rgb(255 255 255 / .66);font-size:.9375rem">Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.</p>
+      </div>
+      <div>
+        <h2 style="margin-bottom:.5rem;color:rgb(255 255 255 / .5);font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase">Navegación</h2>
+        <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0">
+          <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+            <li><a href="{{ l.href }}" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem;transition:color 150ms ease" style-hover="color:#fff">{{ l.label }}</a></li>
+          </sc-for>
+        </ul>
+      </div>
+      <div>
+        <h2 style="margin-bottom:.5rem;color:rgb(255 255 255 / .5);font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase">Contacto</h2>
+        <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0">
+          <li><a href="mailto:webcartaonline@gmail.com" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem" style-hover="color:#fff">webcartaonline@gmail.com</a></li>
+          <li><a href="tel:+34722207215" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem" style-hover="color:#fff">+34 722-207-215</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgb(255 255 255 / .12);color:rgb(255 255 255 / .45);font-size:.8125rem">
+      <p>© 2026 Professional Web. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAV = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Plantillas", href: "plantillas.html" },
+  { label: "Cómo trabajamos", href: "como-trabajamos.html" },
+  { label: "Conoce tus herramientas", href: "conoce-tus-herramientas.html" },
+  { label: "Precios y Planes", href: "precios.html" },
+  { label: "FAQs", href: "faqs.html", current: true },
+];
+const IMG = "Recursos/img/adminApp/";
+const CATS = [
+  { id: "todas", label: "Todas" },
+  { id: "general", label: "Tu web", color: "#157f3c" },
+  { id: "empezar", label: "Primeros pasos", color: "#174ea6" },
+  { id: "editar", label: "Editar la carta", color: "#e8710a" },
+  { id: "publicar", label: "Publicar", color: "#157f3c" },
+  { id: "pdf", label: "PDF e impresión", color: "#e8710a" },
+  { id: "app", label: "App y dispositivos", color: "#174ea6" },
+];
+const FAQS = [
+  { id: "pago-unico", cat: "general", q: "¿El pago es realmente único?", a: "Sí. Pagas una vez y la web es tuya. No hay cuotas mensuales ni sorpresas." },
+  { id: "plazo", cat: "general", q: "¿Cuánto tarda en estar lista?", a: "Normalmente entre 5 y 7 días desde que tenemos tus contenidos." },
+  { id: "conocimientos", cat: "general", q: "¿Necesito conocimientos técnicos?", a: "Ninguno. Nos encargamos de todo y te enseñamos a usar el editor en minutos.", link: ["conoce-tus-herramientas.html", "Conoce el editor adminApp"] },
+  { id: "dominio", cat: "general", q: "¿Incluye dominio y hosting?", a: "El plan Premium incluye dominio propio. En todos los casos publicamos tu web y te entregamos el enlace listo para compartir.", link: ["precios.html", "Ver precios y planes"] },
+
+  { id: "instalar", cat: "empezar", q: "¿Cómo instalo el editor en mi móvil u ordenador?", a: "adminApp se instala desde el navegador, sin tiendas de apps. Después tendrás su icono y se abrirá a pantalla completa. Elige tu dispositivo:", install: true },
+  { id: "conexion", cat: "empezar", q: "¿Qué pongo en «Negocio» y «Clave»?", a: "Son los dos datos que conectan el editor con tu carta. Se guardan solo en tu navegador.", steps: ["Entra en «Ajustes» › «Conexión con la carta».", "En «Negocio» escribe el nombre corto de tu local, el mismo de tu dirección: si tu carta es mi-bar.webcartaonline.com, escribe mi-bar.", "En «Clave» pega la que te dimos al contratar.", "Pulsa «Guardar conexión» y luego «Probar la conexión»."], note: "No compartas la clave con nadie: quien la tenga puede cambiar tu carta." },
+  { id: "empezar-editar", cat: "empezar", q: "Ya lo tengo instalado, ¿cómo empiezo?", a: "Abre el editor y pulsa «Cargar carta». En unos segundos verás tus secciones a la izquierda y podrás tocar cualquier grupo o plato para editarlo.", img: "editor-ordenador.png", imgAlt: "El editor con las secciones y grupos a la izquierda" },
+
+  { id: "cambiar-plato", cat: "editar", q: "¿Cómo cambio un precio, un nombre o una descripción?", a: "Elige la sección y el grupo en el panel izquierdo; cada plato aparece como una ficha con sus campos. Escribe y listo: el cambio queda preparado hasta que publiques.", img: "editor-plato.png", imgAlt: "Ficha de un plato: precio, foto, nombre y descripción en dos idiomas, alérgenos y etiquetas", note: "Con los botones ▲ ▼ cambias el orden, y con «Copiar» duplicas un plato para no escribirlo de cero." },
+  { id: "fotos", cat: "editar", q: "¿Cómo añado o cambio la foto de un plato?", a: "Pulsa «Foto» en la ficha del plato, elige la imagen y encuádrala arrastrando y con el zoom. El editor la recorta y la aligera él solo.", steps: ["Valen JPG, PNG o WEBP de hasta 25 MB.", "En secciones y grupos puedes marcar la zona importante de la foto, la que nunca se debe cortar.", "La foto se sube al pulsar «Publicar cambios»."], note: "Las fotos HEIC del iPhone no se pueden leer. En el móvil: Ajustes › Cámara › Formatos › «Más compatible», o compártela como JPG." },
+  { id: "recuperar-foto", cat: "editar", q: "He quitado una foto por error, ¿la recupero?", a: "Sí, mientras no cierres el editor. Vuelve a abrir la ventana de la foto de ese plato y pulsa «Recuperar». Si ya lo cerraste, tendrás que subirla de nuevo." },
+  { id: "alergenos", cat: "editar", q: "¿Cómo indico los alérgenos?", a: "En la ficha de cada plato tienes los 14 alérgenos como botones: toca los que lleve y quedan marcados. En tu carta se verán como iconos y tus clientes podrán filtrar los platos." },
+  { id: "etiquetas", cat: "editar", q: "¿Qué diferencia hay entre etiqueta, alerta y nota?", a: "Son tres formas de destacar algo en tu carta. Cada una va en un sitio distinto:", types: true },
+  { id: "idiomas", cat: "editar", q: "¿En cuántos idiomas puede estar mi carta?", a: "Desde uno hasta los que necesites, según tu plan. Si tu plan incluye idiomas extra, al cargar la carta el editor te pregunta cuáles quieres. Después cada campo aparece duplicado por idioma (ES, EN…) y tus clientes eligen el idioma con un toque.", link: ["precios.html", "Ver qué incluye cada plan"] },
+  { id: "apariencia", cat: "editar", q: "¿Puedo cambiar los colores, la portada o las letras de mi carta?", a: "Sí, en «Ajustes de la carta». Ahí cambias colores, portada, logotipo, fuentes y los mensajes del pie de página, con una muestra en vivo. Algunas opciones dependen de tu plan.", img: "ajustes-fuentes.png", imgAlt: "Ajustes de la página: posición del filtro de alérgenos, fuentes y mensajes del pie", note: "Si subes tu propia letra, para el texto conviene una sencilla: las muy decorativas lucen más solo en el título." },
+
+  { id: "ven-cambios", cat: "publicar", q: "¿Mis clientes ven los cambios mientras edito?", a: "No. Todo lo que cambias se queda como borrador. Pulsa «Vista previa» para ver tu carta tal cual quedará, con el aviso «Cambios sin publicar». Tus clientes solo lo verán cuando pulses «Publicar cambios».", img: "vista-previa-completa.png", imgAlt: "Vista previa con el aviso «Cambios sin publicar»", link: ["conoce-tus-herramientas.html#vista-previa", "Probar la vista previa"] },
+  { id: "publicar-error", cat: "publicar", q: "¿Y si publico algo por error?", a: "Tranquilo: antes de sustituir tu carta, el servidor guarda una copia de seguridad con fecha. Además, rechaza cualquier archivo dañado, así que una carta rota nunca llega a tus clientes.", steps: ["Si es un error pequeño, corrígelo en el editor y vuelve a publicar.", "Si prefieres volver a la versión anterior, escríbenos y la recuperamos."], link: ["mailto:webcartaonline@gmail.com", "Escribir a soporte"] },
+  { id: "errores", cat: "publicar", q: "Me sale un mensaje de error, ¿qué hago?", a: "El editor explica cada problema con un mensaje. Toca el tuyo para ver cómo solucionarlo:", errors: true },
+  { id: "licencia", cat: "publicar", q: "Me avisa de que mi licencia caduca", a: "Cuando quedan 30 días o menos, el editor te avisa al cargar la carta. Si caduca, tu carta sigue visible, pero no podrás publicar cambios hasta renovarla.", link: ["mailto:webcartaonline@gmail.com", "Renovar mi licencia"] },
+
+  { id: "pdf", cat: "pdf", q: "¿Cómo descargo mi carta en PDF?", a: "Pulsa «Descargar PDF» en la barra de arriba. Se abre una ventana con la vista previa de cada página y todas las opciones.", steps: ["Elige papel y orientación.", "Decide columnas, idioma, portada, fotos y márgenes.", "Pulsa «Descargar PDF»."], img: "descargar-pdf-v2.png", imgAlt: "Ventana «Descargar en PDF» con las opciones y la vista previa de páginas" },
+  { id: "imprimir", cat: "pdf", q: "Consejos para imprimir la carta", a: "Para que salga igual que en pantalla:", steps: ["Imprime al 100 % o «Tamaño real», no «Ajustar a la página».", "Elige en la impresora el mismo papel que en el PDF (A4, A5…).", "Si quieres un acabado profesional, lleva el PDF a una imprenta: ya va listo."], note: "Si tu carta tiene muchas fotos y no necesitas imprimirlas, desactívalas: el PDF pesará menos y gastarás menos tinta." },
+
+  { id: "dispositivos", cat: "app", q: "¿Funciona en cualquier dispositivo?", a: "Sí: móvil Android o iPhone, tablet y ordenador con Chrome, Edge o Safari. La pantalla se adapta sola.", link: ["conoce-tus-herramientas.html#dispositivos", "Verlo en cada dispositivo"] },
+  { id: "sin-conexion", cat: "app", q: "¿Funciona sin conexión a internet?", a: "El editor se abre al instante aunque no haya conexión, porque guarda una copia en tu dispositivo. Eso sí, para cargar tu carta y publicar cambios necesitas internet." },
+  { id: "actualizaciones", cat: "app", q: "¿Tengo que actualizar la app?", a: "No. Las mejoras se instalan solas. La primera vez que abras el editor después de una mejora verás una ventana con las novedades: pulsa «Actualizar» y listo. Tu carta, tu clave y tus ajustes no se tocan." },
+  { id: "cambiar-dispositivo", cat: "app", q: "Voy a cambiar de móvil u ordenador, ¿pierdo algo?", a: "Tu carta está a salvo en el servidor. Lo que se guarda en cada navegador son los ajustes del editor (negocio, clave, color y modo). Para llevártelos:", steps: ["En el dispositivo antiguo: «Ajustes» › «Exportar e importar» › «Descargar archivo de ajustes».", "En el nuevo: instala el editor y en el mismo apartado elige ese archivo.", "Revisa lo que trae y pulsa «Importar estos ajustes»."], note: "La clave solo va en el archivo si la incluyes. Si lo haces, no compartas ese archivo con nadie." },
+  { id: "personalizar-editor", cat: "app", q: "¿Puedo cambiar el color del editor o usar modo oscuro?", a: "Sí. Pulsa «Modo oscuro» o «Modo claro» arriba a la derecha. En «Ajustes» › «Personalización» cambias el nombre del editor y su color principal. Esto solo cambia tu editor, no tu carta." },
+];
+const INSTALL = {
+  android: { label: "Android", steps: ["Abre la dirección del editor en Chrome.", "Toca el menú ⋮ de arriba a la derecha.", "Elige «Instalar aplicación» y confirma."] },
+  iphone: { label: "iPhone", steps: ["Abre la dirección del editor en Safari.", "Toca el botón compartir (el cuadrado con la flecha).", "Elige «Añadir a pantalla de inicio»."] },
+  pc: { label: "Ordenador", steps: ["Abre la dirección del editor en Chrome o Edge.", "Pulsa el icono de instalar de la barra de direcciones.", "Confirma con «Instalar»."] },
+};
+const ERRORS = [
+  ["faltan", "Faltan datos", "Faltan el negocio o la clave. Entra en «Ajustes» y complétalos.", "Ve a «Ajustes» › «Conexión con la carta» y rellena los dos campos. Si no tienes la clave, pídenosla."],
+  ["clave", "Clave incorrecta", "La clave no es correcta. Revísala en «Ajustes».", "Cópiala de nuevo, sin espacios al principio ni al final, y pulsa «Probar la conexión»."],
+  ["red", "Sin conexión", "No hay conexión con el servidor. Comprueba tu internet.", "Comprueba el wifi o los datos y vuelve a intentarlo. Tus cambios no se pierden mientras no cierres el editor."],
+  ["caducada", "Licencia caducada", "Tu licencia ha caducado. Renueva para poder seguir editando.", "Escríbenos para renovarla. Tu carta sigue visible para tus clientes."],
+  ["plan", "No incluido", "Tu plan no incluye esto.", "Esa función no está en tu plan. Si la necesitas, podemos ampliarlo."],
+  ["grande", "Archivo grande", "El archivo es demasiado grande.", "Usa una foto más ligera o haz una captura de ella antes de subirla."],
+  ["heic", "Formato de foto", "Ese archivo no es una imagen JPG, PNG o WEBP.", "Convierte la foto a JPG. En el iPhone: Ajustes › Cámara › Formatos › «Más compatible»."],
+];
+const norm = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const pill = on => ({
+  flex: "none", display: "inline-flex", alignItems: "center", gap: ".45rem", padding: ".5rem 1rem", borderRadius: "999px", fontSize: ".9375rem", whiteSpace: "nowrap",
+  fontWeight: on ? 700 : 500, border: "1px solid " + (on ? "#fff" : "rgb(255 255 255 / .2)"),
+  background: on ? "#fff" : "transparent", color: on ? "#0a0a0a" : "#fff",
+  transition: "background-color 150ms ease, color 150ms ease, border-color 150ms ease",
+});
+
+class Component extends DCLogic {
+  state = { w: typeof window !== "undefined" ? window.innerWidth : 1280, menu: false, cat: "todas", query: "", open: { "pago-unico": true }, dev: "android", err: "faltan", zoom: null };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener("resize", this.onResize);
+    this.onKey = e => { if (e.key === "Escape") this.setState({ zoom: null, menu: false }); };
+    window.addEventListener("keydown", this.onKey);
+    this.onHash = () => this.openFromHash();
+    window.addEventListener("hashchange", this.onHash);
+    this.openFromHash();
+    const ua = navigator.userAgent;
+    if (/iPhone|iPad/.test(ua)) this.setState({ dev: "iphone" }); else if (!/Android/.test(ua)) this.setState({ dev: "pc" });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    this.io = new IntersectionObserver(es => es.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.style.opacity = ""; en.target.style.transform = ""; this.io.unobserve(en.target);
+    }), { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach(el => {
+      const d = el.getAttribute("data-delay") || 0;
+      el.style.transition = `opacity 650ms cubic-bezier(0.2,0.7,0.2,1) ${d}ms, transform 650ms cubic-bezier(0.2,0.7,0.2,1) ${d}ms`;
+      el.style.opacity = "0"; el.style.transform = "translateY(1.25rem)";
+      this.io.observe(el);
+    });
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("keydown", this.onKey);
+    window.removeEventListener("hashchange", this.onHash);
+    this.io && this.io.disconnect();
+  }
+  openFromHash() {
+    const id = decodeURIComponent((location.hash || "").slice(1));
+    if (!FAQS.some(f => f.id === id)) return;
+    this.setState(s => ({ cat: "todas", query: "", open: { ...s.open, [id]: true } }), () => setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 200, behavior: "smooth" });
+    }, 80));
+  }
+  renderVals() {
+    const s = this.state;
+    const desktop = s.w >= 1024;
+    const navLinks = NAV.map(l => ({
+      ...l, current: l.current ? "page" : undefined,
+      style: { display: "inline-block", padding: ".5rem .9rem", borderRadius: "999px", fontSize: ".9375rem", whiteSpace: "nowrap", transition: "background-color 150ms ease, color 150ms ease", fontWeight: l.current ? 700 : 500, background: l.current ? "#0a0a0a" : "transparent", color: l.current ? "#fff" : "#0a0a0a" },
+      hover: l.current ? {} : { backgroundColor: "rgb(10 10 10 / .08)" },
+      dStyle: { display: "flex", alignItems: "center", gap: ".7rem", padding: ".65rem .85rem", borderRadius: ".5rem", fontSize: ".9375rem", fontWeight: l.current ? 700 : 500, background: l.current ? "#fff" : "transparent", color: l.current ? "#0a0a0a" : "rgb(255 255 255 / .66)" },
+      dot: { flex: "none", width: 7, height: 7, borderRadius: 999, background: l.current ? "#e8710a" : "rgb(255 255 255 / .3)" },
+    }));
+
+    const q = norm(s.query.trim());
+    const matchQ = f => !q || norm([f.q, f.a, ...(f.steps || []), f.note || ""].join(" ")).includes(q);
+    const byQ = FAQS.filter(matchQ);
+    const list = byQ.filter(f => s.cat === "todas" || f.cat === s.cat);
+    const catById = Object.fromEntries(CATS.map(c => [c.id, c]));
+
+    const cats = CATS.map(c => {
+      const on = c.id === s.cat;
+      const n = c.id === "todas" ? byQ.length : byQ.filter(f => f.cat === c.id).length;
+      return {
+        label: c.label, active: on, count: n, pick: () => this.setState({ cat: c.id }),
+        style: { ...pill(on), opacity: n ? 1 : .45 },
+        countStyle: { fontSize: ".75rem", fontWeight: 700, padding: "0 .4rem", borderRadius: 999, background: on ? "rgb(10 10 10 / .1)" : "rgb(255 255 255 / .1)" },
+      };
+    });
+
+    const faqs = list.map((f, i) => {
+      const open = !!s.open[f.id];
+      const c = catById[f.cat];
+      return {
+        id: f.id, q: f.q, a: f.a, open, catLabel: c.label,
+        toggle: () => this.setState(st => ({ open: { ...st.open, [f.id]: !open } })),
+        steps: (f.steps || []).map((t, k) => ({ n: k + 1, t })), hasSteps: !!f.steps,
+        hasImg: !!f.img, img: f.img ? IMG + f.img : "", imgAlt: f.imgAlt || "",
+        zoom: () => this.setState({ zoom: { src: IMG + f.img, alt: f.imgAlt } }),
+        hasNote: !!f.note, note: f.note || "",
+        hasLink: !!f.link, linkHref: f.link ? f.link[0] : "", linkLabel: f.link ? f.link[1] + " →" : "",
+        isInstall: !!f.install, isErrors: !!f.errors, isTypes: !!f.types,
+        cardStyle: {
+          scrollMarginTop: "13rem", borderRadius: "1.25rem", overflow: "hidden",
+          border: "1px solid " + (open ? "rgb(255 255 255 / .22)" : "rgb(255 255 255 / .12)"),
+          backgroundImage: "linear-gradient(160deg,#181818,#121212)",
+          transition: "border-color 250ms ease",
+          animation: `faqIn 420ms cubic-bezier(0.2,0.7,0.2,1) ${Math.min(i, 8) * 40}ms both`,
+        },
+        tagStyle: { flex: "none", width: 8, height: 8, borderRadius: 999, background: c.color, boxShadow: `0 0 0 4px color-mix(in srgb, ${c.color} 22%, transparent)`, fontSize: 0, overflow: "hidden" },
+        iconStyle: {
+          flex: "none", display: "grid", placeItems: "center", width: "2rem", height: "2rem", borderRadius: 999,
+          fontSize: "1.25rem", lineHeight: 1, fontWeight: 400,
+          background: open ? "#e8710a" : "rgb(255 255 255 / .08)", color: open ? "#0a0a0a" : "#fff",
+          transform: open ? "rotate(45deg)" : "none",
+          transition: "transform 300ms cubic-bezier(0.2,0.7,0.2,1), background-color 200ms ease, color 200ms ease",
+        },
+        bodyWrap: { display: "grid", gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, transition: "grid-template-rows 380ms cubic-bezier(0.2,0.7,0.2,1), opacity 300ms ease" },
+      };
+    });
+
+    const inst = INSTALL[s.dev];
+    const installTabs = Object.entries(INSTALL).map(([id, v]) => ({ label: v.label, active: id === s.dev, style: pill(id === s.dev), pick: () => this.setState({ dev: id }) }));
+    const installSteps = inst.steps.map((t, k) => ({ n: k + 1, t, style: { display: "flex", gap: ".75rem", alignItems: "flex-start", animation: `faqIn 320ms ease ${k * 70}ms both` } }));
+    const errRow = ERRORS.find(e => e[0] === s.err) || ERRORS[0];
+    const errorTabs = ERRORS.map(([id, label]) => ({ label, active: id === s.err, style: { ...pill(id === s.err), padding: ".4rem .85rem", fontSize: ".875rem" }, pick: () => this.setState({ err: id }) }));
+
+    const sampleBase = { alignSelf: "flex-start", fontSize: ".75rem", fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", borderRadius: 999, padding: ".2rem .6rem" };
+    const tagTypes = [
+      { where: "En un plato", name: "Etiqueta", example: "Picante", text: "Palabra corta junto al plato: «250 g», «Nuevo». Puedes poner varias.", sample: { ...sampleBase, background: "#E9B44C", color: "#17140F" } },
+      { where: "En un grupo", name: "Alerta", example: "También en media ración", text: "Un aviso para todos los platos del grupo. Solo una, junto al título.", sample: { ...sampleBase, background: "#1A1613", color: "#E9B44C", border: "1px solid #2C2620", textTransform: "none", letterSpacing: 0, fontSize: ".8125rem" } },
+      { where: "En una sección", name: "Nota", example: "Tipos de pan", text: "Un recuadro entre la portada de la sección y su primer grupo.", sample: { ...sampleBase, borderRadius: 2, borderLeft: "3px solid #e8710a", padding: ".1rem .6rem", color: "#e8710a", textTransform: "none", letterSpacing: 0, fontSize: ".875rem" } },
+    ];
+
+    return {
+      desktop, mobile: !desktop, menuOpen: s.menu, drawerOpen: !desktop && s.menu,
+      openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      navLinks, cats, faqs, empty: list.length === 0,
+      query: s.query, setQuery: e => this.setState({ query: e.target.value }),
+      installTabs, installSteps, errorTabs, errKey: s.err, errMsg: errRow[2], errFix: errRow[3], tagTypes,
+      hasZoom: !!s.zoom, zoomSrc: s.zoom ? s.zoom.src : "", zoomAlt: s.zoom ? s.zoom.alt : "",
+      closeZoom: () => this.setState({ zoom: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>
