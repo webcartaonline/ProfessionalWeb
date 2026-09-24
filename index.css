@@ -23,4 +23,5 @@
 @import url("css/components/table.css") layer(components);
 @import url("css/components/faq.css") layer(components);
 @import url("css/components/cta.css") layer(components);
+@import url("css/components/tools.css") layer(components);
 @import url("css/components/footer.css") layer(components);

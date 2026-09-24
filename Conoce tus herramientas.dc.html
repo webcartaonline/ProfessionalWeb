@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Conoce tus herramientas — Professional Web</title>
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&amp;display=swap">
+<script src="./image-slot.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}*{margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{min-height:100vh;background:#0a0a0a;color:#fff;font-family:"Google Sans","Google Sans Text","Product Sans","DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:1rem;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button,input,select{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}
+h1,h2,h3{font-weight:700;line-height:1.08;letter-spacing:-0.02em;text-wrap:balance}p{text-wrap:pretty}
+:where(a,button,input,[tabindex]):focus-visible{outline:2px solid #e8710a;outline-offset:3px;border-radius:.5rem}
+::selection{background:#174ea6;color:#fff}
+</style>
+</helmet>
+
+<div style="position:fixed;top:0;left:0;right:0;z-index:100;min-height:9rem;padding-top:.75rem;padding-left:clamp(1rem,5vw,2.5rem);padding-right:clamp(1rem,5vw,2.5rem);pointer-events:none;background-image:linear-gradient(to bottom,rgb(10 10 10 / .95) 0%,rgb(10 10 10 / 0) 100%)">
+  <nav aria-label="Navegación principal" style="pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;max-width:75rem;min-height:3.25rem;margin:0 auto;padding:.5rem 1rem;border-radius:.875rem;background:#fff;color:#0b2f66;box-shadow:0 1.5rem 4.375rem rgb(0 0 0 / .35)">
+    <a href="index.html" aria-label="Professional Web — Inicio" style="display:flex;align-items:center;padding-left:.25rem">
+      <img src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web" style="width:auto;height:3rem;display:block">
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <ul style="display:flex;align-items:center;gap:.25rem;list-style:none;padding:0;margin:0">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+          <li><a href="{{ l.href }}" aria-current="{{ l.current }}" style="{{ l.style }}" style-hover="{{ l.hover }}">{{ l.label }}</a></li>
+        </sc-for>
+      </ul>
+    </sc-if>
+    <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+      <button type="button" aria-label="Abrir menú" aria-expanded="{{ menuOpen }}" onClick="{{ openMenu }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:2.625rem;height:2.625rem;border-radius:.5rem" style-hover="background-color:rgb(10 10 10 / .06)">
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#0b2f66"></span>
+      </button>
+    </sc-if>
+  </nav>
+</div>
+
+<sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:110;background:rgb(0 0 0 / .55);backdrop-filter:blur(2px)"></div>
+    <nav aria-label="Navegación móvil" style="position:fixed;top:0;bottom:0;right:0;z-index:111;display:flex;flex-direction:column;gap:.25rem;width:min(82vw,20rem);padding:1.5rem 1rem;background:#0d0d0d;border-left:1px solid rgb(255 255 255 / .12);box-shadow:-1.25rem 0 3.75rem rgb(0 0 0 / .6);overflow-y:auto">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:.5rem">
+        <button type="button" aria-label="Cerrar menú" onClick="{{ closeMenu }}" style="display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:.5rem;color:#fff;font-size:1.4rem;line-height:1">×</button>
+      </div>
+      <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0;margin:0">
+        <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+          <li><a href="{{ l.href }}" aria-current="{{ l.current }}" style="{{ l.dStyle }}"><span style="{{ l.dot }}"></span>{{ l.label }}</a></li>
+        </sc-for>
+      </ul>
+      <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:auto;padding-top:1rem;border-top:1px solid rgb(255 255 255 / .12)">
+        <a href="mailto:webcartaonline@gmail.com" style="color:rgb(255 255 255 / .66);font-size:.8125rem;word-break:break-word">webcartaonline@gmail.com</a>
+        <a href="tel:+34722207215" style="color:rgb(255 255 255 / .66);font-size:.8125rem">+34 722-207-215</a>
+      </div>
+    </nav>
+  </div>
+</sc-if>
+
+<main id="contenido">
+
+  <!-- Cabecera -->
+  <section data-screen-label="Cabecera" style="padding-top:calc(4.75rem + clamp(4rem,2rem + 5vw,6rem));padding-bottom:clamp(3rem,2rem + 3vw,4.5rem)">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr));gap:clamp(2rem,4vw,3.5rem);align-items:center">
+      <div data-reveal="" style="max-width:60ch">
+        <p style="margin-bottom:.5rem;color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Conoce tus herramientas</p>
+        <h1 style="margin-bottom:1.5rem;font-size:clamp(2rem,1.4rem + 3vw,3.25rem)">adminApp, el editor de tu carta</h1>
+        <p style="color:rgb(255 255 255 / .66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem)">Cambia platos, precios y fotos tú mismo, desde cualquier dispositivo. Revisa cómo queda antes de publicar y descarga tu carta en PDF para imprimirla.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem">
+          <span style="display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;border-radius:999px;border:1px solid rgb(255 255 255 / .12);font-size:.8125rem;color:rgb(255 255 255 / .82)"><span style="width:7px;height:7px;border-radius:999px;background:#174ea6"></span>Sin conocimientos técnicos</span>
+          <span style="display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;border-radius:999px;border:1px solid rgb(255 255 255 / .12);font-size:.8125rem;color:rgb(255 255 255 / .82)"><span style="width:7px;height:7px;border-radius:999px;background:#157f3c"></span>Incluido en tu web</span>
+          <span style="display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;border-radius:999px;border:1px solid rgb(255 255 255 / .12);font-size:.8125rem;color:rgb(255 255 255 / .82)"><span style="width:7px;height:7px;border-radius:999px;background:#e8710a"></span>Cambios al instante</span>
+        </div>
+      </div>
+      <div data-reveal="" data-delay="120" style="border-radius:1.75rem;border:1px solid rgb(255 255 255 / .12);background-image:linear-gradient(160deg,#181818,#121212);padding:.6rem;box-shadow:0 1.5rem 4rem rgb(0 0 0 / .45)">
+        <div style="overflow:hidden;border-radius:1.3rem;aspect-ratio:1920 / 1032">
+          <img src="Recursos/img/adminApp/editor.png" alt="El editor adminApp con la lista de secciones y la ficha de un plato" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.04)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- De un vistazo -->
+  <section data-screen-label="De un vistazo" style="padding-bottom:clamp(4rem,2rem + 5vw,6rem)">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1.5rem">
+        <sc-for list="{{ highlights }}" as="h" hint-placeholder-count="3">
+          <div data-reveal="" data-delay="{{ h.delay }}">
+            <a href="{{ h.href }}" style="position:relative;display:flex;flex-direction:column;gap:.5rem;height:100%;overflow:hidden;padding:clamp(1.5rem,3vw,3rem) clamp(1.5rem,2.5vw,2rem);border:1px solid rgb(255 255 255 / .12);border-radius:1.75rem;background-image:linear-gradient(160deg,#181818,#121212);transition:transform 250ms ease,border-color 250ms ease" style-hover="transform:translateY(-4px);border-color:rgb(255 255 255 / .2)">
+              <span style="{{ h.bar }}"></span>
+              <span style="{{ h.iconWrap }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.375rem;height:1.375rem;display:block"><path d="{{ h.icon1 }}"></path><path d="{{ h.icon2 }}"></path></svg>
+              </span>
+              <h2 style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem)">{{ h.title }}</h2>
+              <p style="color:rgb(255 255 255 / .66);font-size:.9375rem">{{ h.text }}</p>
+              <span style="margin-top:auto;padding-top:.75rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.9375rem;font-weight:500;color:#fff">Probarlo aquí abajo
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1rem;height:1rem"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+              </span>
+            </a>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo se usa -->
+  <section data-screen-label="Cómo se usa" style="padding-bottom:clamp(4rem,2rem + 5vw,6rem)">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:clamp(2rem,3vw,3rem)">
+        <p style="color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Así se usa</p>
+        <h2 style="font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">Cuatro pasos, cero complicaciones</h2>
+      </div>
+      <ol style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <li data-reveal="" data-delay="{{ s.delay }}">
+            <div style="display:flex;flex-direction:column;gap:1rem;height:100%;padding:clamp(1.25rem,3vw,1.75rem);border:1px solid rgb(255 255 255 / .12);border-radius:1.25rem;background-image:linear-gradient(160deg,#181818,#121212);transition:transform 250ms ease,border-color 250ms ease" style-hover="transform:translateY(-4px);border-color:rgb(255 255 255 / .2)">
+              <span aria-hidden="true" style="{{ s.numStyle }}">{{ s.n }}</span>
+              <div>
+                <h3 style="margin-bottom:.25rem;font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem)">{{ s.title }}</h3>
+                <p style="color:rgb(255 255 255 / .66)">{{ s.text }}</p>
+              </div>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Dispositivos -->
+  <section id="dispositivos" data-screen-label="Dispositivos" style="padding-block:clamp(4rem,2rem + 5vw,6rem);border-top:1px solid rgb(255 255 255 / .07);scroll-margin-top:4rem">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
+      <div data-reveal="">
+        <p style="margin-bottom:.5rem;color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">01 · Todos los dispositivos</p>
+        <h2 style="margin-bottom:1rem;font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">Edita desde donde estés</h2>
+        <p style="max-width:48ch;color:rgb(255 255 255 / .66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem)">El móvil en la barra, la tablet en la cocina o el ordenador en la oficina: adminApp se adapta a cualquier pantalla y se instala como una app más.</p>
+        <div role="tablist" aria-label="Elige un dispositivo" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem">
+          <sc-for list="{{ devices }}" as="d" hint-placeholder-count="4">
+            <button type="button" role="tab" aria-selected="{{ d.active }}" onClick="{{ d.pick }}" style="{{ d.style }}">{{ d.label }}</button>
+          </sc-for>
+        </div>
+        <p style="min-height:3.2em;margin-top:1.25rem;color:rgb(255 255 255 / .82);font-size:.9375rem">{{ deviceText }}</p>
+        <a href="faqs.html" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;color:rgb(255 255 255 / .66);font-size:.9375rem;border-bottom:1px solid rgb(255 255 255 / .2);padding-bottom:2px;transition:color 150ms ease" style-hover="color:#fff;border-color:#fff">¿Cómo instalo la app en mi móvil? Ver FAQs</a>
+      </div>
+      <div data-reveal="" data-delay="120" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;min-height:460px;border-radius:1.75rem;border:1px solid rgb(255 255 255 / .12);background:radial-gradient(120% 90% at 50% 100%,rgb(23 78 166 / .24),transparent 60%),linear-gradient(160deg,#181818,#121212);overflow:hidden;padding:2rem 1rem">
+        <div style="{{ frameStyle }}">
+          <div role="img" aria-label="{{ deviceAlt }}" style="{{ screenStyle }}"></div>
+        </div>
+        <figure style="{{ watchStyle }}">
+          <img src="Recursos/img/adminApp/reloj.jpeg" alt="adminApp abierto en un reloj inteligente" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center 55%">
+          <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:.35rem .5rem;background:linear-gradient(to top,rgb(10 10 10 / .9),rgb(10 10 10 / 0));font-size:.6875rem;font-weight:500;color:#fff;text-align:center">Foto real</figcaption>
+        </figure>
+        <span style="position:absolute;left:1.25rem;bottom:1.1rem;font-size:.8125rem;color:rgb(255 255 255 / .45)">{{ deviceSize }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vista previa -->
+  <section id="vista-previa" data-screen-label="Vista previa" style="padding-block:clamp(4rem,2rem + 5vw,6rem);border-top:1px solid rgb(255 255 255 / .07);scroll-margin-top:4rem">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:clamp(2rem,3vw,3rem)">
+        <p style="color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">02 · Vista previa</p>
+        <h2 style="font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">Mira cómo queda antes de publicar</h2>
+        <p style="max-width:48ch;color:rgb(255 255 255 / .66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem)">Tus clientes solo ven los cambios cuando tú pulsas «Publicar». Pruébalo: cambia el plato o el precio.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1.5rem;align-items:stretch">
+        <div data-reveal="" style="display:flex;flex-direction:column;border:1px solid rgb(255 255 255 / .12);border-radius:1.25rem;overflow:hidden;background:#121212">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.9rem 1.1rem;background:#0F2E52">
+            <div style="display:flex;align-items:center;gap:.6rem">
+              <img src="Recursos/img/adminApp/icono-192.png" alt="" style="width:1.75rem;height:1.75rem;border-radius:.4rem;display:block">
+              <span style="font-weight:700">Editor de carta</span>
+            </div>
+            <span style="font-size:.8125rem;color:rgb(255 255 255 / .66)">Desayunos</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;padding:1.25rem 1.1rem 1.4rem;flex:1">
+            <label style="display:flex;flex-direction:column;gap:.35rem">
+              <span style="font-size:.8125rem;font-weight:500;color:rgb(255 255 255 / .66)">Nombre del plato</span>
+              <input type="text" value="{{ dish }}" onInput="{{ setDish }}" style="width:100%;padding:.65rem .8rem;border-radius:.5rem;border:1px solid rgb(255 255 255 / .2);background:#0d0d0d;color:#fff;outline:none" style-focus="border-color:#e8710a">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:.35rem">
+              <span style="font-size:.8125rem;font-weight:500;color:rgb(255 255 255 / .66)">Descripción</span>
+              <input type="text" value="{{ desc }}" onInput="{{ setDesc }}" style="width:100%;padding:.65rem .8rem;border-radius:.5rem;border:1px solid rgb(255 255 255 / .2);background:#0d0d0d;color:#fff;outline:none" style-focus="border-color:#e8710a">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:.35rem">
+              <span style="font-size:.8125rem;font-weight:500;color:rgb(255 255 255 / .66)">Precio (€)</span>
+              <input type="text" inputmode="decimal" value="{{ price }}" onInput="{{ setPrice }}" style="width:9rem;padding:.65rem .8rem;border-radius:.5rem;border:1px solid rgb(255 255 255 / .2);background:#0d0d0d;color:#fff;outline:none" style-focus="border-color:#e8710a">
+            </label>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:auto;padding-top:.5rem">
+              <button type="button" onClick="{{ publish }}" disabled="{{ publishDisabled }}" style="{{ publishStyle }}">{{ publishLabel }}</button>
+              <button type="button" onClick="{{ resetDemo }}" style="padding:.8rem 1.1rem;border-radius:999px;border:1px solid rgb(255 255 255 / .2);font-size:.9375rem;font-weight:500" style-hover="border-color:#fff;background-color:rgb(255 255 255 / .06)">Deshacer</button>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="" data-delay="100" style="display:flex;flex-direction:column;gap:1rem">
+          <div style="{{ previewCardStyle }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.9rem">
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .82)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1rem;height:1rem"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path></svg>
+                Vista previa · solo tú
+              </span>
+              <span style="{{ draftBadgeStyle }}">{{ draftBadge }}</span>
+            </div>
+            <div style="padding:1rem 1.1rem;border-radius:.875rem;background:#fff;color:#0a0a0a">
+              <div style="display:flex;align-items:baseline;gap:.6rem">
+                <span style="font-weight:700;font-size:1.0625rem">{{ dishShown }}</span>
+                <span style="flex:1;border-bottom:1px dotted rgb(10 10 10 / .3)"></span>
+                <span style="font-weight:700;color:#174ea6;white-space:nowrap">{{ priceShown }}</span>
+              </div>
+              <p style="margin-top:.2rem;font-size:.875rem;color:rgb(10 10 10 / .6)">{{ desc }}</p>
+            </div>
+          </div>
+          <div style="padding:1.25rem;border-radius:1.25rem;border:1px solid rgb(255 255 255 / .12);background-image:linear-gradient(160deg,#181818,#121212)">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.9rem">
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .82)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1rem;height:1rem"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path d="M3 12h18"></path></svg>
+                Lo que ven tus clientes
+              </span>
+              <span style="font-size:.8125rem;color:rgb(255 255 255 / .45)">{{ liveLabel }}</span>
+            </div>
+            <div style="{{ liveCardStyle }}">
+              <div style="display:flex;align-items:baseline;gap:.6rem">
+                <span style="font-weight:700;font-size:1.0625rem">{{ pubDish }}</span>
+                <span style="flex:1;border-bottom:1px dotted rgb(10 10 10 / .3)"></span>
+                <span style="font-weight:700;color:#174ea6;white-space:nowrap">{{ pubPrice }}</span>
+              </div>
+              <p style="margin-top:.2rem;font-size:.875rem;color:rgb(10 10 10 / .6)">{{ pubDesc }}</p>
+            </div>
+          </div>
+          <a href="faqs.html" style="align-self:flex-start;display:inline-flex;gap:.4rem;color:rgb(255 255 255 / .66);font-size:.9375rem;border-bottom:1px solid rgb(255 255 255 / .2);padding-bottom:2px;transition:color 150ms ease" style-hover="color:#fff;border-color:#fff">¿Y si publico algo por error? Ver FAQs</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.5rem;margin-top:clamp(2.5rem,4vw,3.5rem)">
+        <figure data-reveal="" style="display:flex;flex-direction:column;gap:.75rem">
+          <div style="overflow:hidden;border-radius:1.25rem;border:1px solid rgb(255 255 255 / .12);aspect-ratio:1920 / 1032">
+            <img src="Recursos/img/adminApp/vista-previa-completa.png" alt="Vista previa de la carta con el aviso «Cambios sin publicar»" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+          </div>
+          <figcaption style="font-size:.9375rem;color:rgb(255 255 255 / .66)"><strong style="color:#fff;font-weight:500">Vista previa completa.</strong> Tu carta tal y como la verán tus clientes, con el aviso de cambios sin publicar.</figcaption>
+        </figure>
+        <figure data-reveal="" data-delay="100" style="display:flex;flex-direction:column;gap:.75rem">
+          <div style="overflow:hidden;border-radius:1.25rem;border:1px solid rgb(255 255 255 / .12);aspect-ratio:1920 / 1032">
+            <img src="Recursos/img/adminApp/ajustes-pagina.png" alt="Ajustes de la página con una muestra en vivo de la carta" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.05)">
+          </div>
+          <figcaption style="font-size:.9375rem;color:rgb(255 255 255 / .66)"><strong style="color:#fff;font-weight:500">Muestra en vivo.</strong> Al cambiar colores o letras ves el resultado al momento, y puedes descartarlo.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- PDF -->
+  <section id="pdf" data-screen-label="Exportar PDF" style="padding-block:clamp(4rem,2rem + 5vw,6rem);border-top:1px solid rgb(255 255 255 / .07);scroll-margin-top:4rem">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
+      <div data-reveal="">
+        <p style="margin-bottom:.5rem;color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">03 · Exportar en PDF</p>
+        <h2 style="margin-bottom:1rem;font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">Tu carta, lista para imprimir</h2>
+        <p style="max-width:48ch;color:rgb(255 255 255 / .66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem)">Descarga la carta publicada en PDF con un clic. Elige el tamaño, el idioma y si quieres portada y fotos.</p>
+
+        <div style="display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem">
+          <div>
+            <p style="margin-bottom:.5rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .5)">Tamaño</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+              <sc-for list="{{ sizes }}" as="z" hint-placeholder-count="3">
+                <button type="button" aria-pressed="{{ z.active }}" onClick="{{ z.pick }}" style="{{ z.style }}">{{ z.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <p style="margin-bottom:.5rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255 / .5)">Idioma</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+              <sc-for list="{{ langs }}" as="g" hint-placeholder-count="2">
+                <button type="button" aria-pressed="{{ g.active }}" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:1.5rem">
+            <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="2">
+              <button type="button" role="switch" aria-checked="{{ t.on }}" onClick="{{ t.flip }}" style="display:inline-flex;align-items:center;gap:.65rem;font-size:.9375rem;font-weight:500">
+                <span style="{{ t.track }}"><span style="{{ t.knob }}"></span></span>{{ t.label }}
+              </button>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:.5rem">
+            <button type="button" onClick="{{ downloadPdf }}" style="position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:.9375rem;font-weight:500;transition:background-color 150ms ease" style-hover="background-color:color-mix(in srgb,#e8710a 88%,white)">
+              <span style="{{ pdfBar }}"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:relative;width:1.1rem;height:1.1rem"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+              <span style="position:relative">{{ pdfLabel }}</span>
+            </button>
+            <a href="faqs.html" style="color:rgb(255 255 255 / .66);font-size:.9375rem;border-bottom:1px solid rgb(255 255 255 / .2);padding-bottom:2px;transition:color 150ms ease" style-hover="color:#fff;border-color:#fff">Consejos para imprimir · FAQs</a>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-delay="120" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;min-height:460px;border-radius:1.75rem;border:1px solid rgb(255 255 255 / .12);background:radial-gradient(120% 90% at 50% 100%,rgb(232 113 10 / .14),transparent 60%),linear-gradient(160deg,#181818,#121212);padding:2rem 1rem;overflow:hidden">
+        <div style="{{ paperStyle }}">
+          <sc-if value="{{ pdfCover }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:1.2em 1em;background:#0a0a0a;color:#fff;text-align:center">
+              <div style="font-size:.6em;letter-spacing:.14em;text-transform:uppercase;color:#e8710a;font-weight:500">{{ paperKicker }}</div>
+              <div style="font-size:1.5em;font-weight:700;line-height:1.1">{{ paperTitle }}</div>
+            </div>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:.8em;padding:1em">
+            <div style="font-weight:700;font-size:1.05em;border-bottom:2px solid #0a0a0a;padding-bottom:.2em">{{ paperSection }}</div>
+            <sc-for list="{{ paperItems }}" as="p" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:.6em">
+                <sc-if value="{{ pdfPhotos }}" hint-placeholder-val="{{ true }}">
+                  <img src="{{ p.img }}" alt="" style="flex:none;width:2.4em;height:2.4em;border-radius:.35em;object-fit:cover;display:block;background:#e6e1d8">
+                </sc-if>
+                <span style="flex:1;min-width:0;display:flex;align-items:baseline;gap:.4em">
+                  <span style="font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.name }}</span>
+                  <span style="flex:1;border-bottom:1px dotted rgb(10 10 10 / .3);min-width:.6em"></span>
+                  <span style="font-weight:700;white-space:nowrap">{{ p.price }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <span style="position:absolute;left:1.25rem;bottom:1.1rem;font-size:.8125rem;color:rgb(255 255 255 / .45)">{{ paperSize }}</span>
+      </div>
+    </div>
+    <div style="width:100%;max-width:75rem;margin:clamp(2.5rem,4vw,3.5rem) auto 0;padding:0 clamp(1rem,5vw,2.5rem)">
+      <figure data-reveal="" style="display:flex;flex-direction:column;gap:.75rem">
+        <div style="overflow:hidden;border-radius:1.25rem;border:1px solid rgb(255 255 255 / .12);aspect-ratio:1920 / 1032">
+          <img src="Recursos/img/adminApp/descargar-pdf-v2.png" alt="Ventana «Descargar en PDF» de adminApp con opciones de papel, idioma, portada y fotos" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 900ms cubic-bezier(0.2,0.7,0.2,1)" style-hover="transform:scale(1.03)">
+        </div>
+        <figcaption style="font-size:.9375rem;color:rgb(255 255 255 / .66)"><strong style="color:#fff;font-weight:500">La ventana real de descarga.</strong> Papel, orientación, columnas, idioma, portada, fotos y márgenes, con la vista previa de cada página.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Más cualidades -->
+  <section data-screen-label="Más cualidades" style="padding-block:clamp(4rem,2rem + 5vw,6rem);border-top:1px solid rgb(255 255 255 / .07)">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:clamp(2rem,3vw,3rem)">
+        <p style="color:#e8710a;font-size:.8125rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase">Y además</p>
+        <h2 style="font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">Pensado para el día a día de tu local</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1rem">
+        <sc-for list="{{ extras }}" as="e" hint-placeholder-count="6">
+          <div data-reveal="" data-delay="{{ e.delay }}" style="display:flex;flex-direction:column;gap:.4rem;padding:1.5rem;border:1px solid rgb(255 255 255 / .12);border-radius:1.25rem;background-image:linear-gradient(160deg,#181818,#121212)">
+            <span style="{{ e.dot }}"></span>
+            <h3 style="font-size:1.125rem;letter-spacing:-0.01em">{{ e.title }}</h3>
+            <p style="color:rgb(255 255 255 / .66);font-size:.9375rem">{{ e.text }}</p>
+            <sc-if value="{{ e.faq }}" hint-placeholder-val="{{ false }}">
+              <a href="faqs.html" style="margin-top:.35rem;align-self:flex-start;font-size:.875rem;font-weight:500;color:#fff;border-bottom:1px solid rgb(255 255 255 / .2);padding-bottom:1px" style-hover="border-color:#fff">Saber más en FAQs</a>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section data-screen-label="Cierre" style="padding-bottom:clamp(4rem,2rem + 5vw,6rem)">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:clamp(1.75rem,4vw,3rem);border-radius:1.75rem;border:1px solid rgb(255 255 255 / .12);background:radial-gradient(90% 140% at 100% 0%,rgb(23 78 166 / .24),transparent 60%),linear-gradient(160deg,#181818,#121212)">
+        <div style="max-width:40ch">
+          <h2 style="margin-bottom:.5rem;font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem)">¿Te queda alguna duda?</h2>
+          <p style="color:rgb(255 255 255 / .66)">Resolvemos paso a paso lo más técnico: instalar la app, publicar e imprimir.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem">
+          <a href="faqs.html" style="display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.6rem;border-radius:999px;background:#157f3c;color:#fff;font-size:.9375rem;font-weight:500;transition:background-color 150ms ease" style-hover="background-color:color-mix(in srgb,#157f3c 85%,white)">Ver FAQs</a>
+          <a href="precios.html" style="display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:.9375rem;font-weight:500;transition:background-color 150ms ease" style-hover="background-color:color-mix(in srgb,#e8710a 88%,white)">Empezar mi web</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="border-top:1px solid rgb(255 255 255 / .12);margin-top:2rem;padding:3rem 0 2rem">
+  <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:clamp(2rem,4vw,3rem)">
+      <div>
+        <p style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700">Professional Web</p>
+        <p style="max-width:34ch;margin-top:.5rem;color:rgb(255 255 255 / .66);font-size:.9375rem">Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.</p>
+      </div>
+      <div>
+        <h2 style="margin-bottom:.5rem;color:rgb(255 255 255 / .5);font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase">Navegación</h2>
+        <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0">
+          <sc-for list="{{ navLinks }}" as="l" hint-placeholder-count="6">
+            <li><a href="{{ l.href }}" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem;transition:color 150ms ease" style-hover="color:#fff">{{ l.label }}</a></li>
+          </sc-for>
+        </ul>
+      </div>
+      <div>
+        <h2 style="margin-bottom:.5rem;color:rgb(255 255 255 / .5);font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase">Contacto</h2>
+        <ul style="display:flex;flex-direction:column;gap:.25rem;list-style:none;padding:0">
+          <li><a href="mailto:webcartaonline@gmail.com" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem" style-hover="color:#fff">webcartaonline@gmail.com</a></li>
+          <li><a href="tel:+34722207215" style="display:inline-block;padding:.25rem 0;color:rgb(255 255 255 / .66);font-size:.9375rem" style-hover="color:#fff">+34 722-207-215</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgb(255 255 255 / .12);color:rgb(255 255 255 / .45);font-size:.8125rem">
+      <p>© 2026 Professional Web. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAV = [
+  { label: "Inicio", href: "index.html" },
+  { label: "Plantillas", href: "plantillas.html" },
+  { label: "Cómo trabajamos", href: "como-trabajamos.html" },
+  { label: "Conoce tus herramientas", href: "conoce-tus-herramientas.html", current: true },
+  { label: "Precios y Planes", href: "precios.html" },
+  { label: "FAQs", href: "faqs.html" },
+];
+const ACC = { blue: "#174ea6", green: "#157f3c", orange: "#e8710a" };
+const DEV = {
+  movil: { label: "Móvil", w: 190, h: 380, r: 30, b: 10, fs: 11, img: "editor-movil.jpg", alt: "El editor adminApp en un móvil", size: "Móvil · Android e iPhone", text: "Edita desde la barra entre servicio y servicio. Se instala en la pantalla de inicio y se abre a pantalla completa." },
+  tablet: { label: "Tablet", w: 380, h: 372, r: 24, b: 12, fs: 12.5, img: "editor-tablet.png", alt: "El editor adminApp en una tablet", size: "Tablet · vertical y horizontal", text: "Más espacio para ordenar secciones, grupos y fotos con calma." },
+  ordenador: { label: "Ordenador", w: 440, h: 246, fit: "contain", r: 14, b: 10, fs: 13, img: "editor-ordenador.png", alt: "El editor adminApp en un ordenador", size: "Ordenador · Chrome, Edge, Safari", text: "El panel lateral de secciones y el editor, todo a la vista a la vez." },
+  reloj: { label: "Reloj", w: 170, h: 170, r: 999, b: 6, fs: 9.5, img: "reloj.jpeg", alt: "adminApp en la pantalla de un reloj", watch: true, size: "Reloj · hasta la pantalla más pequeña", text: "Tu carta se adapta a cualquier pantalla, incluso a la de un reloj." },
+};
+const PDF_SIZES = { a4: { label: "A4", w: 210, h: 297 }, a5: { label: "A5", w: 148, h: 210 }, tercio: { label: "Tercio de A4", w: 99, h: 210 } };
+const INIT = { dish: "Tostada de aguacate", desc: "Pan de masa madre, aguacate y lima", price: "6,50" };
+const ITEMS = {
+  es: [["Tostada de aguacate", "6,50 €"], ["Café con leche", "1,80 €"], ["Zumo natural", "3,20 €"], ["Croissant", "1,90 €"]],
+  en: [["Avocado toast", "€6.50"], ["Latte", "€1.80"], ["Fresh juice", "€3.20"], ["Croissant", "€1.90"]],
+};
+const pill = (on, accent) => ({
+  padding: ".55rem 1.1rem", borderRadius: "999px", fontSize: ".9375rem", fontWeight: on ? 700 : 500,
+  border: "1px solid " + (on ? "#fff" : "rgb(255 255 255 / .2)"),
+  background: on ? "#fff" : "transparent", color: on ? "#0a0a0a" : "#fff",
+  transition: "background-color 150ms ease, color 150ms ease, border-color 150ms ease",
+});
+
+class Component extends DCLogic {
+  state = {
+    w: typeof window !== "undefined" ? window.innerWidth : 1280, menu: false,
+    device: "movil", auto: true,
+    ...INIT, pub: { ...INIT }, publishing: false,
+    size: "a4", lang: "es", cover: true, photos: true, progress: null,
+  };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener("resize", this.onResize);
+    const order = Object.keys(DEV);
+    this.cycle = setInterval(() => {
+      if (!this.state.auto) return;
+      this.setState(s => ({ device: order[(order.indexOf(s.device) + 1) % order.length] }));
+    }, 2800);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      el.style.opacity = ""; el.style.transform = "";
+      io.unobserve(el);
+    }), { threshold: 0.12 });
+    this.io = io;
+    document.querySelectorAll("[data-reveal]").forEach(el => {
+      const d = el.getAttribute("data-delay") || 0;
+      el.style.transition = `opacity 650ms cubic-bezier(0.2,0.7,0.2,1) ${d}ms, transform 650ms cubic-bezier(0.2,0.7,0.2,1) ${d}ms`;
+      el.style.opacity = "0"; el.style.transform = "translateY(1.25rem)";
+      io.observe(el);
+    });
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+    clearInterval(this.cycle); clearInterval(this.pdfTimer); clearTimeout(this.pubTimer);
+    this.io && this.io.disconnect();
+  }
+  publish = () => {
+    this.setState({ publishing: true });
+    this.pubTimer = setTimeout(() => this.setState(s => ({ publishing: false, pub: { dish: s.dish, desc: s.desc, price: s.price } })), 900);
+  };
+  downloadPdf = () => {
+    if (this.state.progress !== null && this.state.progress < 100) return;
+    clearInterval(this.pdfTimer);
+    this.setState({ progress: 0 });
+    this.pdfTimer = setInterval(() => {
+      const p = Math.min(100, (this.state.progress || 0) + 6);
+      this.setState({ progress: p });
+      if (p >= 100) { clearInterval(this.pdfTimer); setTimeout(() => this.setState({ progress: null }), 1800); }
+    }, 60);
+  };
+  renderVals() {
+    const s = this.state;
+    const desktop = s.w >= 1024;
+    const navLinks = NAV.map(l => ({
+      ...l, current: l.current ? "page" : undefined,
+      style: { display: "inline-block", padding: ".5rem .9rem", borderRadius: "999px", fontSize: ".9375rem", whiteSpace: "nowrap", transition: "background-color 150ms ease, color 150ms ease", fontWeight: l.current ? 700 : 500, background: l.current ? "#0a0a0a" : "transparent", color: l.current ? "#fff" : "#0a0a0a" },
+      hover: l.current ? {} : { backgroundColor: "rgb(10 10 10 / .08)" },
+      dStyle: { display: "flex", alignItems: "center", gap: ".7rem", padding: ".65rem .85rem", borderRadius: ".5rem", fontSize: ".9375rem", fontWeight: l.current ? 700 : 500, background: l.current ? "#fff" : "transparent", color: l.current ? "#0a0a0a" : "rgb(255 255 255 / .66)" },
+      dot: { flex: "none", width: 7, height: 7, borderRadius: 999, background: l.current ? "#e8710a" : "rgb(255 255 255 / .3)" },
+    }));
+
+    const highlights = [
+      { href: "#dispositivos", accent: ACC.blue, title: "Todos los dispositivos", text: "Móvil, tablet, ordenador… Edita tu carta desde cualquier pantalla.", icon1: "M5 4h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z", icon2: "M8 20h8M12 16v4" },
+      { href: "#vista-previa", accent: ACC.green, title: "Vista previa", text: "Comprueba cada cambio antes de que lo vean tus clientes.", icon1: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z", icon2: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" },
+      { href: "#pdf", accent: ACC.orange, title: "Exportar en PDF", text: "Descarga tu carta lista para imprimir, en el tamaño que necesites.", icon1: "M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z", icon2: "M12 11v6m-3-3 3 3 3-3" },
+    ].map((h, i) => ({
+      ...h, delay: i * 90,
+      bar: { position: "absolute", top: 0, left: 0, right: 0, height: 3, background: h.accent },
+      iconWrap: { display: "grid", placeItems: "center", width: "2.75rem", height: "2.75rem", marginBottom: ".5rem", borderRadius: 999, background: `color-mix(in srgb, ${h.accent} 24%, transparent)`, color: "#fff" },
+    }));
+
+    const steps = [
+      ["Carga tu carta", "Abre adminApp y pulsa «Cargar carta» para traer los datos actuales.", ACC.blue],
+      ["Edita", "Cambia platos, precios, fotos, alérgenos o secciones.", ACC.green],
+      ["Revisa", "Abre la vista previa y comprueba cómo queda.", ACC.orange],
+      ["Publica", "Pulsa «Publicar cambios» y tu carta se actualiza al momento.", ACC.blue],
+    ].map(([title, text, c], i) => ({ n: "0" + (i + 1), title, text, delay: i * 90, numStyle: { color: c, fontSize: "clamp(1.8rem, 1rem + 3vw, 2.75rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.02em" } }));
+
+    const d = DEV[s.device];
+    const devices = Object.entries(DEV).map(([id, v]) => ({
+      label: v.label, active: id === s.device, style: pill(id === s.device),
+      pick: () => this.setState({ device: id, auto: false }),
+    }));
+    const frameStyle = {
+      width: d.w, height: d.h, maxWidth: "100%", borderRadius: d.r, padding: d.b, fontSize: d.fs, lineHeight: 1.35,
+      background: "#0d0d0d", border: "1px solid rgb(255 255 255 / .2)", boxShadow: "0 1.5rem 4rem rgb(0 0 0 / .5)",
+      transition: "width 600ms cubic-bezier(0.2,0.7,0.2,1), height 600ms cubic-bezier(0.2,0.7,0.2,1), border-radius 600ms ease, font-size 600ms ease, padding 600ms ease",
+    };
+    const screenStyle = d.watch
+      ? { width: "100%", height: "100%", borderRadius: "inherit", backgroundColor: "#fff", backgroundImage: "url(Recursos/img/adminApp/reloj.jpeg)", backgroundSize: "441px 588px", backgroundPosition: "-132px -237px", backgroundRepeat: "no-repeat" }
+      : { width: "100%", height: "100%", borderRadius: Math.max(d.r - d.b, 4), backgroundColor: "#fff", backgroundImage: `url(Recursos/img/adminApp/${d.img})`, backgroundSize: d.fit || "cover", backgroundPosition: d.fit ? "center" : "top center", backgroundRepeat: "no-repeat" };
+    const watchOn = s.device === "reloj";
+    const watchStyle = {
+      position: "absolute", right: "1.25rem", top: "1.25rem", width: 108, height: 144, borderRadius: "1rem", overflow: "hidden", margin: 0,
+      border: "2px solid " + (watchOn ? "#e8710a" : "rgb(255 255 255 / .12)"),
+      transform: watchOn ? "scale(1.12)" : "scale(.9)", opacity: watchOn ? 1 : .75,
+      boxShadow: watchOn ? "0 0 0 8px rgb(232 113 10 / .12)" : "none",
+      transition: "transform 500ms cubic-bezier(0.2,0.7,0.2,1), opacity 400ms ease, border-color 400ms ease, box-shadow 400ms ease",
+    };
+
+    const dirty = s.dish !== s.pub.dish || s.desc !== s.pub.desc || s.price !== s.pub.price;
+    const fmt = p => (p || "0") + " €";
+    const publishStyle = {
+      display: "inline-flex", alignItems: "center", padding: ".8rem 1.6rem", borderRadius: "999px", fontSize: ".9375rem", fontWeight: 500,
+      background: dirty || s.publishing ? "#e8710a" : "rgb(255 255 255 / .08)", color: dirty || s.publishing ? "#0a0a0a" : "rgb(255 255 255 / .45)",
+      cursor: dirty ? "pointer" : "default", transition: "background-color 250ms ease, color 250ms ease",
+    };
+    const previewCardStyle = {
+      padding: "1.25rem", borderRadius: "1.25rem", backgroundImage: "linear-gradient(160deg,#181818,#121212)",
+      border: "1px solid " + (dirty ? "rgb(232 113 10 / .6)" : "rgb(255 255 255 / .12)"),
+      boxShadow: dirty ? "0 0 0 4px rgb(232 113 10 / .08)" : "none", transition: "border-color 300ms ease, box-shadow 300ms ease",
+    };
+    const liveCardStyle = {
+      padding: "1rem 1.1rem", borderRadius: ".875rem", background: "#fff", color: "#0a0a0a",
+      transform: s.justPub ? "scale(1.02)" : "none", transition: "transform 300ms ease",
+      opacity: s.publishing ? .5 : 1,
+    };
+
+    const P = PDF_SIZES[s.size], k = 1.2;
+    const paperStyle = {
+      width: P.w * k, height: P.h * k, maxWidth: "100%", overflow: "hidden", background: "#fff", color: "#0a0a0a",
+      borderRadius: 4, boxShadow: "0 1.5rem 4rem rgb(0 0 0 / .55)", fontSize: s.size === "a4" ? 12 : s.size === "a5" ? 10 : 8.5, lineHeight: 1.35,
+      transform: s.progress !== null ? "translateY(-6px) rotate(-1deg)" : "none",
+      transition: "width 600ms cubic-bezier(0.2,0.7,0.2,1), height 600ms cubic-bezier(0.2,0.7,0.2,1), font-size 600ms ease, transform 400ms ease",
+    };
+    const pdfLabel = s.progress === null ? "Descargar PDF" : s.progress < 100 ? `Generando… ${s.progress}%` : "¡PDF listo!";
+    const toggles = [["cover", "Portada"], ["photos", "Fotos"]].map(([key, label]) => {
+      const on = s[key];
+      return {
+        label, on, flip: () => this.setState({ [key]: !on }),
+        track: { position: "relative", width: 40, height: 22, borderRadius: 999, background: on ? "#157f3c" : "rgb(255 255 255 / .2)", transition: "background-color 200ms ease", flex: "none" },
+        knob: { position: "absolute", top: 3, left: on ? 21 : 3, width: 16, height: 16, borderRadius: 999, background: "#fff", transition: "left 200ms ease" },
+      };
+    });
+
+    const extras = [
+      ["Funciona sin conexión", "Abre al instante y sigue funcionando aunque falle el wifi del local.", ACC.blue, true],
+      ["Se instala como una app", "Con su propio icono en el móvil, la tablet o el ordenador.", ACC.green, true],
+      ["Se actualiza solo", "Las mejoras llegan sin que tengas que hacer nada. Tu carta no se toca.", ACC.orange, true],
+      ["Fotos bien encuadradas", "Sube una foto, recórtala y marca la zona que nunca debe perderse.", ACC.blue, false],
+      ["Alérgenos e idiomas", "Indica los alérgenos de cada plato y tradúcela a otros idiomas.", ACC.green, false],
+      ["Tu estilo", "Modo claro u oscuro y el color principal que prefieras.", ACC.orange, false],
+    ].map(([title, text, c, faq], i) => ({ title, text, faq, delay: (i % 3) * 80, dot: { width: 28, height: 3, borderRadius: 3, background: c, marginBottom: ".6rem" } }));
+
+    return {
+      desktop, mobile: !desktop, menuOpen: s.menu, drawerOpen: !desktop && s.menu,
+      openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      navLinks, highlights, steps,
+      devices, deviceText: d.text, deviceSize: d.size, frameStyle, watchStyle, screenStyle, deviceAlt: d.alt,
+      dish: s.dish, desc: s.desc, price: s.price,
+      setDish: e => this.setState({ dish: e.target.value }),
+      setDesc: e => this.setState({ desc: e.target.value }),
+      setPrice: e => this.setState({ price: e.target.value }),
+      dishShown: s.dish || "Sin nombre", priceShown: fmt(s.price),
+      pubDish: s.pub.dish || "Sin nombre", pubDesc: s.pub.desc, pubPrice: fmt(s.pub.price),
+      publish: this.publish, publishDisabled: !dirty || s.publishing,
+      publishLabel: s.publishing ? "Publicando…" : dirty ? "Publicar cambios" : "Todo publicado",
+      publishStyle, previewCardStyle, liveCardStyle,
+      draftBadge: dirty ? "Sin publicar" : "Al día",
+      draftBadgeStyle: { padding: ".2rem .6rem", borderRadius: 999, fontSize: ".75rem", fontWeight: 700, background: dirty ? "#e8710a" : "rgb(21 127 60 / .25)", color: dirty ? "#0a0a0a" : "#fff", transition: "background-color 250ms ease" },
+      liveLabel: s.publishing ? "Actualizando…" : "En línea",
+      resetDemo: () => this.setState({ ...INIT, pub: { ...INIT } }),
+      sizes: Object.entries(PDF_SIZES).map(([id, v]) => ({ label: v.label, active: id === s.size, style: pill(id === s.size), pick: () => this.setState({ size: id }) })),
+      langs: [["es", "Español"], ["en", "English"]].map(([id, label]) => ({ label, active: id === s.lang, style: pill(id === s.lang), pick: () => this.setState({ lang: id }) })),
+      toggles, pdfCover: s.cover, pdfPhotos: s.photos, paperStyle,
+      paperKicker: s.lang === "es" ? "Carta" : "Menu", paperTitle: s.lang === "es" ? "Tu local" : "Your venue",
+      paperSection: s.lang === "es" ? "Desayunos" : "Breakfast",
+      paperItems: ITEMS[s.lang].map(([name, price], i) => ({ name, price, img: "Recursos/img/adminApp/items/" + ["tostada", "cafe", "zumo", "croissant"][i] + ".png" })),
+      paperSize: `${P.label} · ${P.w} × ${P.h} mm`,
+      downloadPdf: this.downloadPdf, pdfLabel,
+      pdfBar: { position: "absolute", left: 0, top: 0, bottom: 0, width: (s.progress || 0) + "%", background: "rgb(255 255 255 / .35)", transition: "width 60ms linear", opacity: s.progress === null ? 0 : 1 },
+    };
+  }
+}
+</script>
+</body>
+</html>
