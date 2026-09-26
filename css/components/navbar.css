@@ -2,8 +2,8 @@
    NAVBAR — Barra flotante blanca sobre un degradado negro → transparente.
    El degradado hace que el contenido parezca desvanecerse "detrás" de ella.
 
-   A partir de 64em muestra los enlaces en línea; por debajo, el botón que
-   abre el menú lateral (ver components/drawer.css).
+   A partir de 64em muestra los enlaces en línea; por debajo, el botón con la
+   página actual que abre la ventana de navegación (ver components/page-menu.css).
    ========================================================================== */
 
 .navbar-scrim {
@@ -85,29 +85,81 @@
     font-weight: var(--font-weight-bold);
 }
 
-/* ----- Botón del menú (móvil) ------------------------------------------- */
+/* ----- Botón de página actual (móvil) ----------------------------------
+   Ocupa el hueco libre de la barra: muestra dónde está el visitante y abre
+   la ventana de navegación (components/page-menu.css). */
 
 .navbar__toggle {
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 2.625rem;
+    gap: var(--space-2xs);
+    min-width: 0;
+    max-width: 18rem;
     height: 2.625rem;
-    border-radius: var(--radius-sm);
-    transition: background-color var(--transition-fast);
+    margin-inline-start: auto;
+    padding-inline: var(--space-sm) 0.4rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-white);
+    color: #000000;
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-bold);
+    transition: background-color var(--transition-fast),
+        transform var(--transition-fast);
 }
 
 .navbar__toggle:hover {
     background-color: rgb(10 10 10 / 0.06);
 }
 
-.navbar__bar {
-    width: 22px;
-    height: 2px;
-    border-radius: 2px;
-    background-color: var(--color-nav-text);
+.navbar__toggle:active {
+    transform: scale(0.98);
+}
+
+.navbar__current {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    min-width: 0;
+    justify-content: flex-end;
+    overflow: hidden;
+    text-align: end;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.navbar__current::before {
+    content: "";
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange);
+}
+
+.navbar__chevron {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: var(--radius-pill);
+    background-color: rgb(10 10 10 / 0.08);
+}
+
+.navbar__chevron::before {
+    content: "";
+    width: 0.42rem;
+    height: 0.42rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    transform: translateY(-1.5px) rotate(45deg);
+    transition: transform var(--transition-base);
+}
+
+.navbar__toggle[aria-expanded="true"] .navbar__chevron::before {
+    transform: translateY(1.5px) rotate(225deg);
 }
 
 @media (min-width: 48em) {

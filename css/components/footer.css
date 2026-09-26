@@ -3,8 +3,8 @@
    ========================================================================== */
 
 .footer {
+    background-color: var(--color-black);
     border-block-start: 1px solid var(--color-border);
-    margin-block-start: var(--space-lg);
     padding-block: var(--space-xl) var(--space-lg);
 }
 
@@ -42,7 +42,8 @@
 }
 
 .footer__link {
-    display: inline-block;
+    display: block;
+    line-height: var(--line-height-snug);
     padding-block: var(--space-3xs);
     color: var(--color-text-muted);
     font-size: var(--font-size-200);

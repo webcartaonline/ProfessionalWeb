@@ -1,0 +1,200 @@
+/* ==========================================================================
+   PAGE MENU — Ventana de navegación en móvil y tablet.
+   Cae desde la barra como un panel de cristal translúcido; el velo de
+   detrás difumina la página. js/navbar.js alterna [hidden] y .is-open
+   para que la entrada y la salida estén animadas.
+   ========================================================================== */
+
+.page-menu[hidden] {
+    display: none;
+}
+
+.page-menu {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-drawer);
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--nav-space) + var(--space-3xs)) var(--layout-gutter) var(--space-md);
+}
+
+/* ----- Velo: oscurece y difumina lo que queda detrás ------------------- */
+
+.page-menu__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgb(10 10 10 / 0.42);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    opacity: 0;
+    transition: opacity 360ms ease;
+}
+
+.page-menu.is-open .page-menu__backdrop {
+    opacity: 1;
+}
+
+/* ----- Panel de cristal ------------------------------------------------- */
+
+.page-menu__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    width: 100%;
+    max-width: 28rem;
+    max-height: 100%;
+    margin-inline-start: auto;
+    padding: var(--space-2xs);
+    overflow-y: auto;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-lg);
+    background-color: rgb(24 24 24 / 0.6);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    backdrop-filter: blur(28px) saturate(170%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08),
+        0 2rem 5rem rgb(0 0 0 / 0.5);
+    transform-origin: top right;
+    opacity: 0;
+    transform: translateY(-0.75rem) scale(0.96);
+    transition: opacity 280ms ease,
+        transform 460ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.page-menu.is-open .page-menu__panel {
+    opacity: 1;
+    transform: none;
+}
+
+.page-menu__eyebrow {
+    padding: var(--space-2xs) var(--space-xs) var(--space-3xs);
+    color: var(--color-text-faint);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+}
+
+/* ----- Enlaces: entran escalonados ------------------------------------- */
+
+.page-menu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+}
+
+.page-menu__list > li {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: opacity 260ms ease, transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.page-menu.is-open .page-menu__list > li {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(90ms + var(--i, 0) * 40ms);
+}
+
+.page-menu__link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2xs);
+    min-height: 3.25rem;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-md);
+    color: var(--color-text-soft);
+    font-size: var(--font-size-400);
+    font-weight: var(--font-weight-medium);
+    transition: background-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.page-menu__link:hover {
+    background-color: rgb(255 255 255 / 0.07);
+    color: var(--color-white);
+}
+
+/* Flecha lineal hacia la derecha, del mismo trazo que la del botón. */
+.page-menu__arrow {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-inline-end: 0.35rem;
+    border-inline-end: 2px solid currentColor;
+    border-block-end: 2px solid currentColor;
+    color: var(--color-text-faint);
+    transform: rotate(-45deg);
+    transition: transform var(--transition-base), color var(--transition-fast);
+}
+
+.page-menu__link:hover .page-menu__arrow {
+    color: var(--color-white);
+    transform: translateX(3px) rotate(-45deg);
+}
+
+.page-menu__link[aria-current="page"] {
+    background-color: var(--color-white);
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-bold);
+}
+
+/* En la página actual la flecha se cambia por el punto naranja. */
+.page-menu__link[aria-current="page"] .page-menu__arrow {
+    width: 7px;
+    height: 7px;
+    margin-inline-end: 0.35rem;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange);
+    transform: none;
+}
+
+/* ----- Contacto --------------------------------------------------------- */
+
+.page-menu__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3xs) var(--space-sm);
+    margin-block-start: var(--space-3xs);
+    padding: var(--space-xs);
+    border-block-start: 1px solid var(--color-border-soft);
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.page-menu.is-open .page-menu__footer {
+    opacity: 1;
+    transition-delay: 320ms;
+}
+
+.page-menu__contact {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-100);
+    word-break: break-word;
+    transition: color var(--transition-fast);
+}
+
+.page-menu__contact:hover {
+    color: var(--color-white);
+}
+
+/* Mientras está abierto, la barra queda por encima del velo para que el
+   mismo botón sirva para cerrar. */
+body.is-menu-open .navbar-scrim {
+    z-index: calc(var(--z-drawer) + 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-menu__panel,
+    .page-menu__list > li {
+        transform: none;
+    }
+}
+
+/* En escritorio caben todos los enlaces: la ventana nunca debe verse. */
+@media (min-width: 64em) {
+    .page-menu {
+        display: none;
+    }
+}

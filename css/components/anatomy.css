@@ -1,0 +1,377 @@
+/* ==========================================================================
+   ANATOMY — "Partes de la carta": lista de piezas (portada, logo, secciones,
+   grupos, etiquetas…) y un móvil con la captura real de la plantilla, donde
+   la pieza elegida se ilumina y el resto se oscurece.
+
+   js/anatomy.js mueve los recuadros, cambia de captura y hace el recorrido
+   automático. Sin JavaScript se ve la lista con todas las explicaciones.
+   ========================================================================== */
+
+.anatomy__header {
+    max-width: 60ch;
+}
+
+.anatomy__eyebrow {
+    color: var(--color-orange);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+}
+
+.anatomy {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.anatomy__controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-width: 0;
+}
+
+/* ----- Conmutador de plantilla ----------------------------------------- */
+
+.anatomy__switch {
+    display: inline-flex;
+    align-self: flex-start;
+    gap: var(--space-3xs);
+    padding: var(--space-3xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-surface-raised);
+}
+
+.anatomy__tpl {
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+    transition: background-color var(--transition-base),
+        color var(--transition-base), opacity var(--transition-base);
+}
+
+.anatomy__tpl:hover:not(:disabled) {
+    color: var(--color-white);
+}
+
+.anatomy__tpl[aria-pressed="true"] {
+    background-color: var(--color-orange);
+    color: var(--color-white);
+}
+
+.anatomy__tpl:disabled {
+    cursor: not-allowed;
+    opacity: 0.35;
+}
+
+/* ----- Lista de piezas: fichas en fila (móvil) -------------------------- */
+
+.anatomy__list {
+    display: flex;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding-block-end: var(--space-2xs);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.anatomy__list::-webkit-scrollbar {
+    display: none;
+}
+
+.anatomy__list > li {
+    flex: none;
+}
+
+.anatomy__part {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-soft);
+    text-align: start;
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    transition: background-color var(--transition-base),
+        border-color var(--transition-base), color var(--transition-base);
+}
+
+.anatomy__part:hover {
+    border-color: var(--color-border-strong);
+    color: var(--color-white);
+}
+
+.anatomy__part[aria-pressed="true"] {
+    border-color: var(--color-orange);
+    background-color: rgb(232 113 10 / 0.12);
+    color: var(--color-orange);
+    font-weight: var(--font-weight-bold);
+}
+
+.anatomy__part-body {
+    display: none;
+}
+
+/* Barra de avance del recorrido automático. */
+.anatomy__part-progress {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    height: 2px;
+    background-color: var(--color-orange);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+@keyframes anatomy-progress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.anatomy.is-touring .anatomy__part[aria-pressed="true"] .anatomy__part-progress {
+    animation: anatomy-progress var(--anatomy-step, 4800ms) linear forwards;
+}
+
+/* ----- Escenario: el móvil con la captura ------------------------------- */
+
+.anatomy__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+}
+
+.anatomy__phone {
+    width: clamp(15rem, 72vw, 19rem);
+    padding: 7px;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-black);
+    box-shadow: 0 2rem 5rem rgb(0 0 0 / 0.55);
+}
+
+.anatomy__screen {
+    position: relative;
+    aspect-ratio: 780 / 1646;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-sunken);
+}
+
+.anatomy__shot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 420ms ease, transform 620ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.anatomy__shot.is-active {
+    opacity: 1;
+    transform: none;
+}
+
+.anatomy__dim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.anatomy__mark {
+    position: absolute;
+    border: 2px solid var(--color-orange);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 4px rgb(232 113 10 / 0.18),
+        0 0 1.5rem rgb(232 113 10 / 0.35);
+    pointer-events: none;
+}
+
+/* Latido suave para que el ojo encuentre la pieza. */
+.anatomy__mark::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--color-orange);
+    border-radius: inherit;
+    opacity: 0;
+    animation: anatomy-pulse 2.2s ease-out infinite;
+}
+
+@keyframes anatomy-pulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    70%,
+    100% {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}
+
+.anatomy__label {
+    position: absolute;
+    z-index: 1;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+    box-shadow: 0 0.5rem 1.25rem rgb(0 0 0 / 0.45);
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+}
+
+.anatomy__meta {
+    color: var(--color-text-faint);
+    font-size: var(--font-size-100);
+    text-align: center;
+}
+
+.anatomy__caption {
+    max-width: 38ch;
+    min-height: 3.2em;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-300);
+    text-align: center;
+    text-wrap: pretty;
+}
+
+.anatomy__caption strong {
+    color: var(--color-white);
+    font-weight: var(--font-weight-bold);
+}
+
+.anatomy__note {
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-orange-soft);
+    color: var(--color-orange);
+    font-size: var(--font-size-100);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+.anatomy__note[hidden] {
+    display: none;
+}
+
+@keyframes anatomy-caption-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.4rem);
+    }
+}
+
+.anatomy__caption.is-entering {
+    animation: anatomy-caption-in 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .anatomy__shot,
+    .anatomy__caption.is-entering {
+        transition: none;
+        animation: none;
+        transform: none;
+    }
+
+    .anatomy__mark::after {
+        animation: none;
+    }
+}
+
+/* ----- Escritorio: lista en columna con explicaciones desplegables ------ */
+
+@media (min-width: 64em) {
+    .anatomy {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+        gap: var(--space-2xl);
+    }
+
+    .anatomy__list {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        overflow: visible;
+        border-block-start: 1px solid var(--color-border-soft);
+    }
+
+    .anatomy__part {
+        width: 100%;
+        padding: var(--space-xs) var(--space-3xs);
+        border: 0;
+        border-block-end: 1px solid var(--color-border-soft);
+        border-radius: 0;
+        font-size: var(--font-size-400);
+        white-space: normal;
+    }
+
+    .anatomy__part:hover {
+        color: var(--color-white);
+    }
+
+    .anatomy__part[aria-pressed="true"] {
+        background-color: transparent;
+    }
+
+    .anatomy__part-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .anatomy__part[aria-pressed="true"] .anatomy__part-body {
+        grid-template-rows: 1fr;
+    }
+
+    .anatomy__part-text {
+        min-height: 0;
+        overflow: hidden;
+        max-width: 48ch;
+        color: var(--color-text-muted);
+        font-size: var(--font-size-200);
+        font-weight: var(--font-weight-regular);
+        line-height: var(--line-height-base);
+        opacity: 0;
+        transition: opacity 300ms ease;
+    }
+
+    .anatomy__part[aria-pressed="true"] .anatomy__part-text {
+        padding-block-start: var(--space-3xs);
+        opacity: 1;
+        transition-delay: 120ms;
+    }
+
+    .anatomy__stage {
+        position: sticky;
+        inset-block-start: calc(var(--nav-space) + var(--space-sm));
+    }
+
+    .anatomy__phone {
+        width: 19.5rem;
+    }
+
+    /* La explicación ya está en la lista. */
+    .anatomy__caption {
+        display: none;
+    }
+}

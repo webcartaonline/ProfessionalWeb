@@ -62,7 +62,9 @@
     --color-orange-soft: rgb(232 113 10 / 0.06);
 
     /* Roles */
-    --color-bg: var(--color-black);
+    /* Negro puro para el fondo: la portada se funde en él y el pie
+       (--color-black) queda diferenciado. */
+    --color-bg: #000000;
     --color-nav-surface: var(--color-white);
     --color-nav-text: var(--color-blue-dark);
 

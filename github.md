@@ -3,9 +3,14 @@ branch: main
 path: (whole repo)
 
 ## Last sync
-date: 2026-09-24T21:39:22Z
+date: 2026-09-26T11:57:10Z
 
 ### Updated in this project
+- Mobile nav: hamburger + side drawer replaced by a "current page" button that opens a page menu (css/components/page-menu.css, js/navbar.js); drawer.css removed
+- Plantillas: new "Partes de la carta" section (css/components/anatomy.css, js/anatomy.js, Recursos/img/Plantilla1/Alerta.png); "Plantillas / Otras cartas" selector muted
+- Pure black page background (#000), footer on --color-black, footer links as blocks
+
+### Previous sync (2026-09-24T21:39:22Z)
 - FAQs page rebuilt (FAQs.dc.html): search, topic filters, animated accordion, screenshots with zoom
 - New adminApp answers: install per device, connection, photos, labels, publishing, error messages, PDF, updates, changing device
 - Content grounded in webcartaonline/adminApp (LEEME.md, ajustes.html, version.json, js/publicar.js, nube.js, version.js, imagen-recorte.js, destacados.js, idiomas.js, copia-ajustes.js)

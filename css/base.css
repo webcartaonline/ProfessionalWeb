@@ -36,6 +36,13 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* El fondo también en el contenido: si algún visor anula el del body, la
+   portada sigue fundiéndose con negro y no con blanco. */
+main {
+    padding-block-end: var(--space-lg);
+    background-color: var(--color-bg);
+}
+
 /* Bloquea el desplazamiento del fondo mientras el menú móvil está abierto. */
 body.is-locked {
     overflow: hidden;

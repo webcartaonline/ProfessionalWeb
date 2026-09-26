@@ -28,10 +28,10 @@
     z-index: -1;
     background-image: linear-gradient(
         to bottom,
-        rgb(10 10 10 / 0.15) 0%,
-        rgb(10 10 10 / 0.4) 45%,
-        rgb(10 10 10 / 0.88) 82%,
-        var(--color-black) 100%
+        rgb(0 0 0 / 0.15) 0%,
+        rgb(0 0 0 / 0.4) 45%,
+        rgb(0 0 0 / 0.88) 82%,
+        var(--color-bg) 100%
     );
 }
 
