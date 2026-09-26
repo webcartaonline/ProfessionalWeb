@@ -31,93 +31,21 @@
         }
     </script>
 
+    <!-- Componentes compartidos (cabecera y pie). Van SIN defer para que las
+         etiquetas <pw-header> y <pw-footer> se pinten junto con la página. -->
+    <script src="js/components/site-data.js"></script>
+    <script src="js/components/atoms.js"></script>
+    <script src="js/components/molecules.js"></script>
+    <script src="js/components/organisms.js"></script>
+
     <script src="js/navbar.js" defer></script>
     <script src="js/reveal.js" defer></script>
 </head>
 
 <body>
 
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-    <!-- ===== Barra de navegación ====================================== -->
-    <div class="navbar-scrim">
-        <nav class="navbar" aria-label="Navegación principal">
-            <a class="navbar__brand" href="index.html" aria-label="Professional Web — Inicio">
-                <img class="navbar__logo" src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web"
-                    width="120" height="32">
-            </a>
-
-            <ul class="navbar__menu">
-                <li><a class="navbar__link" href="index.html">Inicio</a></li>
-                <li><a class="navbar__link" href="plantillas.html">Plantillas</a></li>
-                <li><a class="navbar__link" href="como-trabajamos.html">Cómo trabajamos</a></li>
-                <li><a class="navbar__link" href="conoce-tus-herramientas.html">Conoce tus herramientas</a></li>
-                <li><a class="navbar__link" href="precios.html" aria-current="page">Precios y Planes</a></li>
-                <li><a class="navbar__link" href="faqs.html">FAQs</a></li>
-            </ul>
-
-            <button class="navbar__toggle" type="button" data-menu-toggle aria-expanded="false"
-                aria-controls="menu-movil" aria-haspopup="dialog">
-                <span class="visually-hidden">Página actual: </span>
-                <span class="navbar__current">Precios y Planes</span>
-                <span class="visually-hidden">. Abrir menú de páginas</span>
-                <span class="navbar__chevron" aria-hidden="true"></span>
-            </button>
-        </nav>
-    </div>
-
-    <!-- ===== Ventana de navegación (móvil) ========================= -->
-    <div class="page-menu" id="menu-movil" data-menu hidden>
-        <div class="page-menu__backdrop" data-menu-close></div>
-
-        <nav class="page-menu__panel" aria-label="Navegación móvil">
-            <p class="page-menu__eyebrow">Ir a</p>
-
-            <ul class="page-menu__list">
-                <li style="--i: 0">
-                    <a class="page-menu__link" href="index.html">
-                        <span>Inicio</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li style="--i: 1">
-                    <a class="page-menu__link" href="plantillas.html">
-                        <span>Plantillas</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li style="--i: 2">
-                    <a class="page-menu__link" href="como-trabajamos.html">
-                        <span>Cómo trabajamos</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li style="--i: 3">
-                    <a class="page-menu__link" href="conoce-tus-herramientas.html">
-                        <span>Conoce tus herramientas</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li style="--i: 4">
-                    <a class="page-menu__link" href="precios.html" aria-current="page">
-                        <span>Precios y Planes</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-                <li style="--i: 5">
-                    <a class="page-menu__link" href="faqs.html">
-                        <span>FAQs</span>
-                        <span class="page-menu__arrow" aria-hidden="true"></span>
-                    </a>
-                </li>
-            </ul>
-
-            <div class="page-menu__footer">
-                <a class="page-menu__contact" href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a>
-                <a class="page-menu__contact" href="tel:+34722207215">+34 722-207-215</a>
-            </div>
-        </nav>
-    </div>
+    <!-- Cabecera: skip-link + navbar + ventana de navegación móvil (js/components/organisms.js) -->
+    <pw-header current="precios.html"></pw-header>
 
     <main id="contenido">
 
@@ -276,48 +204,8 @@
 
     </main>
 
-    <!-- ===== Pie ====================================================== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div>
-                    <p class="footer__brand-name">Professional Web</p>
-                    <p class="footer__claim">
-                        Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso.
-                    </p>
-                </div>
-
-                <div>
-                    <h2 class="footer__heading">Navegación</h2>
-                    <ul class="footer__list">
-                        <li><a class="footer__link" href="index.html">Inicio</a></li>
-                        <li><a class="footer__link" href="plantillas.html">Plantillas</a></li>
-                        <li><a class="footer__link" href="como-trabajamos.html">Cómo trabajamos</a></li>
-                        <li><a class="footer__link" href="conoce-tus-herramientas.html">Conoce tus herramientas</a></li>
-                        <li><a class="footer__link" href="precios.html">Precios y Planes</a></li>
-                        <li><a class="footer__link" href="faqs.html">FAQs</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h2 class="footer__heading">Contacto</h2>
-                    <ul class="footer__list">
-                        <li>
-                            <a class="footer__link" href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a>
-                        </li>
-                        <li>
-                            <a class="footer__link" href="tel:+34722207215">+34 722-207-215</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <!-- Sin JS no hay año dinámico: actualízalo a mano una vez al año. -->
-                <p>© 2026 Professional Web. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Pie (js/components/organisms.js) -->
+    <pw-footer></pw-footer>
 
 </body>
 
