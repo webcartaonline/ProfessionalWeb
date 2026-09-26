@@ -28,7 +28,7 @@
 
 .footer__heading {
     margin-block-end: var(--space-2xs);
-    color: rgb(255 255 255 / 0.5);
+    color: var(--color-orange);
     font-size: var(--font-size-100);
     font-weight: var(--font-weight-medium);
     letter-spacing: var(--letter-spacing-wide);
