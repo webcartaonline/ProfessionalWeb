@@ -35,4 +35,5 @@ date: 2026-09-26T11:57:10Z
 | Conoce tus herramientas | como-trabajamos.html, css/tokens.css, css/base.css, css/layout.css, css/components/{navbar,drawer,page-header,feature,step,button,footer}.css; content from adminApp (LEEME.md, index.html, manifest.json, js/pdf-config.js, js/pdf-ventana.js, sw.js) |
 | Precios y Planes | new (brand: pago único) |
 | FAQs | faqs.html, css/*; adminApp LEEME.md, ajustes.html, js/publicar.js, js/nube.js, js/version.js, js/imagen-recorte.js, js/destacados.js, js/idiomas.js, js/copia-ajustes.js, js/licencia.js |
+| Aviso legal / Privacidad | aviso-legal.html, privacidad.html, css/components/legal.css; enlaces en el pie desde js/components/site-data.js (legal) |
 | Nav/tokens | css/tokens.css, css/base.css, css/components/navbar.css |

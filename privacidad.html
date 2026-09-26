@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Política de privacidad — Professional Web</title>
+    <meta name="description" content="Cómo trata Professional Web los datos personales: qué datos, para qué, cuánto tiempo y cómo ejercer tus derechos.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon: .ico para compatibilidad amplia, .png para pantallas de alta densidad -->
+    <link rel="icon" href="Recursos/img/Logo/favicon.ico" sizes="32x32">
+    <link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="Recursos/img/Logo/favicon.png">
+
+    <!-- Google Sans servida desde el propio dominio (sin peticiones a Google) -->
+    <link rel="preload" href="Recursos/fonts/GoogleSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Guardián de la animación de entrada: marca el documento antes de pintar
+         para que no haya parpadeo. Si el navegador no soporta IntersectionObserver
+         o se pide reducir el movimiento, no se marca y todo se ve desde el inicio. -->
+    <script>
+        if ("IntersectionObserver" in window &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("js-reveal");
+        }
+    </script>
+
+    <!-- Componentes compartidos (cabecera y pie). Van SIN defer para que las
+         etiquetas <pw-header> y <pw-footer> se pinten junto con la página. -->
+    <script src="js/components/site-data.js"></script>
+    <script src="js/components/atoms.js"></script>
+    <script src="js/components/molecules.js"></script>
+    <script src="js/components/organisms.js"></script>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/reveal.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Cabecera: skip-link + navbar + ventana de navegación móvil (js/components/organisms.js) -->
+    <pw-header current="privacidad.html"></pw-header>
+
+    <main id="contenido">
+
+        <section class="section section--below-nav" aria-labelledby="privacidad-titulo">
+            <div class="container container--narrow">
+
+                <div class="page-header">
+                    <p class="page-header__eyebrow">Legal</p>
+                    <h1 class="page-header__title" id="privacidad-titulo">Política de privacidad</h1>
+                    <p class="page-header__lead">
+                        Solo tratamos los datos que decides enviarnos al contactar. Sin formularios, sin cookies y sin analítica.
+                    </p>
+                </div>
+
+                <div class="legal">
+                    <p class="legal__updated">Última actualización: 26 de septiembre de 2026</p>
+
+                    <h2>Responsable del tratamiento</h2>
+                    <ul>
+                        <li><strong>Titular:</strong> Juan Camilo Piamba Uribe, persona física, que opera con el nombre comercial Professional Web (Webcartaonline).</li>
+                        <li><strong>Correo electrónico:</strong> <a href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a></li>
+                        <li><strong>Teléfono:</strong> <a href="tel:+34722207215">+34 722 207 215</a></li>
+                    </ul>
+                    <p>El resto de datos identificativos del titular figuran en el <a href="aviso-legal.html">Aviso legal</a>.</p>
+
+                    <h2>Qué datos tratamos</h2>
+                    <ul>
+                        <li><strong>Al navegar:</strong> la web no recoge datos personales. Las demostraciones interactivas (por ejemplo, en «Conoce tus herramientas») funcionan solo en tu navegador: lo que escribes no se envía ni se guarda.</li>
+                        <li><strong>Al contactar:</strong> si nos escribes o llamas, tratamos tu nombre, tu correo o teléfono y la información que incluyas en tu mensaje.</li>
+                    </ul>
+
+                    <h2>Finalidad y base jurídica</h2>
+                    <p>Usamos tus datos solo para responder a tu consulta y, si lo pides, preparar un presupuesto o una propuesta.</p>
+                    <ul>
+                        <li><strong>Base jurídica:</strong> tu consentimiento al contactarnos (art. 6.1.a RGPD) y la aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</li>
+                        <li>No enviamos publicidad, no elaboramos perfiles y no tomamos decisiones automatizadas.</li>
+                    </ul>
+
+                    <h2>Conservación</h2>
+                    <p>Conservamos los datos mientras dure la conversación. Si no llega a contratarse ningún servicio, los borramos como máximo 12 meses después del último contacto. Si se contrata, se conservan durante los plazos que exija la ley.</p>
+
+                    <h2>Destinatarios y proveedores</h2>
+                    <p>No cedemos tus datos a terceros, salvo obligación legal. Estos proveedores intervienen en el funcionamiento de la web y del correo:</p>
+                    <ul>
+                        <li><strong>GitHub, Inc. (GitHub Pages)</strong>, alojamiento de la web: registra la dirección IP de los visitantes para servir la página y por seguridad. <a href="https://docs.github.com/es/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">Declaración de privacidad de GitHub</a>.</li>
+                        <li><strong>Google LLC (Gmail)</strong>, correo electrónico: almacena los mensajes que nos envías. <a href="https://policies.google.com/privacy?hl=es" rel="noopener">Política de privacidad de Google</a>.</li>
+                    </ul>
+                    <p>Ambos pueden tratar datos en Estados Unidos. Estas transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. y en cláusulas contractuales tipo de la Comisión Europea.</p>
+
+                    <h2>Cookies</h2>
+                    <p>Esta web no utiliza cookies propias ni de terceros, ni tecnologías similares como almacenamiento local o píxeles de seguimiento. Por eso no muestra aviso de cookies. Las fuentes tipográficas y el resto de recursos se sirven desde el propio sitio.</p>
+
+                    <h2>Enlaces externos</h2>
+                    <p>Algunas páginas enlazan a webs de clientes a modo de ejemplo. Cada una tiene su propia política de privacidad, de la que no somos responsables.</p>
+
+                    <h2>Tus derechos</h2>
+                    <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar tu consentimiento en cualquier momento. Escribe a <a href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a> indicando qué derecho quieres ejercer; te responderemos en el plazo máximo de un mes.</p>
+                    <p>Si crees que tus datos no se han tratado correctamente, puedes reclamar ante la <a href="https://www.aepd.es" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
+
+                    <h2>Cambios en esta política</h2>
+                    <p>Si cambia la forma en que tratamos los datos, actualizaremos esta página y su fecha de última actualización.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie (js/components/organisms.js) -->
+    <pw-footer></pw-footer>
+
+</body>
+
+</html>

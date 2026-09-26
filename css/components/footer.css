@@ -65,6 +65,22 @@
     font-size: var(--font-size-100);
 }
 
+/* Enlaces legales: mismo tono apagado que el copyright, sin llamar la atención. */
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.footer-legal__link {
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+.footer-legal__link:hover {
+    color: var(--color-text-muted);
+}
+
 @media (min-width: 48em) {
     .footer__grid {
         grid-template-columns: 1.5fr 1fr 1fr;

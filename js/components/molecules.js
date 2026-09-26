@@ -45,6 +45,15 @@
             return '<ul class="footer__list">' + links.join("") + "</ul>";
         },
 
+        // Enlaces legales de la franja inferior del pie.
+        legalNav: function (items) {
+            var links = items.map(function (item) {
+                return "<li>" + atoms.contactLink(item, "footer-legal__link") + "</li>";
+            });
+
+            return '<nav aria-label="Legal"><ul class="footer-legal">' + links.join("") + "</ul></nav>";
+        },
+
         // Columna del pie: título + contenido.
         footerColumn: function (heading, content) {
             return "<div>" + atoms.footerHeading(heading) + content + "</div>";

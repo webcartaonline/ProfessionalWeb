@@ -1,0 +1,49 @@
+/* ==========================================================================
+   LEGAL — Texto largo de las páginas legales (privacidad, aviso legal):
+   columna estrecha, títulos pequeños y enlaces subrayados.
+   ========================================================================== */
+
+.legal {
+    max-width: 68ch;
+    color: var(--color-text-soft);
+}
+
+.legal__updated {
+    margin-block-end: var(--space-lg);
+    color: var(--color-text-faint);
+    font-size: var(--font-size-200);
+}
+
+.legal h2 {
+    margin-block: var(--space-xl) var(--space-xs);
+    color: var(--color-text);
+    font-size: var(--font-size-500);
+}
+
+.legal p + p,
+.legal p + ul,
+.legal ul + p {
+    margin-block-start: var(--space-sm);
+}
+
+.legal ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    padding-inline-start: var(--space-md);
+}
+
+.legal strong {
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+}
+
+.legal a {
+    border-bottom: 1px solid rgb(232 113 10 / 0.4);
+    color: var(--color-orange);
+    transition: border-color var(--transition-fast);
+}
+
+.legal a:hover {
+    border-color: var(--color-orange);
+}

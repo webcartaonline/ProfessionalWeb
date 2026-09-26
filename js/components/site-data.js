@@ -33,6 +33,12 @@
             { href: "tel:+34722207215", label: "+34 722-207-215" }
         ],
 
+        // Páginas legales: enlaces discretos en la franja inferior del pie.
+        legal: [
+            { href: "aviso-legal.html", label: "Aviso legal" },
+            { href: "privacidad.html", label: "Privacidad" }
+        ],
+
         footer: {
             navHeading: "Navegación",
             contactHeading: "Contacto",

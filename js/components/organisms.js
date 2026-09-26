@@ -26,9 +26,9 @@
     var MENU_ID = "menu-movil";
     var CONTENT_ID = "contenido";
 
-    // Texto de la página actual para el botón de móvil.
+    // Texto de la página actual para el botón de móvil (incluye las legales).
     function currentLabel(currentHref) {
-        var match = site.nav.filter(function (item) {
+        var match = site.nav.concat(site.legal).filter(function (item) {
             return item.href === currentHref;
         })[0];
 
@@ -68,7 +68,7 @@
             return atoms.skipLink(CONTENT_ID) + this.navbar(currentHref) + this.pageMenu(currentHref);
         },
 
-        // Pie: marca, mapa del sitio, contacto y copyright.
+        // Pie: marca, mapa del sitio, contacto, copyright y enlaces legales.
         footer: function () {
             var copyright = site.footer.copyright.replace("{year}", new Date().getFullYear());
 
@@ -83,7 +83,10 @@
                 molecules.footerColumn(site.footer.navHeading, molecules.navList(site.nav, "footer")) +
                 molecules.footerColumn(site.footer.contactHeading, molecules.footerContacts(site.contact)) +
                 "</div>" +
-                '<div class="footer__bottom"><p>' + atoms.escape(copyright) + "</p></div>" +
+                '<div class="footer__bottom">' +
+                "<p>" + atoms.escape(copyright) + "</p>" +
+                molecules.legalNav(site.legal) +
+                "</div>" +
                 "</div>" +
                 "</footer>"
             );

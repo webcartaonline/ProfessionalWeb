@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aviso legal — Professional Web</title>
+    <meta name="description" content="Datos del titular de Professional Web y condiciones de uso de la web.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon: .ico para compatibilidad amplia, .png para pantallas de alta densidad -->
+    <link rel="icon" href="Recursos/img/Logo/favicon.ico" sizes="32x32">
+    <link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="Recursos/img/Logo/favicon.png">
+
+    <!-- Google Sans servida desde el propio dominio (sin peticiones a Google) -->
+    <link rel="preload" href="Recursos/fonts/GoogleSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Guardián de la animación de entrada: marca el documento antes de pintar
+         para que no haya parpadeo. Si el navegador no soporta IntersectionObserver
+         o se pide reducir el movimiento, no se marca y todo se ve desde el inicio. -->
+    <script>
+        if ("IntersectionObserver" in window &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("js-reveal");
+        }
+    </script>
+
+    <!-- Componentes compartidos (cabecera y pie). Van SIN defer para que las
+         etiquetas <pw-header> y <pw-footer> se pinten junto con la página. -->
+    <script src="js/components/site-data.js"></script>
+    <script src="js/components/atoms.js"></script>
+    <script src="js/components/molecules.js"></script>
+    <script src="js/components/organisms.js"></script>
+
+    <script src="js/navbar.js" defer></script>
+    <script src="js/reveal.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Cabecera: skip-link + navbar + ventana de navegación móvil (js/components/organisms.js) -->
+    <pw-header current="aviso-legal.html"></pw-header>
+
+    <main id="contenido">
+
+        <section class="section section--below-nav" aria-labelledby="aviso-titulo">
+            <div class="container container--narrow">
+
+                <div class="page-header">
+                    <p class="page-header__eyebrow">Legal</p>
+                    <h1 class="page-header__title" id="aviso-titulo">Aviso legal</h1>
+                    <p class="page-header__lead">
+                        Quién está detrás de esta web y en qué condiciones puedes usarla.
+                    </p>
+                </div>
+
+                <div class="legal">
+                    <p class="legal__updated">Última actualización: 26 de septiembre de 2026</p>
+
+                    <h2>Titular de la web</h2>
+                    <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular:</p>
+                    <ul>
+                        <li><strong>Titular:</strong> Juan Camilo Piamba Uribe, persona física.</li>
+                        <li><strong>NIE:</strong> 35693569E</li>
+                        <li><strong>Nombre comercial:</strong> Professional Web (Webcartaonline).</li>
+                        <li><strong>Domicilio:</strong> C. Sierra Nevada, 10, 2.º B, 30005 Murcia, España.</li>
+                        <li><strong>Correo electrónico:</strong> <a href="mailto:webcartaonline@gmail.com">webcartaonline@gmail.com</a></li>
+                        <li><strong>Teléfono:</strong> <a href="tel:+34722207215">+34 722 207 215</a></li>
+                    </ul>
+
+                    <h2>Objeto de la web</h2>
+                    <p>Esta web presenta los servicios de diseño de páginas web y cartas digitales de Professional Web. Tiene carácter informativo: no permite contratar ni pagar en línea. Cualquier encargo se acuerda aparte, con un presupuesto por escrito.</p>
+
+                    <h2>Precios</h2>
+                    <p>Los servicios se dirigen a negocios y profesionales. Todos los precios que aparecen en la web, incluidas suscripciones y extras, se indican <strong>sin IVA (IVA no incluido)</strong>; el impuesto aplicable se añade en el presupuesto y en la factura.</p>
+
+                    <h2>Condiciones de uso</h2>
+                    <p>Al navegar por la web aceptas usarla de forma lícita y no dañar su funcionamiento ni sus contenidos. Podemos modificar la web y este aviso en cualquier momento; la versión vigente es la publicada aquí.</p>
+
+                    <h2>Propiedad intelectual</h2>
+                    <p>Los textos, el diseño, el logotipo y el código de la web pertenecen al titular. Las imágenes de negocios clientes se muestran con su autorización. La tipografía Google Sans se usa bajo la licencia SIL Open Font License. No está permitido reproducir estos contenidos sin autorización.</p>
+
+                    <h2>Responsabilidad y enlaces</h2>
+                    <p>Cuidamos que la información sea correcta y esté actualizada, pero no garantizamos la ausencia de errores ni interrupciones. Los enlaces a webs de terceros se ofrecen como ejemplo; no respondemos de sus contenidos.</p>
+
+                    <h2>Protección de datos</h2>
+                    <p>El tratamiento de los datos personales se explica en la <a href="privacidad.html">Política de privacidad</a>. Esta web no usa cookies.</p>
+
+                    <h2>Legislación aplicable</h2>
+                    <p>Este aviso se rige por la legislación española. Si eres consumidor, serán competentes los juzgados de tu domicilio.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie (js/components/organisms.js) -->
+    <pw-footer></pw-footer>
+
+</body>
+
+</html>
