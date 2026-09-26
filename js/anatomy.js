@@ -14,7 +14,7 @@
     if (!root) return;
 
     var W = 780, H = 1646, PAD = 8, MARKS = 4, STEP = 4800;
-    var SCREEN_NAMES = { Inicio: "Inicio", Tapas: "Tapas", Hamburguesas: "Hamburguesas", Cervezas: "Cervezas", "Alerta.png": "Tapas" };
+    var SCREEN_NAMES = { Inicio: "Inicio", Tapas: "Tapas", Hamburguesas: "Hamburguesas", Cervezas: "Cervezas", Alergenos: "Tapas (final)", Redes: "Tapas (final)", "Alerta.png": "Tapas" };
     var TPL_NAMES = { p1: "Plantilla 1", p2: "Plantilla 2" };
 
     function shot(tpl, screen) {
@@ -64,6 +64,18 @@
         alergenos: {
             p1: { s: "Hamburguesas", r: [[40, 636, 260, 56], [40, 1032, 192, 56], [40, 1382, 192, 56]] },
             p2: { s: "Tapas", r: [[80, 642, 120, 54], [80, 1016, 120, 54], [80, 1340, 120, 54]] }
+        },
+        filtro: {
+            p1: { s: "Alergenos", r: [[0, 282, 780, 898]] },
+            p2: { s: "Alergenos", r: [[40, 280, 700, 792]] }
+        },
+        pie: {
+            p1: { s: "Alergenos", r: [[180, 1310, 420, 284]] },
+            p2: { s: "Alergenos", r: [[190, 1140, 400, 204]] }
+        },
+        redes: {
+            p1: { s: "Redes", r: [[100, 1322, 580, 60]] },
+            p2: { s: "Alergenos", r: [[100, 1432, 580, 82]] }
         }
     };
 
@@ -257,11 +269,12 @@
         if (preloaded) return;
         preloaded = true;
         ["p1", "p2"].forEach(function (t) {
-            ["Inicio", "Tapas", "Hamburguesas", "Cervezas"].forEach(function (s) {
+            ["Inicio", "Tapas", "Hamburguesas", "Cervezas", "Alergenos"].forEach(function (s) {
                 new Image().src = shot(t, s);
             });
         });
         new Image().src = shot("p1", "Alerta.png");
+        new Image().src = shot("p1", "Redes");
     }
 
     if ("IntersectionObserver" in window) {

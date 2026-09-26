@@ -14,10 +14,6 @@
     <link rel="icon" href="Recursos/img/Logo/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="Recursos/img/Logo/favicon.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
 
     <!-- La versión (?v=) fuerza a los navegadores a pedir la hoja de estilos
          de nuevo en vez de servir una copia antigua de su caché. Súbela cada
@@ -268,7 +264,7 @@
 
                                 <span class="anatomy__part-name">Imagen de portada</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">La foto de fondo de la cabecera. Es lo primero que ve tu cliente al abrir la carta.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">La foto de fondo de la cabecera. Es lo primero que ve tu cliente al abrir la carta y es una de las imágnes decorativas.</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -282,7 +278,7 @@
 
                                 <span class="anatomy__part-name">Logo de empresa</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Tu logotipo, junto al nombre del negocio en la portada.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Tu logotipo y/o el nombre del negocio en la portada. se adaptan sin importar el tamaño del logotipo.</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -296,7 +292,7 @@
 
                                 <span class="anatomy__part-name">Secciones</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Las grandes partes de la carta: Tapas, Bocadillos, Cervezas… Se eligen en la barra de arriba.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Las "páginas" de la carta, se puede usar para separar género o categorías como: postres, cenas, menú del día, nuevos...</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -310,7 +306,7 @@
 
                                 <span class="anatomy__part-name">Imágenes decorativas</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Fotos de ambiente detrás del título de una sección o de un grupo. Visten la carta sin mostrar un plato concreto.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Fotos de ambiente en el fondo de la portada y detrás del título de una sección y/o de un grupo. Visten la carta sin mostrar un plato concreto.</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -324,7 +320,7 @@
 
                                 <span class="anatomy__part-name">Notas</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Un recuadro dentro de una sección, antes de su primer grupo: el servicio, un horario, un aviso.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Texto la inicio del contenido de cada sección, antes de su primer grupo. Se puede usar para: horarios o disponibilidad, variaciones, avisos...</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -338,7 +334,7 @@
 
                                 <span class="anatomy__part-name">Grupos</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Ordenan los productos dentro de cada sección: Tapas frías, De barril, Botellín y tercio…</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Ordenan los productos dentro de cada sección, por ejemplo, si la sección se llama Desayunos, los gruppos podrían ser: Tostadas, Café, Zumos...</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -352,7 +348,7 @@
 
                                 <span class="anatomy__part-name">Alertas</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Un aviso para todos los productos de un grupo, junto a su título: «Con patatas y salsa a elegir».</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Un aviso para todos los productos de un grupo, junto a su título: "Extra de queso + 0,25 €", "Solo disponible sábados y domingos".</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -380,7 +376,7 @@
 
                                 <span class="anatomy__part-name">Imágenes de producto</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">La foto de cada plato, junto a su precio, para que el cliente vea lo que pide.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">La foto de cada producto, junto a su precio, para que el cliente vea lo que pide.</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 
@@ -404,11 +400,53 @@
 
                         <li>
 
+                            <button class="anatomy__part" type="button" data-part="filtro" aria-pressed="false">
+
+                                <span class="anatomy__part-name">Filtro de alérgenos</span>
+
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Al final o al inicio de cada sección, el comensal marca los alérgenos que quiere evitar y la carta le avisa en cada plato que los contenga.</span></span>
+
+                                <span class="anatomy__part-progress" aria-hidden="true"></span>
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
                             <button class="anatomy__part" type="button" data-part="alergenos" aria-pressed="false">
 
                                 <span class="anatomy__part-name">Alérgenos</span>
 
-                                <span class="anatomy__part-body"><span class="anatomy__part-text">Los 14 alérgenos, como iconos en cada producto.</span></span>
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Los 14 alérgenos, como iconos en cada producto. Se ilumina en rojo cuando coincide con el filtro del comensal</span></span>
+
+                                <span class="anatomy__part-progress" aria-hidden="true"></span>
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
+                            <button class="anatomy__part" type="button" data-part="pie" aria-pressed="false">
+
+                                <span class="anatomy__part-name">Texto final</span>
+
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Textos al final de la carta con título y descripción. Se puede usar para: horario, dirección, wifi, reservas, un agradecimiento...</span></span>
+
+                                <span class="anatomy__part-progress" aria-hidden="true"></span>
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
+                            <button class="anatomy__part" type="button" data-part="redes" aria-pressed="false">
+
+                                <span class="anatomy__part-name">Redes sociales</span>
+
+                                <span class="anatomy__part-body"><span class="anatomy__part-text">Iconos con enlace a tus redes (Instagram, TikTok, Facebook, YouTube...) al final de la carta, para que el cliente te siga desde la mesa.</span></span>
 
                                 <span class="anatomy__part-progress" aria-hidden="true"></span>
 

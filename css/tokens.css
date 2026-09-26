@@ -3,6 +3,26 @@
    Ningún componente debe escribir valores "mágicos": todo sale de aquí.
    ========================================================================== */
 
+/* ----- Fuente propia -----------------------------------------------------
+   Google Sans (SIL Open Font License 1.1, ver Recursos/fonts/OFL.txt),
+   alojada en el propio dominio: el navegador no contacta con Google.
+   Variable (wght 400–700, opsz, GRAD), recortada a latín + latín extendido. */
+@font-face {
+    font-family: "Google Sans";
+    src: url("../Recursos/fonts/GoogleSans-Variable.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("../Recursos/fonts/GoogleSans-Italic-Variable.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     color-scheme: dark;
 
