@@ -1,16 +1,18 @@
 /* ==========================================================================
    TABLE — Comparativa de planes. En móvil se desplaza en horizontal dentro
    de su propio marco (.table-wrap hereda .scroller de base.css).
+   En móvil el marco sangra hasta los bordes de la pantalla (anula el gutter
+   del .container) y la tabla es más ancha para evitar saltos de línea.
    ========================================================================== */
 
 .table-wrap {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    margin-inline: calc(var(--layout-gutter) * -1);
+    border-block: 1px solid var(--color-border);
 }
 
 .table {
     width: 100%;
-    min-width: 32.5rem;
+    min-width: 40rem;
     border-collapse: collapse;
 }
 
@@ -37,11 +39,13 @@
     color: var(--color-text-muted);
     font-size: var(--font-size-200);
     text-align: center;
+    white-space: nowrap; /* en móvil los precios no se parten; solo salta el <p> manual */
 }
 
 .table__cell--label {
     color: var(--color-text-soft);
     text-align: left;
+    white-space: normal;
 }
 
 .table__cell--featured {
@@ -51,4 +55,20 @@
 
 .table tbody tr:last-child .table__cell {
     border-block-end: 0;
+}
+
+@media (min-width: 48em) {
+    .table-wrap {
+        margin-inline: 0;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+    }
+
+    .table {
+        min-width: 32.5rem;
+    }
+
+    .table__cell {
+        white-space: normal;
+    }
 }
