@@ -19,6 +19,16 @@
     font-weight: var(--font-weight-bold);
 }
 
+/* El nombre de la marca lleva a Inicio y se vuelve naranja al pasar el ratón. */
+.footer__brand-link {
+    color: var(--color-white);
+    transition: color var(--transition-fast);
+}
+
+.footer__brand-link:hover {
+    color: var(--color-orange);
+}
+
 .footer__claim {
     max-width: 34ch;
     margin-block-start: var(--space-2xs);

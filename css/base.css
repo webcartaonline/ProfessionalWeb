@@ -38,9 +38,11 @@ body {
 
 /* El fondo también en el contenido: si algún visor anula el del body, la
    portada sigue fundiéndose con negro y no con blanco. */
+/* Transparente para dejar ver las líneas de fondo (js/background-lines.js);
+   el negro lo pone el <body>. */
 main {
     padding-block-end: var(--space-lg);
-    background-color: var(--color-bg);
+    background-color: transparent;
 }
 
 /* Bloquea el desplazamiento del fondo mientras el menú móvil está abierto. */

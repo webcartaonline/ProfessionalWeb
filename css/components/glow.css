@@ -1,0 +1,69 @@
+/* ==========================================================================
+   GLOW — Haz de luz muy sutil que sigue al ratón dentro de las tarjetas
+   (.feature, .step, .extra, .cta, .plan). El borde de cada tarjeta cercana se
+   ilumina en el tramo más próximo al puntero, aunque no esté debajo. Solo con ratón: hover real + puntero fino.
+   js/card-glow.js actualiza --glow-x / --glow-y.
+
+   El borde se pinta con el propio fondo (capa border-box bajo un borde
+   transparente), así el brillo sigue al puntero sin elementos extra.
+   ========================================================================== */
+
+@property --glow-b {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --glow-o {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :is(.feature, .step, .extra, .cta, .plan) {
+        --glow-o: 0;
+
+        border-color: transparent;
+        background:
+            /* Haz interior */
+            radial-gradient(
+                30rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+                rgb(var(--glow-rgb, 255 255 255) / calc(0.035 * var(--glow-o))),
+                rgb(var(--glow-rgb, 255 255 255) / calc(0.012 * var(--glow-o))) 40%,
+                transparent 80%
+            ) padding-box,
+            var(--glow-fill, var(--gradient-card)) padding-box,
+            /* Borde: brillo cerca del puntero sobre el borde de siempre.
+               Depende de --glow-b (puntero en la página), no del hover, así
+               también se iluminan los bordes de las tarjetas vecinas. */
+            radial-gradient(
+                18rem circle at var(--glow-x, -100rem) var(--glow-y, -100rem),
+                rgb(var(--glow-rgb, 255 255 255) / calc(var(--glow-edge, 0.4) * var(--glow-b))),
+                transparent 70%
+            ) border-box,
+            linear-gradient(var(--glow-border, var(--color-border)), var(--glow-border, var(--color-border))) border-box;
+        transition: --glow-o 500ms ease, --glow-b 400ms ease, transform var(--transition-base);
+    }
+
+    /* Cierre grande: conserva su degradado azul (css/components/tools.css). */
+    .cta--large {
+        --glow-fill: radial-gradient(90% 140% at 100% 0%, rgb(23 78 166 / 0.24), transparent 60%) padding-box,
+            var(--gradient-card);
+    }
+
+    /* Plan destacado: luz naranja, borde naranja apagado que se enciende
+       con su naranja de siempre al acercar el ratón. */
+    .plan--featured {
+        --glow-rgb: 232 113 10;
+        --glow-edge: 1;
+        --glow-border: rgb(232 113 10 / 0.35);
+        --glow-fill: linear-gradient(160deg, #1d150c, var(--color-surface));
+    }
+
+    :is(.feature, .step, .extra, .cta, .plan):hover {
+        --glow-o: 1;
+
+        border-color: transparent;
+    }
+}

@@ -27,3 +27,17 @@
 @import url("css/components/tools.css") layer(components);
 @import url("css/components/legal.css") layer(components);
 @import url("css/components/footer.css") layer(components);
+@import url("css/components/glow.css") layer(components);
+
+/* Fondo negro fuera de las capas y con más especificidad: al ser <main>
+   transparente (líneas de fondo), garantiza el negro (en <html>) aunque un visor
+   externo intente anular el fondo de html/body. */
+:root:root {
+    background-color: #000000;
+}
+
+/* El body NO debe pintar fondo propio: taparía la portada y las líneas,
+   que están en capas negativas (z-index < 0). */
+:root:root body {
+    background-color: transparent;
+}

@@ -77,7 +77,7 @@
                 '<div class="container">' +
                 '<div class="footer__grid">' +
                 "<div>" +
-                '<p class="footer__brand-name">' + atoms.escape(site.brand.name) + "</p>" +
+                '<p class="footer__brand-name"><a class="footer__brand-link" href="' + site.brand.home + '">' + atoms.escape(site.brand.name) + "</a></p>" +
                 '<p class="footer__claim">' + atoms.escape(site.brand.claim) + "</p>" +
                 "</div>" +
                 molecules.footerColumn(site.footer.navHeading, molecules.navList(site.nav, "footer")) +

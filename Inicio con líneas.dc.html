@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Google Sans";src:url("Recursos/fonts/GoogleSans-Variable.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Google Sans";src:url("Recursos/fonts/GoogleSans-Italic-Variable.woff2") format("woff2");font-weight:400 700;font-style:italic;font-display:swap}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+body{min-height:100svh;background:#000000;color:#ffffff;font-family:"Google Sans","Google Sans Text","Product Sans","DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:1rem;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:#174ea6;color:#ffffff}
+</style>
+<script src="js/background-lines.js"></script>
+</helmet>
+
+<div style="position:fixed;top:0;left:0;right:0;z-index:100;min-height:9rem;padding:0.75rem clamp(1rem,5vw,2.5rem) 0;pointer-events:none;background-image:linear-gradient(to bottom,rgb(10 10 10 / 0.95) 0%,rgb(10 10 10 / 0) 100%);">
+  <nav aria-label="Navegación principal" style="pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;max-width:75rem;min-height:3.25rem;margin:0 auto;padding:0.5rem clamp(0.75rem,2vw,1rem);border-radius:0.875rem;background:#ffffff;color:#0b2f66;box-shadow:0 1.5rem 4.375rem rgb(0 0 0 / 0.35);">
+    <a href="#" style="display:flex;align-items:center;padding-left:0.25rem;">
+      <img src="Recursos/img/Logo/IsoLogoBlack.png" alt="Professional Web" style="width:auto;height:clamp(2.4rem,4vw,3rem);display:block;">
+    </a>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+      <ul style="display:flex;align-items:center;gap:0.25rem;margin:0;padding:0;list-style:none;">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+          <li><a href="#" style="{{ n.style }}">{{ n.label }}</a></li>
+        </sc-for>
+      </ul>
+    </sc-if>
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+      <button style="flex:1 1 auto;display:flex;align-items:center;gap:0.5rem;min-width:0;max-width:18rem;height:2.625rem;margin-left:auto;padding:0 0.4rem 0 1rem;border-radius:999px;background:#ffffff;color:#000000;font-size:0.9375rem;font-weight:700;">
+        <span style="flex:1 1 auto;display:flex;align-items:center;justify-content:flex-end;gap:0.5rem;min-width:0;">
+          <span style="flex:none;width:7px;height:7px;border-radius:999px;background:#e8710a;"></span>Inicio
+        </span>
+        <span style="flex:none;display:grid;place-items:center;width:1.875rem;height:1.875rem;border-radius:999px;background:rgb(10 10 10 / 0.08);">
+          <span style="width:0.42rem;height:0.42rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-1.5px) rotate(45deg);"></span>
+        </span>
+      </button>
+    </sc-if>
+  </nav>
+</div>
+
+<main id="contenido" style="padding-bottom:2rem;background-color:transparent;">
+  <section style="position:relative;display:grid;min-height:88svh;overflow:hidden;">
+    <img src="Recursos/img/PortadaRecortada.png" alt="" style="position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    <div style="position:absolute;inset:0;z-index:-2;background-image:linear-gradient(to bottom,rgb(0 0 0 / 0.15) 0%,rgb(0 0 0 / 0.4) 45%,rgb(0 0 0 / 0.88) 82%,#000000 100%);"></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;align-self:end;width:100%;max-width:75rem;margin:0 auto;padding:4rem clamp(1rem,5vw,2.5rem) clamp(4rem,8vw,6rem);">
+      <h1 style="max-width:16ch;font-size:clamp(2.25rem,1.5rem + 4.4vw,4rem);line-height:1.06;font-weight:700;letter-spacing:-0.02em;text-wrap:balance;">Lleva tu negocio al siguiente nivel</h1>
+      <p style="max-width:42ch;color:rgb(255 255 255 / 0.66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem);text-wrap:pretty;">Montamos la carta de tu negocio y te la entregamos lista para funcionar, sin que tengas que hacer nada.</p>
+      <a href="#por-que-elegirnos" style="display:inline-flex;align-items:center;justify-content:center;padding:0.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:0.9375rem;font-weight:500;transition:background-color 150ms ease;" style-hover="background:#ea7f22;color:#0a0a0a;">Saber más</a>
+    </div>
+  </section>
+
+  <section id="por-que-elegirnos" style="padding:clamp(2rem,4vw,3rem) 0 clamp(4rem,8vw,6rem);">
+    <div style="width:100%;max-width:75rem;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);">
+      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:clamp(2rem,4vw,3rem);">
+        <h2 style="font-size:clamp(1.75rem,1.4rem + 2vw,2.5rem);font-weight:700;line-height:1.08;letter-spacing:-0.02em;text-wrap:balance;">¿Por qué elegirnos?</h2>
+        <p style="max-width:48ch;color:rgb(255 255 255 / 0.66);font-size:clamp(1.0625rem,1rem + 0.4vw,1.25rem);text-wrap:pretty;">Todo lo que necesita tu negocio para estar en internet, sin letra pequeña.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:clamp(1rem,2vw,1.5rem);">
+        <article style="position:relative;display:flex;flex-direction:column;gap:0.5rem;overflow:hidden;padding:clamp(2rem,4vw,3rem) clamp(1.5rem,3vw,2rem);border:1px solid rgb(255 255 255 / 0.12);border-radius:1.75rem;background-image:linear-gradient(160deg,#181818,#121212);transition:transform 250ms ease,border-color 250ms ease;" style-hover="transform:translateY(-4px);border-color:rgb(255 255 255 / 0.2);">
+          <span style="position:absolute;top:0;left:0;right:0;height:3px;background:#174ea6;"></span>
+          <span style="display:grid;place-items:center;width:2.75rem;height:2.75rem;margin-bottom:0.5rem;border-radius:999px;background:rgb(23 78 166 / 0.24);color:#ffffff;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1.375rem;height:1.375rem;"><path d="M17.5 6.2A6.5 6.5 0 0 0 7.8 11"></path><path d="M7.8 13a6.5 6.5 0 0 0 9.7 4.8"></path><path d="M4 11h9"></path><path d="M4 14h9"></path></svg>
+          </span>
+          <h3 style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700;line-height:1.08;letter-spacing:-0.02em;">Tu carta en un solo pago</h3>
+          <p style="color:rgb(255 255 255 / 0.66);font-size:0.9375rem;">Pagas una vez y la carta es tuya. Sin cuotas mensuales ni sorpresas.</p>
+        </article>
+        <article style="position:relative;display:flex;flex-direction:column;gap:0.5rem;overflow:hidden;padding:clamp(2rem,4vw,3rem) clamp(1.5rem,3vw,2rem);border:1px solid rgb(255 255 255 / 0.12);border-radius:1.75rem;background-image:linear-gradient(160deg,#181818,#121212);transition:transform 250ms ease,border-color 250ms ease;" style-hover="transform:translateY(-4px);border-color:rgb(255 255 255 / 0.2);">
+          <span style="position:absolute;top:0;left:0;right:0;height:3px;background:#157f3c;"></span>
+          <span style="display:grid;place-items:center;width:2.75rem;height:2.75rem;margin-bottom:0.5rem;border-radius:999px;background:rgb(21 127 60 / 0.24);color:#ffffff;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1.375rem;height:1.375rem;"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><ellipse cx="12" cy="12" rx="4.5" ry="9"></ellipse></svg>
+          </span>
+          <h3 style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700;line-height:1.08;letter-spacing:-0.02em;">Tu carta en diferentes idiomas</h3>
+          <p style="color:rgb(255 255 255 / 0.66);font-size:0.9375rem;">Vende más y atrae a más clientes permitiendo ver la carta en diferentes idiomas.</p>
+        </article>
+        <article style="position:relative;display:flex;flex-direction:column;gap:0.5rem;overflow:hidden;padding:clamp(2rem,4vw,3rem) clamp(1.5rem,3vw,2rem);border:1px solid rgb(255 255 255 / 0.12);border-radius:1.75rem;background-image:linear-gradient(160deg,#181818,#121212);transition:transform 250ms ease,border-color 250ms ease;" style-hover="transform:translateY(-4px);border-color:rgb(255 255 255 / 0.2);">
+          <span style="position:absolute;top:0;left:0;right:0;height:3px;background:#e8710a;"></span>
+          <span style="display:grid;place-items:center;width:2.75rem;height:2.75rem;margin-bottom:0.5rem;border-radius:999px;background:rgb(232 113 10 / 0.24);color:#ffffff;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1.375rem;height:1.375rem;"><path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4Z"></path><path d="m14.5 5.5 4 4"></path></svg>
+          </span>
+          <h3 style="font-size:clamp(1.25rem,1.1rem + 0.9vw,1.625rem);font-weight:700;line-height:1.08;letter-spacing:-0.02em;">Modifica los datos cuando quieras</h3>
+          <p style="color:rgb(255 255 255 / 0.66);font-size:0.9375rem;">Cambias precios, horarios, imágenes y más desde un solo lugar, cuando y donde quieras.</p>
+        </article>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:4rem;">
+        <a href="#" style="display:inline-flex;align-items:center;justify-content:center;padding:0.8rem 1.6rem;border-radius:999px;background:#e8710a;color:#0a0a0a;font-size:0.9375rem;font-weight:500;" style-hover="background:#ea7f22;color:#0a0a0a;">Ver plantillas</a>
+        <a href="#" style="display:inline-flex;align-items:center;justify-content:center;padding:0.8rem 1.6rem;border-radius:999px;border:1px solid rgb(255 255 255 / 0.2);color:#ffffff;font-size:0.9375rem;font-weight:500;" style-hover="border-color:#ffffff;background:rgb(255 255 255 / 0.06);color:#ffffff;">Ver precios</a>
+      </div>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;maxLines&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:1,&quot;max&quot;:3,&quot;step&quot;:1,&quot;default&quot;:3,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Líneas&quot;},&quot;frequency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Baja&quot;,&quot;Media&quot;,&quot;Alta&quot;],&quot;default&quot;:&quot;Media&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Líneas&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1280 };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.sync();
+  }
+  componentDidUpdate(prev) {
+    if (prev.maxLines !== this.props.maxLines || prev.frequency !== this.props.frequency) this.sync(true);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); clearTimeout(this.t); }
+  sync(replay) {
+    const gaps = { 'Baja': [3500, 9000], 'Media': [2200, 6500], 'Alta': [1200, 3500] }[this.props.frequency ?? 'Media'];
+    const apply = () => {
+      if (!window.PWLines) { this.t = setTimeout(apply, 100); return; }
+      window.PWLines.configure({ maxLines: this.props.maxLines ?? 3, minGap: gaps[0], maxGap: gaps[1] });
+      if (replay) window.PWLines.replay();
+    };
+    apply();
+  }
+  renderVals() {
+    const wide = this.state.w >= 1024;
+    const labels = ['Inicio', 'Plantillas', 'Cómo trabajamos', 'Conoce tus herramientas', 'Precios y Planes', 'FAQs'];
+    const base = 'display:inline-block;padding:0.5rem 0.9rem;border-radius:999px;font-size:0.9375rem;white-space:nowrap;';
+    const toStyle = s => Object.fromEntries(s.split(';').filter(Boolean).map(p => { const [k, ...v] = p.split(':'); return [k.replace(/-([a-z])/g, (_, c) => c.toUpperCase()), v.join(':')]; }));
+    return {
+      wide, narrow: !wide,
+      nav: labels.map((label, i) => ({ label, style: toStyle(base + (i === 0 ? 'background:#0a0a0a;color:#ffffff;font-weight:700;' : 'color:#0a0a0a;font-weight:500;')) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
