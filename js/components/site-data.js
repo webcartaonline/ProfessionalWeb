@@ -23,7 +23,7 @@
             { href: "index.html", label: "Inicio" },
             { href: "plantillas.html", label: "Plantillas" },
             { href: "como-trabajamos.html", label: "Cómo trabajamos" },
-            { href: "conoce-tus-herramientas.html", label: "Conoce tus herramientas" },
+            { href: "conoce-el-editor.html", label: "Conoce el editor" },
             { href: "precios.html", label: "Precios y Planes" },
             { href: "faqs.html", label: "FAQs" }
         ],

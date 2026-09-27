@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TOOLS DEMO — Demos interactivas de "Conoce tus herramientas".
+   TOOLS DEMO — Demos interactivas de "Conoce el editor".
 
    1. Dispositivos: cambia el marco (móvil, tablet, ordenador, reloj) y rota
       solo hasta que el usuario elige uno.
