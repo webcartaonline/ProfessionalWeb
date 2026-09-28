@@ -59,11 +59,6 @@
     align-items: center;
 }
 
-.split--hero {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
-    gap: clamp(2rem, 4vw, 3.5rem);
-}
-
 .split__lead {
     max-width: 48ch;
     color: var(--color-text-muted);
@@ -117,6 +112,206 @@
     --chip-accent: var(--color-orange);
 }
 
+/* ----- Vídeo «adminApp en acción» -------------------------------------- */
+
+/* Marco con borde grueso tipo pantalla; el vídeo es 16:9 (1920 × 1080).
+   Los botones, la barra de progreso y los subtítulos los mueve
+   js/editor-video.js con data-state y data-step. */
+.editor-video {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+}
+
+.editor-video__frame {
+    position: relative;
+    padding: 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background-image: var(--gradient-card);
+    box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.45);
+}
+
+.editor-video__media {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 1.3rem;
+    background-color: var(--color-black);
+    object-fit: cover;
+}
+
+.editor-video__controls {
+    position: absolute;
+    inset-block-end: 1.4rem;
+    inset-inline-end: 1.4rem;
+    display: flex;
+    gap: var(--space-2xs);
+}
+
+.editor-video__button {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background-color: rgb(0 0 0 / 0.55);
+    color: var(--color-white);
+    backdrop-filter: blur(8px);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.editor-video__button[hidden] {
+    display: none;
+}
+
+.editor-video__button:hover {
+    border-color: var(--color-white);
+    background-color: rgb(0 0 0 / 0.75);
+}
+
+.editor-video__button svg {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.editor-video__icon-pause,
+[data-state="playing"] .editor-video__icon-play {
+    display: none;
+}
+
+[data-state="playing"] .editor-video__icon-pause {
+    display: block;
+}
+
+.editor-video__progress {
+    position: absolute;
+    inset-inline: 1.9rem;
+    inset-block-end: 0.95rem;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 3px;
+    background-color: rgb(255 255 255 / 0.12);
+    pointer-events: none;
+}
+
+.editor-video__progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-orange);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+/* A pantalla completa: solo el vídeo, centrado sobre negro. */
+.editor-video__frame:fullscreen {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--color-bg);
+}
+
+.editor-video__frame:fullscreen .editor-video__media {
+    width: min(100vw, 100vh * 16 / 9);
+    border-radius: 0;
+}
+
+/* Subtítulo bajo el vídeo: texto de la web, legible en cualquier pantalla. */
+.editor-video__caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    min-height: 2.5rem;
+    color: var(--color-text-soft);
+    font-size: var(--font-size-400);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+}
+
+.editor-video__step {
+    --step-accent: var(--color-blue);
+
+    display: none;
+    flex: none;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--step-accent);
+    color: var(--color-white);
+    font-size: var(--font-size-200);
+    font-weight: var(--font-weight-bold);
+}
+
+.editor-video__step:not(:empty) {
+    display: grid;
+}
+
+.editor-video__step[data-accent="green"] {
+    --step-accent: var(--color-green);
+}
+
+.editor-video__step[data-accent="orange"] {
+    --step-accent: var(--color-orange);
+}
+
+/* Móvil: sin marco y a sangre (anula el margen lateral del .container)
+   para ganar todo el ancho de pantalla; controles más juntos. */
+@media (max-width: 48rem) {
+    .editor-video__frame {
+        margin-inline: calc(-1 * var(--layout-gutter));
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        box-shadow: none;
+    }
+
+    .editor-video__media {
+        border-radius: 0;
+    }
+
+    .editor-video__controls {
+        inset-block-end: 0.8rem;
+        inset-inline-end: 0.8rem;
+        gap: 0.35rem;
+    }
+
+    .editor-video__button {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .editor-video__button svg {
+        width: 0.95rem;
+        height: 0.95rem;
+    }
+
+    .editor-video__progress {
+        inset-inline: 0.9rem;
+        inset-block-end: 0.5rem;
+        height: 2px;
+    }
+
+    .editor-video__caption {
+        min-height: 3.25rem;
+        font-size: var(--font-size-300);
+    }
+
+    .editor-video__step {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: var(--font-size-100);
+    }
+}
+
 /* ----- Capturas ---------------------------------------------------------- */
 
 .shot {
@@ -154,24 +349,6 @@
     font-weight: var(--font-weight-medium);
 }
 
-/* Captura principal: marco con borde grueso tipo pantalla. */
-.shot--framed {
-    padding: 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    background-image: var(--gradient-card);
-    box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.45);
-}
-
-.shot--framed .shot__frame {
-    border: 0;
-    border-radius: 1.3rem;
-}
-
-.shot--framed .shot__frame img {
-    object-position: top left;
-}
-
 .shots {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
@@ -203,18 +380,6 @@
 .feature__more svg {
     width: 1rem;
     height: 1rem;
-}
-
-/* ----- Pasos en rejilla (reutilizan .step) ------------------------------ */
-
-.steps--grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-}
-
-.steps--grid .step {
-    flex-direction: column;
-    height: 100%;
 }
 
 /* ----- Botones tipo píldora (selectores de las demos) ------------------- */

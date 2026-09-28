@@ -41,6 +41,7 @@
     <script src="js/background-lines.js" defer></script>
     <script src="js/card-glow.js" defer></script>
     <script src="js/tools-demo.js" defer></script>
+    <script src="js/editor-video.js" defer></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
 
         <!-- ===== Cabecera ============================================== -->
         <section class="section section--below-nav tools-header" aria-labelledby="herramientas-titulo">
-            <div class="container split split--hero">
+            <div class="container">
 
                 <div class="page-header" data-reveal>
                     <p class="page-header__eyebrow">Conoce el editor</p>
@@ -63,17 +64,62 @@
                     </p>
                     <ul class="chips">
                         <li class="chip">Sin conocimientos técnicos</li>
-                        <li class="chip chip--green">Accede desde donde queiras</li>
+                        <li class="chip chip--green">Accede desde donde quieras</li>
                         <li class="chip chip--orange">Cambios al instante</li>
                     </ul>
                 </div>
 
-                <div class="shot shot--framed" data-reveal>
-                    <div class="shot__frame">
-                        <img src="Recursos/img/adminApp/editor.png" width="1920" height="1032"
-                            alt="El editor adminApp con la lista de secciones y la ficha de un plato">
+                <!-- Vídeo «adminApp en acción» (animación de Claude Design renderizada a MP4).
+                     Los subtítulos van fuera del vídeo, en HTML, para que se lean bien en el
+                     móvil; js/editor-video.js los sincroniza y controla la reproducción. -->
+                <figure class="editor-video" data-reveal data-editor-video>
+                    <div class="editor-video__frame">
+                        <video class="editor-video__media" muted loop playsinline preload="metadata"
+                            width="1920" height="1080" poster="Recursos/img/adminApp/video/poster.jpg"
+                            aria-describedby="video-descripcion" data-video>
+                            <source src="Recursos/img/adminApp/video/adminapp-en-accion-720.mp4" type="video/mp4"
+                                media="(max-width: 48rem)">
+                            <source src="Recursos/img/adminApp/video/adminapp-en-accion-1080.mp4" type="video/mp4">
+                        </video>
+
+                        <div class="editor-video__controls">
+                            <button class="editor-video__button" type="button" aria-label="Reproducir vídeo"
+                                data-video-toggle>
+                                <svg class="editor-video__icon-play" viewBox="0 0 24 24" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+                                </svg>
+                                <svg class="editor-video__icon-pause" viewBox="0 0 24 24" fill="currentColor"
+                                    aria-hidden="true">
+                                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                                </svg>
+                            </button>
+                            <button class="editor-video__button" type="button" aria-label="Ver a pantalla completa"
+                                data-video-fullscreen hidden>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <span class="editor-video__progress" aria-hidden="true"><span data-video-progress></span></span>
                     </div>
-                </div>
+
+                    <figcaption class="editor-video__caption">
+                        <span class="editor-video__step" aria-hidden="true" data-video-step></span>
+                        <span data-video-caption>adminApp en acción</span>
+                    </figcaption>
+
+                    <p class="visually-hidden" id="video-descripcion">
+                        Vídeo sin sonido: en adminApp se carga la carta, se elige el grupo Tapas calientes, se cambia
+                        el precio de las patatas bravas, se añade un pincho de tortilla con sus alérgenos y su foto y
+                        se publica. Al momento, la carta del móvil muestra el precio nuevo y el plato nuevo. Después,
+                        el editor pasa a modo oscuro, se repasan la vista previa, el PDF, los ajustes, los idiomas y
+                        los dispositivos, y se ven las dos plantillas de carta.
+                    </p>
+                </figure>
 
             </div>
         </section>
@@ -147,54 +193,6 @@
                     </li>
 
                 </ul>
-            </div>
-        </section>
-
-        <!-- ===== Así se usa ============================================ -->
-        <section class="section section--flush" aria-labelledby="pasos-titulo">
-            <div class="container">
-
-                <div class="section__header" data-reveal>
-                    <p class="eyebrow">Así se usa</p>
-                    <h2 class="section__title" id="pasos-titulo">Cuatro pasos, cero complicaciones</h2>
-                </div>
-
-                <ol class="steps steps--grid">
-
-                    <li class="step step--blue" data-reveal>
-                        <span class="step__number" aria-hidden="true">01</span>
-                        <div>
-                            <h3 class="step__title">Carga tu carta</h3>
-                            <p class="step__text">Abre adminApp y pulsa «Cargar carta» para traer los datos actuales.</p>
-                        </div>
-                    </li>
-
-                    <li class="step step--green" data-reveal>
-                        <span class="step__number" aria-hidden="true">02</span>
-                        <div>
-                            <h3 class="step__title">Edita</h3>
-                            <p class="step__text">Cambia platos, precios, fotos, alérgenos o secciones.</p>
-                        </div>
-                    </li>
-
-                    <li class="step step--orange" data-reveal>
-                        <span class="step__number" aria-hidden="true">03</span>
-                        <div>
-                            <h3 class="step__title">Revisa</h3>
-                            <p class="step__text">Abre la vista previa y comprueba cómo queda.</p>
-                        </div>
-                    </li>
-
-                    <li class="step step--blue" data-reveal>
-                        <span class="step__number" aria-hidden="true">04</span>
-                        <div>
-                            <h3 class="step__title">Publica</h3>
-                            <p class="step__text">Pulsa «Publicar cambios» y tu carta se actualiza al momento.</p>
-                        </div>
-                    </li>
-
-                </ol>
-
             </div>
         </section>
 
@@ -498,18 +496,6 @@
                         <h3 class="extra__title">Se actualiza solo</h3>
                         <p class="extra__text">Las mejoras llegan sin que tengas que hacer nada. Tu carta no se toca.</p>
                         <a class="text-link" href="faqs.html#actualizaciones">Saber más en FAQs</a>
-                    </li>
-                    <li class="extra" data-reveal>
-                        <h3 class="extra__title">Fotos bien encuadradas</h3>
-                        <p class="extra__text">Sube una foto, recórtala y marca la zona que nunca debe perderse.</p>
-                    </li>
-                    <li class="extra extra--green" data-reveal>
-                        <h3 class="extra__title">Alérgenos e idiomas</h3>
-                        <p class="extra__text">Indica los alérgenos de cada plato y tradúcela a otros idiomas.</p>
-                    </li>
-                    <li class="extra extra--orange" data-reveal>
-                        <h3 class="extra__title">Tu estilo</h3>
-                        <p class="extra__text">Modo claro u oscuro y el color principal que prefieras.</p>
                     </li>
                 </ul>
 
