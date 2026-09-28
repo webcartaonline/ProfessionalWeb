@@ -124,6 +124,12 @@
     margin: clamp(2rem, 5vw, 3.5rem) 0 0;
 }
 
+/* Tras un .page-header con su margen normal (Plantillas): el aire de arriba
+   ya lo pone la cabecera; se deja el mismo aire debajo antes del contenido. */
+.editor-video--before-content {
+    margin-block: 0 var(--space-2xl);
+}
+
 .editor-video__frame {
     position: relative;
     padding: 0.6rem;

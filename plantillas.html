@@ -43,6 +43,7 @@
     <script src="js/card-glow.js" defer></script>
     <script src="js/gallery.js" defer></script>
     <script src="js/anatomy.js" defer></script>
+    <script src="js/editor-video.js" defer></script>
 </head>
 
 <body>
@@ -63,6 +64,69 @@
                         restaurantes. Elige el estilo que va con tu negocio y lo adaptamos a tu marca.
                     </p>
                 </div>
+
+                <!-- Vídeo «Personaliza tu carta» (animación de Claude Design renderizada a MP4).
+                     Mismo componente que en conoce-el-editor.html: js/editor-video.js. -->
+                <figure class="editor-video editor-video--before-content" data-reveal data-editor-video>
+                    <div class="editor-video__frame">
+                        <video class="editor-video__media" muted loop playsinline preload="metadata"
+                            width="1920" height="1080" poster="Recursos/img/Plantillas/video/poster.jpg"
+                            aria-describedby="video-descripcion" data-video>
+                            <source src="Recursos/img/Plantillas/video/personaliza-tu-carta-720.mp4" type="video/mp4"
+                                media="(max-width: 48rem)">
+                            <source src="Recursos/img/Plantillas/video/personaliza-tu-carta-1080.mp4" type="video/mp4">
+                        </video>
+
+                        <div class="editor-video__controls">
+                            <button class="editor-video__button" type="button" aria-label="Reproducir vídeo"
+                                data-video-toggle>
+                                <svg class="editor-video__icon-play" viewBox="0 0 24 24" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+                                </svg>
+                                <svg class="editor-video__icon-pause" viewBox="0 0 24 24" fill="currentColor"
+                                    aria-hidden="true">
+                                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                                </svg>
+                            </button>
+                            <button class="editor-video__button" type="button" aria-label="Ver a pantalla completa"
+                                data-video-fullscreen hidden>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <span class="editor-video__progress" aria-hidden="true"><span data-video-progress></span></span>
+                    </div>
+
+                    <figcaption class="editor-video__caption">
+                        <span class="editor-video__step" aria-hidden="true" data-video-step></span>
+                        <span data-video-caption>Personaliza tu carta</span>
+                    </figcaption>
+
+                    <!-- Subtítulos: [desde, hasta, texto, paso, color] (segundos de las escenas) -->
+                    <script type="application/json" data-video-captions>
+                        [
+                            [0, 2.8, "Tu carta, a tu manera"],
+                            [2.8, 6.8, "Colores", "1", "blue"],
+                            [6.8, 10.2, "Tipografía", "2", "green"],
+                            [10.2, 13.6, "Portada", "3", "orange"],
+                            [13.6, 17.2, "Imágenes", "4", "blue"],
+                            [17.2, 20.9, "Alérgenos", "5", "green"],
+                            [20.9, 26.5, "Personaliza tu plantilla como quieras"]
+                        ]
+                    </script>
+
+                    <p class="visually-hidden" id="video-descripcion">
+                        Vídeo sin sonido: las dos plantillas de carta se personalizan paso a paso. Cambian el color
+                        principal y el de fondo, la fuente del título y la foto de portada; aparecen las fotos de
+                        platos, grupos y secciones; y el filtro de alérgenos avisa en cada plato de lo que el
+                        comensal quiere evitar. Al final, varias cartas cambian de diseño a toda velocidad.
+                    </p>
+                </figure>
 
                 <div class="gallery" data-reveal>
                     <!-- MUTEADO: selector «Plantillas / Otras cartas». Las cartas de clientes
