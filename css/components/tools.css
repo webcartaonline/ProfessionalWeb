@@ -124,10 +124,10 @@
     margin: clamp(2rem, 5vw, 3.5rem) 0 0;
 }
 
-/* Tras un .page-header con su margen normal (Plantillas): el aire de arriba
-   ya lo pone la cabecera; se deja el mismo aire debajo antes del contenido. */
+/* Tras un .page-header (Plantillas): más aire que el margen de la cabecera
+   (los márgenes colapsan, gana el mayor) y el mismo debajo del vídeo. */
 .editor-video--before-content {
-    margin-block: 0 var(--space-2xl);
+    margin-block: var(--space-3xl);
 }
 
 .editor-video__frame {
