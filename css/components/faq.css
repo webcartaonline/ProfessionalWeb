@@ -205,6 +205,59 @@
     color: var(--color-orange);
 }
 
+/* ----- Resultados por similitud (siempre bajo los exactos al buscar) --- */
+
+.faq-similar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-block-start: var(--space-lg);
+}
+
+.faq-similar[hidden] {
+    display: none;
+}
+
+/* Separador con el rótulo en medio de una línea discontinua. */
+.faq-similar__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    padding-block-start: var(--space-md);
+    border-block-start: 1px dashed var(--color-border-strong);
+}
+
+.faq-similar__title {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-white);
+    font-weight: var(--font-weight-bold);
+}
+
+.faq-similar__title::before {
+    content: "≈";
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: var(--radius-pill);
+    background-color: rgb(255 255 255 / 0.08);
+    color: var(--color-text-soft);
+    font-size: var(--font-size-200);
+}
+
+.faq-similar__text,
+.faq-similar__none {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-200);
+}
+
+/* Las parecidas se ven algo más apagadas que las exactas hasta abrirlas. */
+.faq-similar .faq:not([open]) {
+    border-style: dashed;
+}
+
 /* ----- Acordeón -------------------------------------------------------- */
 
 .faqs {
@@ -390,6 +443,77 @@
     border-color: var(--color-white);
 }
 
+/* Varios enlaces seguidos en una respuesta. */
+.faq__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs) var(--space-md);
+}
+
+.faq-type .faq__link {
+    margin-block-start: auto;
+}
+
+/* Botones del editor con lo que hace cada uno. */
+.faq-keys {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: var(--space-2xs) var(--space-md);
+}
+
+.faq-keys div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: var(--space-xs) 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--space-xs);
+    background-color: var(--color-surface-sunken);
+}
+
+.faq-keys dt {
+    font-weight: var(--font-weight-medium);
+}
+
+.faq-keys dd {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-200);
+}
+
+/* Vídeo dentro de una respuesta: sin márgenes ni sangrado de página. */
+.faq .editor-video {
+    gap: var(--space-2xs);
+    margin: 0;
+}
+
+.faq .editor-video__frame {
+    margin-inline: 0;
+    padding: 0.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-image: var(--gradient-card);
+    box-shadow: none;
+}
+
+.faq .editor-video__media {
+    border-radius: calc(var(--radius-md) - 0.35rem);
+}
+
+.faq .editor-video__controls {
+    inset-block-end: 0.9rem;
+    inset-inline-end: 0.9rem;
+}
+
+.faq .editor-video__progress {
+    inset-inline: 1.2rem;
+    inset-block-end: 0.6rem;
+}
+
+.faq .editor-video__caption {
+    min-height: 2rem;
+    font-size: var(--font-size-300);
+}
+
 /* ----- Captura dentro de una respuesta (se amplía al pulsar) ----------- */
 
 .faq__shot {
@@ -426,6 +550,23 @@
     background-color: rgb(10 10 10 / 0.8);
     font-size: 0.75rem;
     font-weight: var(--font-weight-medium);
+}
+
+/* Dos capturas lado a lado (por ejemplo, modo claro y oscuro). */
+.faq__shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-sm);
+    align-items: start;
+}
+
+/* Captura vertical de móvil: estrecha y centrada. */
+.faq__shot--tall {
+    align-items: center;
+}
+
+.faq__shot--tall .faq__zoom {
+    width: min(100%, 15rem);
 }
 
 .faq__shot figcaption {

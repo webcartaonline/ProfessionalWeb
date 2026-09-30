@@ -1,5 +1,6 @@
 /* ==========================================================================
-   FAQ — Buscador, filtros por tema, pestañas internas y capturas ampliables.
+   FAQ — Buscador (resultados exactos y por similitud), filtros por tema,
+   pestañas internas y capturas ampliables.
 
    Las preguntas son <details> nativos y funcionan sin este archivo: sin
    JavaScript se ven todas, con los pasos de cada dispositivo y cada
@@ -23,43 +24,162 @@
 
     /* ----- Buscador y temas -------------------------------------------- */
 
+    // Palabras que no aportan nada a la búsqueda por similitud.
+    var STOPWORDS = ("de la el los las un una unos unas y o a en con por para que se me mi mis tu tus su sus " +
+        "lo le les al del es son hay como cual donde cuando puedo puede quiero tengo esta este esto " +
+        "eso muy mas pero sin sobre hasta").split(" ");
+
+    function words(text) {
+        return normalize(text).split(/[^a-z0-9]+/).filter(function (word) {
+            return word.length > 2 && STOPWORDS.indexOf(word) === -1;
+        });
+    }
+
+    function unique(list) {
+        return list.filter(function (word, i) {
+            return list.indexOf(word) === i;
+        });
+    }
+
+    // Distancia de edición (letras que hay que cambiar para ir de una palabra a otra).
+    function distance(a, b) {
+        var row = [];
+        for (var j = 0; j <= b.length; j++) row.push(j);
+        for (var i = 1; i <= a.length; i++) {
+            var diagonal = row[0];
+            row[0] = i;
+            for (var k = 1; k <= b.length; k++) {
+                var above = row[k];
+                row[k] = Math.min(row[k] + 1, row[k - 1] + 1, diagonal + (a[i - 1] === b[k - 1] ? 0 : 1));
+                diagonal = above;
+            }
+        }
+        return row[b.length];
+    }
+
+    // Parecido entre dos palabras, de 0 a 1: iguales, misma raíz
+    // («publicar» / «publicación») o con alguna errata («alergneos»).
+    function likeness(a, b) {
+        if (a === b) return 1;
+        var shorter = Math.min(a.length, b.length);
+        if (shorter >= 4 && (a.indexOf(b) === 0 || b.indexOf(a) === 0)) return 0.9;
+
+        var prefix = 0;
+        while (prefix < shorter && a[prefix] === b[prefix]) prefix += 1;
+        if (prefix >= 5) return 0.8;
+
+        if (shorter < 4 || Math.abs(a.length - b.length) > 2) return 0;
+        var ratio = 1 - distance(a, b) / Math.max(a.length, b.length);
+        return ratio >= 0.75 ? ratio * 0.85 : 0;
+    }
+
+    function best(word, list) {
+        var top = 0;
+        for (var i = 0; i < list.length && top < 1; i++) {
+            top = Math.max(top, likeness(word, list[i]));
+        }
+        return top;
+    }
+
+    // Pesa más coincidir con la pregunta o sus palabras clave que con la respuesta.
+    function similarity(entry, queryWords) {
+        var total = 0;
+        queryWords.forEach(function (word) {
+            total += Math.max(best(word, entry.title) * 3, best(word, entry.keywords) * 2.5, best(word, entry.body));
+        });
+        return total / (queryWords.length * 3);
+    }
+
+    var MIN_SIMILARITY = 0.16;
+    var MAX_SIMILAR = 6;
+
     var tools = document.querySelector("[data-faq-tools]");
     var search = document.querySelector("[data-faq-search]");
     var topics = document.querySelectorAll("[data-faq-topic]");
+    var list = document.querySelector("[data-faq-list]");
     var empty = document.querySelector("[data-faq-empty]");
-    var emptyQuery = document.querySelector("[data-faq-query]");
+    var queryLabels = document.querySelectorAll("[data-faq-query]");
+    var status = document.querySelector("[data-faq-status]");
+    var similarBox = document.querySelector("[data-faq-similar]");
+    var similarList = document.querySelector("[data-faq-similar-list]");
+    var similarNone = document.querySelector("[data-faq-similar-none]");
     var topic = "todas";
 
     // El texto de cada pregunta se indexa una sola vez.
     var index = [];
     each(items, function (item) {
-        index.push({ item: item, cat: item.getAttribute("data-cat"), text: normalize(item.textContent) });
+        var title = item.querySelector(".faq__title").textContent;
+        var text = item.textContent;
+        // Los subtítulos del vídeo (JSON) no cuentan como texto de la respuesta.
+        each(item.querySelectorAll("script"), function (script) {
+            text = text.replace(script.textContent, "");
+        });
+        index.push({
+            item: item,
+            cat: item.getAttribute("data-cat"),
+            text: normalize(text),
+            title: unique(words(title)),
+            keywords: unique(words(item.getAttribute("data-keywords") || "")),
+            body: unique(words(text))
+        });
     });
 
+    function reveal(entry, visible) {
+        var wasHidden = entry.item.hidden;
+        entry.item.hidden = !visible;
+
+        // Reinicia la animación de entrada solo en las que aparecen.
+        if (visible && wasHidden) {
+            entry.item.removeAttribute("data-shown");
+            void entry.item.offsetWidth;
+            entry.item.setAttribute("data-shown", "");
+        }
+    }
+
     function filter() {
-        var query = normalize(search.value.trim());
+        var raw = search.value.trim();
+        var query = normalize(raw);
+        var queryWords = unique(words(raw));
         var counts = { todas: 0 };
-        var shown = 0;
+        var exact = [];
+        var similar = [];
 
         index.forEach(function (entry) {
-            var matches = !query || entry.text.indexOf(query) !== -1;
-            if (matches) {
-                counts.todas += 1;
-                counts[entry.cat] = (counts[entry.cat] || 0) + 1;
+            if (!query || entry.text.indexOf(query) !== -1) {
+                entry.score = Infinity;
+                exact.push(entry);
+            } else {
+                entry.score = queryWords.length ? similarity(entry, queryWords) : 0;
+                if (entry.score >= MIN_SIMILARITY) similar.push(entry);
             }
-
-            var visible = matches && (topic === "todas" || entry.cat === topic);
-            var wasHidden = entry.item.hidden;
-            entry.item.hidden = !visible;
-
-            // Reinicia la animación de entrada solo en las que aparecen.
-            if (visible && wasHidden) {
-                entry.item.removeAttribute("data-shown");
-                void entry.item.offsetWidth;
-                entry.item.setAttribute("data-shown", "");
-            }
-            if (visible) shown += 1;
         });
+
+        similar.sort(function (a, b) {
+            return b.score - a.score;
+        });
+        similar = similar.slice(0, MAX_SIMILAR);
+
+        exact.concat(similar).forEach(function (entry) {
+            counts.todas += 1;
+            counts[entry.cat] = (counts[entry.cat] || 0) + 1;
+        });
+
+        var inTopic = function (entry) {
+            return topic === "todas" || entry.cat === topic;
+        };
+
+        // Exactas en su orden de siempre; parecidas aparte, de más a menos parecidas.
+        index.forEach(function (entry) {
+            list.appendChild(entry.item);
+            reveal(entry, entry.score === Infinity && inTopic(entry));
+        });
+        similar.forEach(function (entry) {
+            similarList.appendChild(entry.item);
+            reveal(entry, inTopic(entry));
+        });
+
+        var shownExact = exact.filter(inTopic).length;
+        var shownSimilar = similar.filter(inTopic).length;
 
         each(topics, function (button) {
             var count = counts[button.getAttribute("data-faq-topic")] || 0;
@@ -67,8 +187,16 @@
             button.toggleAttribute("data-empty", count === 0);
         });
 
-        empty.hidden = shown > 0;
-        emptyQuery.textContent = search.value.trim();
+        each(queryLabels, function (label) {
+            label.textContent = raw;
+        });
+        empty.hidden = !query || shownExact > 0;
+        similarBox.hidden = !query;
+        similarNone.hidden = shownSimilar > 0;
+
+        status.textContent = query
+            ? shownExact + " resultados exactos y " + shownSimilar + " por similitud."
+            : "";
     }
 
     if (tools && search) {
@@ -129,8 +257,9 @@
         var target = id && document.getElementById(id);
         if (!target || !target.matches(".faq")) return;
 
-        // Si la pregunta estaba oculta por un filtro, se quita el filtro.
-        if (target.hidden && search) {
+        // Si la pregunta estaba oculta o apartada por un filtro o una
+        // búsqueda, se quitan ambos para verla en su sitio.
+        if (search && (target.hidden || search.value)) {
             search.value = "";
             topics[0].click();
         }

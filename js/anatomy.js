@@ -287,4 +287,27 @@
     } else preload();
 
     render();
+
+    // Enlace directo a una parte (plantillas.html#parte-secciones), p. ej. desde
+    // las FAQs: la selecciona, para el recorrido y lleva al bloque.
+    function openFromHash() {
+        var match = /^#parte-([a-z]+)$/.exec(location.hash);
+        if (!match || !PARTS[match[1]]) return;
+        touch();
+        state.part = match[1];
+        render();
+        preload();
+
+        // Se repite al terminar de cargar: las imágenes de más arriba mueven el bloque.
+        var section = document.getElementById("partes");
+        section.scrollIntoView({ block: "start" });
+        if (document.readyState !== "complete") {
+            window.addEventListener("load", function () {
+                section.scrollIntoView({ block: "start" });
+            }, { once: true });
+        }
+    }
+
+    window.addEventListener("hashchange", openFromHash);
+    openFromHash();
 })();

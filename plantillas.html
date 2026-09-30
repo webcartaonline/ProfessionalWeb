@@ -18,7 +18,7 @@
     <!-- La versión (?v=) fuerza a los navegadores a pedir la hoja de estilos
          de nuevo en vez de servir una copia antigua de su caché. Súbela cada
          vez que se añada o se renombre un archivo dentro de css/. -->
-    <link rel="stylesheet" href="index.css?v=3">
+    <link rel="stylesheet" href="index.css?v=4">
 
     <!-- Guardián de la animación de entrada: marca el documento antes de pintar
          para que no haya parpadeo. Si el navegador no soporta IntersectionObserver
@@ -67,7 +67,7 @@
 
                 <!-- Vídeo «Personaliza tu carta» (animación de Claude Design renderizada a MP4).
                      Mismo componente que en conoce-el-editor.html: js/editor-video.js. -->
-                <figure class="editor-video editor-video--before-content" data-reveal data-editor-video>
+                <figure class="editor-video editor-video--before-content" id="personaliza" data-reveal data-editor-video>
                     <div class="editor-video__frame">
                         <video class="editor-video__media" muted loop playsinline preload="metadata"
                             width="1920" height="1080" poster="Recursos/img/Plantillas/video/poster.jpg"

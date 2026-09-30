@@ -7,6 +7,12 @@
    automático. Sin JavaScript se ve la lista con todas las explicaciones.
    ========================================================================== */
 
+/* Al llegar con un enlace directo (plantillas.html#parte-grupos) el título
+   no queda tapado por la barra de navegación fija. */
+#partes {
+    scroll-margin-top: 4rem;
+}
+
 .anatomy__header {
     max-width: 60ch;
 }
