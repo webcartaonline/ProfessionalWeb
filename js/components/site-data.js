@@ -8,11 +8,11 @@
 (function () {
     "use strict";
 
-    var PW = (window.PW = window.PW || {});
+    var WCO = (window.WCO = window.WCO || {});
 
-    PW.site = {
+    WCO.site = {
         brand: {
-            name: "Professional Web",
+            name: "WebCartaOnline",
             home: "index.html",
             logo: "Recursos/img/Logo/IsoLogoBlack.png",
             claim: "Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso."
@@ -43,7 +43,7 @@
             navHeading: "Navegación",
             contactHeading: "Contacto",
             // {year} se sustituye por el año en curso.
-            copyright: "© {year} Professional Web. Todos los derechos reservados."
+            copyright: "© {year} WebCartaOnline. Todos los derechos reservados."
         }
     };
 })();

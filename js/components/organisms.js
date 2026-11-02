@@ -4,9 +4,9 @@
 
    Se registran como etiquetas propias para usarlas en el HTML:
 
-       <pw-header current="precios.html"></pw-header>
+       <wco-header current="precios.html"></wco-header>
        ...
-       <pw-footer></pw-footer>
+       <wco-footer></wco-footer>
 
    Al conectarse, cada etiqueta se sustituye por su HTML final, así el DOM
    queda idéntico al marcado de siempre y el CSS y js/navbar.js funcionan
@@ -18,10 +18,10 @@
 (function () {
     "use strict";
 
-    var PW = (window.PW = window.PW || {});
-    var site = PW.site;
-    var atoms = PW.atoms;
-    var molecules = PW.molecules;
+    var WCO = (window.WCO = window.WCO || {});
+    var site = WCO.site;
+    var atoms = WCO.atoms;
+    var molecules = WCO.molecules;
 
     var MENU_ID = "menu-movil";
     var CONTENT_ID = "contenido";
@@ -35,7 +35,7 @@
         return (match || site.nav[0]).label;
     }
 
-    PW.organisms = {
+    WCO.organisms = {
         // Barra flotante de escritorio + botón de la ventana en móvil.
         navbar: function (currentHref) {
             return (
@@ -122,11 +122,11 @@
         );
     }
 
-    define("pw-header", function (element) {
-        return PW.organisms.header(currentPage(element));
+    define("wco-header", function (element) {
+        return WCO.organisms.header(currentPage(element));
     });
 
-    define("pw-footer", function () {
-        return PW.organisms.footer();
+    define("wco-footer", function () {
+        return WCO.organisms.footer();
     });
 })();

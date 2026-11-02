@@ -28,12 +28,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-sm);
+    gap: var(--space-2xs);
     width: 100%;
     max-width: var(--layout-max-width);
     min-height: var(--nav-height);
     margin-inline: auto;
-    padding: var(--space-2xs) var(--space-xs);
+    padding: var(--space-2xs);
     border-radius: var(--radius-md);
     background-color: var(--color-nav-surface);
     color: var(--color-nav-text);
@@ -43,14 +43,15 @@
 /* ----- Marca ------------------------------------------------------------ */
 
 .navbar__brand {
+    /* El logo nunca se encoge: si falta sitio, se recorta el texto del botón. */
+    flex: none;
     display: flex;
     align-items: center;
-    padding-inline-start: var(--space-3xs);
 }
 
 .navbar__logo {
     width: auto;
-    height: 2.4rem;
+    height: 1.1rem;
 }
 
 /* ----- Enlaces en línea (escritorio) ------------------------------------ */
@@ -98,7 +99,7 @@
     max-width: 18rem;
     height: 2.625rem;
     margin-inline-start: auto;
-    padding-inline: var(--space-sm) 0.4rem;
+    padding-inline: var(--space-3xs) 0.4rem;
     border-radius: var(--radius-pill);
     background-color: var(--color-white);
     color: #000000;
@@ -131,6 +132,8 @@
 
 .navbar__current::before {
     content: "";
+    /* En móviles muy estrechos se oculta el punto para que quepa el texto. */
+    display: none;
     flex: none;
     width: 7px;
     height: 7px;
@@ -162,13 +165,28 @@
     transform: translateY(1.5px) rotate(225deg);
 }
 
+@media (min-width: 24em) {
+    .navbar__current::before {
+        display: block;
+    }
+}
+
 @media (min-width: 48em) {
     .navbar {
+        gap: var(--space-sm);
         padding-inline: var(--space-sm);
     }
 
+    .navbar__brand {
+        padding-inline-start: var(--space-3xs);
+    }
+
     .navbar__logo {
-        height: 3rem;
+        height: 1.9rem;
+    }
+
+    .navbar__toggle {
+        padding-inline-start: var(--space-sm);
     }
 }
 

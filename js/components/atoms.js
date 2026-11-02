@@ -8,7 +8,7 @@
 (function () {
     "use strict";
 
-    var PW = (window.PW = window.PW || {});
+    var WCO = (window.WCO = window.WCO || {});
 
     // Escapa texto para meterlo en HTML sin riesgo.
     function escape(value) {
@@ -19,7 +19,7 @@
             .replace(/"/g, "&quot;");
     }
 
-    PW.atoms = {
+    WCO.atoms = {
         escape: escape,
 
         // Enlace "Saltar al contenido" para teclado y lectores de pantalla.

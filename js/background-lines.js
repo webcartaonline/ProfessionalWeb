@@ -39,7 +39,7 @@
     var alive = true;
 
     canvas.setAttribute("aria-hidden", "true");
-    canvas.className = "pw-lines";
+    canvas.className = "wco-lines";
 
     // Siempre detrás del contenido. El fondo de <main> debe ser transparente
     // (el negro lo pone el <body>) para que las líneas se vean.
