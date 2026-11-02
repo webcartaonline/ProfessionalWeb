@@ -14,7 +14,7 @@
         brand: {
             name: "WebCartaOnline",
             home: "index.html",
-            logo: "Recursos/img/Logo/IsoLogoBlack.png",
+            logo: "Recursos/img/Logo/Logotipo.png",
             claim: "Webs rápidas y cuidadas para negocios que quieren dar el siguiente paso."
         },
 

@@ -6,28 +6,28 @@
 
 @layer tokens, base, layout, components;
 
-@import url("css/tokens.css") layer(tokens);
-@import url("css/base.css") layer(base);
-@import url("css/layout.css") layer(layout);
+@import url("css/tokens.css?v=2026-11-02") layer(tokens);
+@import url("css/base.css?v=2026-11-02") layer(base);
+@import url("css/layout.css?v=2026-11-02") layer(layout);
 
-@import url("css/components/button.css") layer(components);
-@import url("css/components/navbar.css") layer(components);
-@import url("css/components/page-menu.css") layer(components);
-@import url("css/components/hero.css") layer(components);
-@import url("css/components/marquee.css") layer(components);
-@import url("css/components/feature.css") layer(components);
-@import url("css/components/page-header.css") layer(components);
-@import url("css/components/gallery.css") layer(components);
-@import url("css/components/anatomy.css") layer(components);
-@import url("css/components/step.css") layer(components);
-@import url("css/components/plan.css") layer(components);
-@import url("css/components/table.css") layer(components);
-@import url("css/components/faq.css") layer(components);
-@import url("css/components/cta.css") layer(components);
-@import url("css/components/tools.css") layer(components);
-@import url("css/components/legal.css") layer(components);
-@import url("css/components/footer.css") layer(components);
-@import url("css/components/glow.css") layer(components);
+@import url("css/components/button.css?v=2026-11-02") layer(components);
+@import url("css/components/navbar.css?v=2026-11-02") layer(components);
+@import url("css/components/page-menu.css?v=2026-11-02") layer(components);
+@import url("css/components/hero.css?v=2026-11-02") layer(components);
+@import url("css/components/marquee.css?v=2026-11-02") layer(components);
+@import url("css/components/feature.css?v=2026-11-02") layer(components);
+@import url("css/components/page-header.css?v=2026-11-02") layer(components);
+@import url("css/components/gallery.css?v=2026-11-02") layer(components);
+@import url("css/components/anatomy.css?v=2026-11-02") layer(components);
+@import url("css/components/step.css?v=2026-11-02") layer(components);
+@import url("css/components/plan.css?v=2026-11-02") layer(components);
+@import url("css/components/table.css?v=2026-11-02") layer(components);
+@import url("css/components/faq.css?v=2026-11-02") layer(components);
+@import url("css/components/cta.css?v=2026-11-02") layer(components);
+@import url("css/components/tools.css?v=2026-11-02") layer(components);
+@import url("css/components/legal.css?v=2026-11-02") layer(components);
+@import url("css/components/footer.css?v=2026-11-02") layer(components);
+@import url("css/components/glow.css?v=2026-11-02") layer(components);
 
 /* Fondo negro fuera de las capas y con más especificidad: al ser <main>
    transparente (líneas de fondo), garantiza el negro (en <html>) aunque un visor
