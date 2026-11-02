@@ -6,10 +6,10 @@
 (function () {
     "use strict";
 
-    var PW = (window.PW = window.PW || {});
-    var atoms = PW.atoms;
+    var WCO = (window.WCO = window.WCO || {});
+    var atoms = WCO.atoms;
 
-    PW.molecules = {
+    WCO.molecules = {
         // Lista de navegación. variant: "navbar" | "page-menu" | "footer".
         navList: function (items, variant, currentHref) {
             var listClass = {
