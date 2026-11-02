@@ -72,9 +72,22 @@
 }
 
 .plan__period {
-    margin-block-end: var(--space-md);
     color: rgb(255 255 255 / 0.5);
     font-size: 0.82rem;
+}
+
+/* Coste anual que acompaña al pago de entrada: visible, pero por debajo del precio. */
+.plan__maintenance {
+    margin-block: var(--space-xs) var(--space-md);
+    padding-block-start: var(--space-xs);
+    border-block-start: 1px solid var(--color-border-soft);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-200);
+}
+
+.plan__maintenance strong {
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
 }
 
 .plan__features {
