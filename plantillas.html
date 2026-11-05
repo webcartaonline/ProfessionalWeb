@@ -19,7 +19,7 @@
     <!-- La versión (?v=) fuerza a los navegadores a pedir la hoja de estilos
          de nuevo en vez de servir una copia antigua de su caché. Súbela cada
          vez que se añada o se renombre un archivo dentro de css/. -->
-    <link rel="stylesheet" href="index.css?v=4">
+    <link rel="stylesheet" href="index.css?v=5">
 
     <!-- Guardián de la animación de entrada: marca el documento antes de pintar
          para que no haya parpadeo. Si el navegador no soporta IntersectionObserver
@@ -43,7 +43,7 @@
     <script src="js/background-lines.js?v=2026-11-02" defer></script>
     <script src="js/card-glow.js?v=2026-11-02" defer></script>
     <script src="js/gallery.js?v=2026-11-02" defer></script>
-    <script src="js/anatomy.js?v=2026-11-02" defer></script>
+    <script src="js/anatomy.js?v=2026-11-05" defer></script>
     <script src="js/editor-video.js?v=2026-11-02" defer></script>
 </head>
 
@@ -122,7 +122,7 @@
                     </script>
 
                     <p class="visually-hidden" id="video-descripcion">
-                        Vídeo sin sonido: las dos plantillas de carta se personalizan paso a paso. Cambian el color
+                        Vídeo sin sonido: las cuatro plantillas de carta se personalizan paso a paso. Cambian el color
                         principal y el de fondo, la fuente del título y la foto de portada; aparecen las fotos de
                         platos, grupos y secciones; y el filtro de alérgenos avisa en cada plato de lo que el
                         comensal quiere evitar. Al final, varias cartas cambian de diseño a toda velocidad.
@@ -155,6 +155,16 @@
                             <button class="gallery__item" type="button" role="tab" id="tab-p2"
                                 aria-controls="rail-p2" aria-selected="false">
                                 <span>Plantilla 2</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p3"
+                                aria-controls="rail-p3" aria-selected="false">
+                                <span>Plantilla 3</span>
+                                <span class="gallery__dot"></span>
+                            </button>
+                            <button class="gallery__item" type="button" role="tab" id="tab-p4"
+                                aria-controls="rail-p4" aria-selected="false">
+                                <span>Plantilla 4</span>
                                 <span class="gallery__dot"></span>
                             </button>
                         </div>
@@ -227,6 +237,78 @@
                                         <div class="gallery__screen">
                                             <img src="Recursos/img/Plantilla2/Alergenos.jpg"
                                                 alt="Filtro de alérgenos de la plantilla 2" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gallery__screens scroller" id="rail-p3" role="tabpanel"
+                                aria-labelledby="tab-p3">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla3/Inicio.jpg"
+                                                alt="Pantalla de inicio de la plantilla 3" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla3/Panes.jpg"
+                                                alt="Sección de panes de la plantilla 3" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla3/Pasteleria.jpg"
+                                                alt="Sección de pastelería de la plantilla 3" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla3/Alergenos.jpg"
+                                                alt="Filtro de alérgenos de la plantilla 3" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla3/Pie.jpg"
+                                                alt="Pie con horario y redes de la plantilla 3" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gallery__screens scroller" id="rail-p4" role="tabpanel"
+                                aria-labelledby="tab-p4">
+                                <div class="gallery__track">
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla4/Inicio.jpg"
+                                                alt="Pantalla de inicio de la plantilla 4" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla4/Desayunos.jpg"
+                                                alt="Sección de desayunos de la plantilla 4" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla4/Tapas.jpg"
+                                                alt="Sección de tapas y raciones de la plantilla 4" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla4/Alergenos.jpg"
+                                                alt="Filtro de alérgenos de la plantilla 4" loading="lazy">
+                                        </div>
+                                    </div>
+                                    <div class="gallery__phone">
+                                        <div class="gallery__screen">
+                                            <img src="Recursos/img/Plantilla4/Pie.jpg"
+                                                alt="Pie con horario y redes de la plantilla 4" loading="lazy">
                                         </div>
                                     </div>
                                 </div>
@@ -313,9 +395,14 @@
 
                 <div class="anatomy" data-anatomy data-reveal>
                     <div class="anatomy__controls">
+                        <!-- Rótulo «Plantilla» fijo y botones con solo el número: así
+                             caben las cuatro en una fila incluso en móviles pequeños. -->
                         <div class="anatomy__switch" role="group" aria-label="Plantilla de ejemplo">
-                            <button class="anatomy__tpl" type="button" data-tpl="p1" aria-pressed="true">Plantilla 1</button>
-                            <button class="anatomy__tpl" type="button" data-tpl="p2" aria-pressed="false">Plantilla 2</button>
+                            <span class="anatomy__switch-label" aria-hidden="true">Plantilla</span>
+                            <button class="anatomy__tpl" type="button" data-tpl="p1" aria-pressed="true" aria-label="Plantilla 1">1</button>
+                            <button class="anatomy__tpl" type="button" data-tpl="p2" aria-pressed="false" aria-label="Plantilla 2">2</button>
+                            <button class="anatomy__tpl" type="button" data-tpl="p3" aria-pressed="false" aria-label="Plantilla 3">3</button>
+                            <button class="anatomy__tpl" type="button" data-tpl="p4" aria-pressed="false" aria-label="Plantilla 4">4</button>
                         </div>
 
                         <ul class="anatomy__list" aria-label="Partes de la carta">
